@@ -29,7 +29,14 @@
 
 mysql 설정은 config/dbconfig.js에 있음. 최대한 아래에 맞춰서 설정하기.
 
-![1524136847109](C:\Users\630su\AppData\Local\Temp\1524136847109.png)
+```javascript
+module.exports = {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'company'
+}
+```
 
 https://github.com/mysqljs/mysql
 
