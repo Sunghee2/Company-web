@@ -1,6 +1,24 @@
-### 데이터베이스 프로그래밍
+## CHECK
+
+- [x] Form name 최대한 column 이름과 동일하게 하기.
+- [x] Form name README.md에 명시하기.
+- [x] 각자 한 부분 적기(하단에 이름 적어둠).
+- [x] indentation 지키기. 최대한 깔끔하게.
 
 
+
+**또 추가해야 할 것 있으면 알아서 추가하기**
+
+
+
+## 해야할 것
+
+- [x] DB schema 생성 & query 최적화             
+- [x] data 만들기
+
+
+
+# 데이터베이스프로그래밍
 
 ##### Requirement
 
@@ -25,7 +43,7 @@
 
 
 
-##### setting
+##### settings
 
 mysql 설정은 config/dbconfig.js에 있음. 최대한 아래에 맞춰서 설정하기.
 
@@ -41,4 +59,21 @@ module.exports = {
 https://github.com/mysqljs/mysql
 
 
+
+### 권민찬
+
+
+
+### 배진영
+
+
+
+### 이성희
+
+- **18-05-08** 
+  - async-error.js 추가
+
+
+
+### 정지우
 
