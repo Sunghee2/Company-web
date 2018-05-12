@@ -71,14 +71,40 @@ https://github.com/mysqljs/mysql
     - 추가: includes/cards.pug, includes/main_image.pug, includes/records.pug, searches/search.pug
     - 수정: layout.pug, footer.pug, signin.pug, new.pug, stylesheets/style.css
 ###### 상세 내용, 클레스명 확인 및 수정 -> 권민찬
+
+- navbar
+- form action, method
+- input name
+- signin - 이메일 형식 아님. id로 
+- 회원가입에 사번 없음. 
+- 부트스트랩 4베타 바꾸기
+- 직원/ 프로젝트 검색 따로 분리하기.
+
 ###### 백엔드 합류 -> 배진영
 
 
 ### 이성희
 
 - **18-05-08** 
-  - async-error.js 추가
+  - 추가 : async-error.js
 
+- ##### 18-05-13
+
+  - 인증 & 암호화
+    - 추가 : lib/passport-config.js, routes/auth.js 
+  - 회원가입
+    - 추가: '/new'.get.post(routes/users.js)
+  - 계정 정보수정
+    - 추가
+      - '/:id/edit'.get(routes/users.js)
+      - '/:id'.put(routes/users.js)  ** 아직 하는 중 **
+  - 수정: '/'.get(routes/index.js)
+
+> 회원가입 form 줄이기. (핸드폰 번호, 이메일 필요한지..생각해보기)
+>
+> search url...? 어디에 들어가는 건지....
+>
+> user 정보 수정 / 정보 보기 해야되나..
 
 ### 정지우
 
