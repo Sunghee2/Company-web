@@ -66,13 +66,18 @@ https://github.com/mysqljs/mysql
 
 ### 배진영
 
+- **18-05-12** 
+  - view 추가 및 수정
+    - 추가: includes/cards.pug, includes/main_image.pug, includes/records.pug, searches/search.pug
+    - 수정: layout.pug, footer.pug, signin.pug, new.pug, stylesheets/style.css
+###### 상세 내용, 클레스명 확인 및 수정 -> 권민찬
+###### 백엔드 합류 -> 배진영
 
 
 ### 이성희
 
 - **18-05-08** 
   - async-error.js 추가
-
 
 
 ### 정지우
