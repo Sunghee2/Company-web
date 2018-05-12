@@ -1,8 +1,23 @@
+/* all page */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  padding-left: 15%;
+  padding-right: 15%;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
-a {
-  color: #00B7FF; }
+/* body */
+div.header.clearfix{
+  padding-top: 4em;
+}
+
+/* footer */
+.footer{
+  text-align: center;
+}
+
+hr.featurette-divider{
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
 
 /*# sourceMappingURL=style.css.map */
