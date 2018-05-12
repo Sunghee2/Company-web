@@ -2,20 +2,74 @@ extends ../layout
 
 block content
   .container
-    h1.main-title Register
-    form(action='/users', method='POST')
-      .form-group
-        label(for='name') Name
-        input.form-control(type='text', id='name', name='name', placeholder='Your name')
-      .form-group
-        label(for='email') Email address
-        input.form-control(type='email', id='email', name='email', placeholder='Email')
-      .form-group
-        label(for='password') Password
-        input.form-control(type='password', id='password', name='password', placeholder='Password')
-      .form-group
-        label(for='password_confirmation') Password Confirmation
-        input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password')
-      a.btn.btn-outline-secondary(href='/users') List
-      | 
-      button.btn.btn-primary(type='submit') Register 
+    .py-5.text-center
+      h2 Register
+      p
+      p.lead Please read the following before registering.
+      p
+      p 1. Employee numbers are assigned at random.
+      p 2. Please fill in all details.
+    hr.featurette-divider
+    .col-md-12
+      h4.mb-3 Account
+      form.needs-validation
+        .mb-3
+          label(for='username') ID
+          .input-group
+            .input-group-prepend
+              span.input-group-text @
+            input#username.form-control(type='text', placeholder='Username')
+        .mb-3
+          label(for='password') Password
+          .input-group
+            input#password.form-control(type='text', placeholder='Password')
+        .mb-3
+          label(for='password-confirmed') Password-Confirmed
+          .input-group
+            input#password-confirmed.form-control(type='text', placeholder='Password-Confirmed')
+        p  
+        hr.featurette-divider
+        h4.mb-3 Profile
+        .row
+          .col-md-6.mb-3
+            label(for='firstName') First name
+            input#firstName.form-control(type='text', placeholder='')
+          .col-md-6.mb-3
+            label(for='lastName') Last name
+            input#lastName.form-control(type='text', placeholder='')
+        .mb-3
+          label(for='rrn') RRN
+          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing')
+        .mb-3
+          label(for='department') Department
+          .input-group
+            input#department.form-control(type='text', placeholder='Click find and search your department')
+            .input-group-prepend
+              span.input-group-text Find
+        label(for='gender') Gender
+        div
+          input#man(name='gender', type='radio')
+          |  Man
+          input#woman(name='gender', type='radio')
+          |  Woman
+          h6  
+        .mb-3
+          label(for='rrn') Final Education
+          input#final-education.form-control(type='text', placeholder=' Graduated from Myongji University, Data Technology Track')
+        .mb-3
+          label(for='email')
+            | Email 
+            span.text-muted (Optional)
+          input#email.form-control(type='email', placeholder='you@example.com')
+          .invalid-feedback
+            | Please enter a valid email address for shipping updates.
+        .mb-3
+          label(for='address') Address
+          input#address.form-control(type='text', placeholder='1234 Main St', required='')
+          .invalid-feedback
+            | Please enter your shipping address.
+        .mb-3
+          label(for='address2') Phone Number
+          input#phone-number.form-control(type='text', placeholder='eg. 010-1234-5678')
+        hr.mb-4
+        button.btn.btn-primary.btn-lg.btn-block(type='submit') Register

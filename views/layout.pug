@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title MJ Overflow
+    title Project
     meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -14,17 +14,22 @@ html
     block top-nav
       include ./includes/topnav
     block hero-unit
-    if flashMessages
-      each texts, type in flashMessages
-        .container
-          .alert.alert-dismissible.fade.show(class=`alert-${type}`)
-            each msg in texts
-              | #{msg} 
-            button.close(type='button', data-dismiss='alert', aria-label='close')
-              span(aria-hidden='true') &times;
+      .jumbortron
+        if flashMessages
+          each texts, type in flashMessages
+            .container
+              .alert.alert-dismissible.fade.show(class=`alert-${type}`)
+                each msg in texts
+                  | #{msg}
+                button.close(type='button', data-dismiss='alert', aria-label='close')
+                  span(aria-hidden='true') &times;
     block content
 
+    block main-image
+      include ./includes/main_image
+    block cards
+      include ./includes/cards
+    block records
+      include ./includes/records
     block footer
       include ./includes/footer
-
-
