@@ -93,13 +93,14 @@ https://github.com/mysqljs/mysql
   - 계정 정보수정
     - 추가
       - '/:id/edit'.get(routes/users.js)
-      - '/:id'.put(routes/users.js)  ** 아직 하는 중 **
+      - '/:id'.put(routes/users.js) 
   - 수정: '/'.get(routes/index.js)
 
 - ##### 18-05-14
   - 회원가입 form 변경
   - 로그인 버그 수정
-  - 비밀번호 수정 진행중
+  - 프로필 정보 수정
+  - 비밀번호 수정
 
 > search url...? 어디에 들어가는 건지....
 >

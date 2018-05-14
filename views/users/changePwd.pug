@@ -2,8 +2,8 @@ extends ../layout
 
 block content
   .container
-    h1.main-title Reset Password
-    form(action=`/users/${currentUser.employee_number}/resetPwd?_method=PUT`, method='POST')
+    h1.main-title Change Password
+    form(action=`/users/${currentUser.employee_number}/changePwd?_method=PUT`, method='POST')
       .form-group
         label(for='current_password') Current Password
         input.form-control(type='password', name='password', placeholder='Current Password')

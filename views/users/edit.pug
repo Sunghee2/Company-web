@@ -20,12 +20,19 @@ block content
           input#department.form-control(type='text', placeholder='Click find and search your department', name='department', value=user.dept_id)
           .input-group-prepend
             span.input-group-text Find
-      label(for='gender') Gender
-      div
-        input#man(name='gender', value='m', type='radio')
-        |  Man
-        input#woman(name='gender', value='f', type='radio')
-        |  Woman
+      label.form-check-label(for='gender') Gender
+        if(user.gender=='m')
+          input#man(name='gender', value='m', type='radio' checked)
+          |  Man
+        else
+          input#man(name='gender', value='m', type='radio')
+          |  Man
+        if(user.gender=='f')         
+          input#woman(name='gender', value='f', type='radio' checked)
+          |  Woman
+        else
+          input#woman(name='gender', value='f', type='radio')
+          |  Woman
         h6  
       .mb-3
         label(for='rrn') Final Education

@@ -81,7 +81,7 @@ function validateForm(form, type, options) {
   return null;
 }
 
-function validateFormForResetPwd(form) {
+function validateFormForChangePwd(form) {
   if (!form.password) {
     return 'Current Password is required.';
   }
@@ -101,6 +101,8 @@ function validateFormForResetPwd(form) {
   if (form.new_password !== form.new_password_confirmation) {
     return 'New Passsword do not match.';
   }
+
+  return null;
 }
 
 router.route('/')
@@ -187,16 +189,32 @@ router.put('/:id', needAuth, catchErrors(async(req, res, next) => {
     return res.redirect('back'); 
   }
 
-  req.flash('success', 'Updated successfully.');
-  res.redirect('/users');
+  var employee_number = req.params.id;
+  var name = req.body.name;
+  var rrn = req.body.rrn;
+  var department = req.body.department;
+  var gender = req.body.gender;
+  var final_education = req.body.final_education;
+  var email = req.body.email || "";
+  var phone_number = req.body.phone_number;
+
+  conn.query('UPDATE employees SET name=?, rrn=?, dept_id=?, gender=?, final_education=?, email=?, phone_number=? where employee_number=?',
+    [name, rrn, department, gender, final_education, email, phone_number, employee_number], function(err, rows) {
+    if (err) {
+      req.flash('danger', err);
+      return res.redirect('back');
+    }
+    req.flash('success', 'Updated successfully.');
+    res.redirect('/');
+  })
 }))
 
-router.route('/:id/resetPwd')
+router.route('/:id/changePwd')
   .get(needAuth, catchErrors(async(req, res, next) => {
-    res.render('users/resetPwd');
+    res.render('users/changePwd');
   }))
   .put(needAuth, catchErrors(async(req, res, next) => {
-    var err = validateFormForResetPwd(req.body);
+    var err = validateFormForChangePwd(req.body);
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
@@ -206,8 +224,37 @@ router.route('/:id/resetPwd')
     var new_password = req.body.new_password;
     var new_password_confirmation = req.body.new_password_confirmation;
 
-    
-
-  }))
+    conn.query('SELECT * FROM accounts WHERE employee_number=?', [req.params.id], function(err, rows) {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');
+      }
+      if (rows.length == 0) {
+        req.flash('danger', '잘못된 접근입니다.');
+        return res.redirect('back');
+      }
+      var user = rows[0];
+      if(!bcrypt.compareSync(password, user.password)) {
+        req.flash('danger', '비밀번호가 올바르지 않습니다.');
+        return res.redirect('back');
+      } else {
+        bcrypt.hash(new_password, 10, function(err, hash) {
+          conn.query('UPDATE accounts SET password=? WHERE employee_number=?', [hash, req.params.id], function(err, rows) {
+            if (err) {
+              req.flash('danger', err);
+              return res.redirect('back');
+            }
+            if (rows.length !== 0) {
+              req.flash('success', 'Updated successfully.');
+              res.redirect('/');
+            } else {
+              req.flash('danger', '변경에 실패하였습니다.');
+              res.redirect('back');
+            }
+          })
+        })
+      }
+    })
+  }));
 
 module.exports = router;
