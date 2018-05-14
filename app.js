@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
 var sassMiddleware = require('node-sass-middleware');
+var session = require('express-session');
+var flash = require('connect-flash');
 var passport = require('passport');
 
 var indexRouter = require('./routes/index');
@@ -37,11 +39,25 @@ app.use(sassMiddleware({
   indentedSyntax: true, 
   sourceMap: true
 }));
+
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'long-long-long-secret-string-1313513tefgwdsvbjkvasd'
+}));
+
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 app.use(passport.session());
 passportConfig(passport);
+
+app.use(function(req, res, next) {
+  // res.locals.currentUser = req.user;  // passport는 req.user로 user정보 전달
+  res.locals.flashMessages = req.flash();
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

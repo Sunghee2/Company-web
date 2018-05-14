@@ -100,8 +100,9 @@ https://github.com/mysqljs/mysql
       - '/:id'.put(routes/users.js)  ** 아직 하는 중 **
   - 수정: '/'.get(routes/index.js)
 
-> 회원가입 form 줄이기. (핸드폰 번호, 이메일 필요한지..생각해보기)
->
+- ##### 18-05-14
+  - 회원가입 form 변경
+
 > search url...? 어디에 들어가는 건지....
 >
 > user 정보 수정 / 정보 보기 해야되나..

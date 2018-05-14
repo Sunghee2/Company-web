@@ -16,10 +16,22 @@ function needAuth(req, res, next) {
 }
 
 function validateForm(form, type, options) {
-  var id = form.name || "";
-  // var email = form.email || "";
+  var id = form.id || "";
+  var employee_number = form.employee_number || "";
+  var name = form.name || "";
+  var rrn = form.rrn || "";
+  var department = form.department || "";
+  var gender = form.gender || "";
+  var final_education = form.final_education || "";
+  var phone_number = form.phone_number || "";
+
   id = id.trim();
-  // email = email.trim();
+  employee_number = employee_number.trim();
+  name = name.trim();
+  rrn = rrn.trim();
+  department = department.trim();
+  final_education = final_education.trim();
+  phone_number = phone_number.trim();
 
   if (!id) {
     return 'ID is required.';
@@ -43,20 +55,37 @@ function validateForm(form, type, options) {
     return 'Password must be at least 6 characters.';
   }
 
+  if (!name) {
+    return 'Name is required.';
+  }
+  
+  if (!rrn) {
+    return 'RRN is required.';
+  }
+
+  if (!department) {
+    return 'Department is required.';
+  }
+
+  if (!gender) {
+    return 'Gender is required.';
+  }
+
+  if (!final_education) {
+    return 'Final education is required.';
+  }
+
+  if (!phone_number) {
+    return 'Phone number is required.';
+  }
+
   return null;
 }
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.route('/new')
-  .get(function(req, res, next) {
-    res.render('users/new');
-  })
+router.route('/')
   .post(catchErrors(async (req, res, next) => {
     var err = validateForm(req.body, 'signup', {needPassword: true});
+    console
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
@@ -65,46 +94,60 @@ router.route('/new')
     var id = req.body.id;
     var password = req.body.password;
     var employee_number = req.body.employee_number;
+    var name = req.body.name;
+    var rrn = req.body.rrn;
+    var department = req.body.department;
+    var gender = req.body.gender;
+    var final_education = req.body.final_education;
     var email = req.body.email || "";
+    var phone_number = req.body.phone_number;
 
     conn.query('SELECT * FROM accounts WHERE employee_number=?', [employee_number], function(err, rows) {
       if (err) {
         req.flash('danger', err);
         return res.redirect('back');
       }
-
-      if (rows.length) {
-        bcrypt.hash(password, null, null, function(err, hash) {
-            var account = {id: id, password: hash, employee_number: employee_number};
-            conn.query('INSERT INTO accounts set ?', account, function(err, rows) {
+      if (!rows.length) {
+        bcrypt.hash(password, 10, function(err, hash) {
+            var account = [
+              employee_number, id, hash
+            ];
+            var employee = [
+              employee_number, name, rrn, department,
+              gender, final_education, email, phone_number
+            ]
+            conn.query('INSERT INTO employees values (?,?,?,?,?,?,?,?)', employee, function(err, rows) {
               if (err) {
                 req.flash('danger', err);
                 return res.redirect('back');
               }
-              req.flash('success', 'Registered successfully. Please sign in.');
-              res.redirect('/signin');
             })
-        })
-        conn.query('')
-      } else {
-        req.flash('danger', '이미 가입된 사번입니다.');
-        return res.redirect('back');
-      }
-    })
-  
-  // var account = {
-  //             'id': req.body.id,
-  //             'password': req.body.password,
-  //             'employee_number': req.body.employee_number
-  //           }
+            conn.query('INSERT INTO accounts values (?,?,?)', account, function(err, rows) {
+              if (err) {
+                req.flash('danger', err);
+                return res.redirect('back');
+              }
+            })
 
-  // var employee = {
-  //             'employee_number': req.body.employee_number,
-  //             'g': req.body.,
-  //             '': req.body.email,
-  //             '': req.body.}
+          })
+        } else {
+          req.flash('danger', '이미 가입된 사번입니다.');
+          return res.redirect('back');
+        }
+        req.flash('success', 'Registered successfully. Please sign in.');
+        res.redirect('/signin');
+      })
+  }));
 
-}));
+
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
+
+router.route('/new')
+  .get(function(req, res, next) {
+    res.render('users/new');
+  })
 
 router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
   conn.query('SELECT * FROM accounts WHERE `id`=?', [req.paramsid], function(err, rows) {

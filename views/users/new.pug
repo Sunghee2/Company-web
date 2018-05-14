@@ -12,64 +12,62 @@ block content
     hr.featurette-divider
     .col-md-12
       h4.mb-3 Account
-      form.needs-validation
+      form.needs-validation(action='/users', method='POST')
         .mb-3
           label(for='username') ID
           .input-group
             .input-group-prepend
               span.input-group-text @
-            input#username.form-control(type='text', placeholder='Username')
+            input#username.form-control(type='text', placeholder='Username', name='id')
         .mb-3
           label(for='password') Password
           .input-group
-            input#password.form-control(type='text', placeholder='Password')
+            input#password.form-control(type='text', placeholder='Password', name='password')
         .mb-3
           label(for='password-confirmed') Password-Confirmed
           .input-group
-            input#password-confirmed.form-control(type='text', placeholder='Password-Confirmed')
+            input#password-confirmed.form-control(type='text', placeholder='Password-Confirmed', name='password_confirmed')
+        .mb-3
+          label(for='employee_number') Employee number
+          .input-group
+            input#password.form-control(type='text', placeholder='Employee Number', name='employee_number')
+    
+        
         p  
         hr.featurette-divider
         h4.mb-3 Profile
         .row
           .col-md-6.mb-3
-            label(for='firstName') First name
-            input#firstName.form-control(type='text', placeholder='')
-          .col-md-6.mb-3
             label(for='lastName') Last name
-            input#lastName.form-control(type='text', placeholder='')
+            input#lastName.form-control(type='text', placeholder='', name='name')
         .mb-3
           label(for='rrn') RRN
-          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing')
+          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn')
         .mb-3
           label(for='department') Department
           .input-group
-            input#department.form-control(type='text', placeholder='Click find and search your department')
+            input#department.form-control(type='text', placeholder='Click find and search your department', name='department')
             .input-group-prepend
               span.input-group-text Find
         label(for='gender') Gender
         div
-          input#man(name='gender', type='radio')
+          input#man(name='gender', value='m', type='radio')
           |  Man
-          input#woman(name='gender', type='radio')
+          input#woman(name='gender', value='f', type='radio')
           |  Woman
           h6  
         .mb-3
           label(for='rrn') Final Education
-          input#final-education.form-control(type='text', placeholder=' Graduated from Myongji University, Data Technology Track')
+          input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track')
         .mb-3
           label(for='email')
             | Email 
             span.text-muted (Optional)
-          input#email.form-control(type='email', placeholder='you@example.com')
+          input#email.form-control(type='email', name='email',placeholder='you@example.com')
           .invalid-feedback
             | Please enter a valid email address for shipping updates.
         .mb-3
-          label(for='address') Address
-          input#address.form-control(type='text', placeholder='1234 Main St', required='')
-          .invalid-feedback
-            | Please enter your shipping address.
-        .mb-3
           label(for='address2') Phone Number
-          input#phone-number.form-control(type='text', placeholder='eg. 01012345678')
+          input#phone-number.form-control(type='text', placeholder='eg. 01012345678', name='phone_number')
         hr.mb-4
         button.btn.btn-primary.btn-lg.btn-block(type='submit') Register
