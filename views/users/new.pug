@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  .container
+  .container.form-signup
     .py-5.text-center
       h2 Register
       p
@@ -16,9 +16,7 @@ block content
         .mb-3
           label(for='username') ID
           .input-group
-            .input-group-prepend
-              span.input-group-text @
-            input#username.form-control(type='text', placeholder='Username', name='id')
+            input.form-control(type='text', placeholder='User Id (eg. abc@gmail.com)', name='id')
         .mb-3
           label(for='password') Password
           .input-group
@@ -31,34 +29,38 @@ block content
           label(for='employee_number') Employee number
           .input-group
             input#password.form-control(type='text', placeholder='Employee Number', name='employee_number')
-    
-        
         p  
         hr.featurette-divider
         h4.mb-3 Profile
         .row
           .col-md-6.mb-3
+            label(for='firstName') First name
+            input#firstName.form-control(type='text', placeholder='Jean')
+          .col-md-6.mb-3
             label(for='lastName') Last name
-            input#lastName.form-control(type='text', placeholder='', name='name')
+            input#lastName.form-control(type='text', placeholder='Reno')
         .mb-3
           label(for='rrn') RRN
           input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn')
+          .col-md-6.mb-3
+        label(for='department') Department
+        .row
+          .col-md-9
+            .input-group
+              input#department.form-control(type='text', placeholder='Click find and search your department', name='department')
+          .col-md-3
+            button.btn.btn-primary.find-department(type='button') Find DeptNum
         .mb-3
-          label(for='department') Department
-          .input-group
-            input#department.form-control(type='text', placeholder='Click find and search your department', name='department')
-            .input-group-prepend
-              span.input-group-text Find
-        label(for='gender') Gender
-        div
+          label(for='gender') Gender
+          p
           input#man(name='gender', value='m', type='radio')
-          |  Man
+          |  Man &emsp;&emsp;&emsp;
           input#woman(name='gender', value='f', type='radio')
           |  Woman
           h6  
         .mb-3
           label(for='rrn') Final Education
-          input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track')
+          input#final-education.form-control(type='text', name='final_education',placeholder='Graduated from Myongji University, Data Technology Track')
         .mb-3
           label(for='email')
             | Email 

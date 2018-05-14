@@ -6,10 +6,10 @@ block content
       .clearfix
         form.form-signin(action='/signin', method='POST')
           h3.form-signin-heading Signin
-          label.sr-only(for='id') ID
+          label.sr-only(for='email') Email address
           input(
-            type='text', name='id', class='form-control', 
-            placeholder='ID', required, autofocus
+            type='email', id='email', name='id', class='form-control', 
+            placeholder='Email address', required, autofocus
           )
           label.sr-only(for='password') Password
           input(
@@ -18,5 +18,11 @@ block content
           )
           button.btn.btn-primary.btn-block(type='submit') Signin
 
-          div.sub 
-            a(href='/users/new') Signup
+          div.notice_signup
+            p
+            | if you do not have an account &emsp;&emsp;&emsp;
+            button.btn.btn-light.signup(type='button') Sign Up
+
+    .jumbotron
+    .jumbotron
+    .jumbotron
