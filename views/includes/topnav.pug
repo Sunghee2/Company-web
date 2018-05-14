@@ -8,17 +8,21 @@
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
           li.nav-item
-            a.nav-link(href="/questions") Questions
+            a.nav-link(href="/employees") Employee Management
           li.nav-item
-            a.nav-link(href="/users") Users
+            a.nav-link(href="/projects") Project Management
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') Signin
             li.nav-item
               a.nav-link(href='/users/new') Signup
           else
-            li.nav-item
-              a.nav-link(href=`/users/${currentUser._id}`) My Profile
+            li.nav-item.dropdown
+              //여기 알아서 잘 해주셈^^;
+              a.nav-link.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') currentUser.id
+              .dropdown-menu(aria-labelledby='navbarDropdown')
+                a.dropdown-item(href=`/users/${currentUser.employee_number}/edit`) Profile Settings
+                a.dropdown-item(href=`/users/${currentUser.employee_number}/resetPwd`) Reset Password
             li.nav-item
               a.nav-link(href='/signout') Signout
         

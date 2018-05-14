@@ -16,43 +16,42 @@ function needAuth(req, res, next) {
 }
 
 function validateForm(form, type, options) {
-  var id = form.id || "";
-  var employee_number = form.employee_number || "";
   var name = form.name || "";
   var rrn = form.rrn || "";
   var department = form.department || "";
   var gender = form.gender || "";
   var final_education = form.final_education || "";
   var phone_number = form.phone_number || "";
-
-  id = id.trim();
-  employee_number = employee_number.trim();
+  
   name = name.trim();
   rrn = rrn.trim();
   department = department.trim();
   final_education = final_education.trim();
   phone_number = phone_number.trim();
-
-  if (!id) {
-    return 'ID is required.';
-  }
-
+  
   if (type === 'signup') {
+    var id = form.id || "";
+    var employee_number = form.employee_number || "";
+    id = id.trim();
+    employee_number = employee_number.trim();
+
+    if (!id) {
+      return 'ID is required.';
+    }
     if (!employee_number) {
       return 'Employee number is required.';
     }
-  }
-
-  if (!form.password && options.needPassword) {
-    return 'Password is required.';
-  }
-
-  if (form.password !== form.password_confirmed) {
-    return 'Passsword do not match.';
-  }
-
-  if (form.password.length < 6) {
-    return 'Password must be at least 6 characters.';
+    if (!form.password && options.needPassword) {
+      return 'Password is required.';
+    }
+  
+    if (form.password !== form.password_confirmed) {
+      return 'Passsword do not match.';
+    }
+  
+    if (form.password.length < 6) {
+      return 'Password must be at least 6 characters.';
+    }
   }
 
   if (!name) {
@@ -82,10 +81,31 @@ function validateForm(form, type, options) {
   return null;
 }
 
+function validateFormForResetPwd(form) {
+  if (!form.password) {
+    return 'Current Password is required.';
+  }
+
+  if (!form.new_password) {
+    return 'New Password is required.';
+  }
+
+  if (!form.new_password_confirmation) {
+    return 'New Password Confirmation is required.';
+  }
+
+  if (form.new_password.length < 6) {
+    return 'New Password must be at least 6 characters.';
+  }
+
+  if (form.new_password !== form.new_password_confirmation) {
+    return 'New Passsword do not match.';
+  }
+}
+
 router.route('/')
   .post(catchErrors(async (req, res, next) => {
     var err = validateForm(req.body, 'signup', {needPassword: true});
-    console
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
@@ -139,24 +159,24 @@ router.route('/')
       })
   }));
 
-
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.route('/new')
   .get(function(req, res, next) {
     res.render('users/new');
   })
 
 router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
-  conn.query('SELECT * FROM accounts WHERE `id`=?', [req.paramsid], function(err, rows) {
+  conn.query('SELECT * FROM employees WHERE employee_number=?', [req.params.id], function(err, rows) {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');     
     }
-    const user = rows[0];
-    res.render('users/edit', {user: user});
+    if (!rows.length) {
+      req.flash('danger', '잘못된 접근입니다.');
+      return res.redirect('back');
+    } else {
+      const user = rows[0];
+      res.render('users/edit', {user: user});
+    }
   })
 }))
 
@@ -170,5 +190,24 @@ router.put('/:id', needAuth, catchErrors(async(req, res, next) => {
   req.flash('success', 'Updated successfully.');
   res.redirect('/users');
 }))
+
+router.route('/:id/resetPwd')
+  .get(needAuth, catchErrors(async(req, res, next) => {
+    res.render('users/resetPwd');
+  }))
+  .put(needAuth, catchErrors(async(req, res, next) => {
+    var err = validateFormForResetPwd(req.body);
+    if (err) {
+      req.flash('danger', err);
+      return res.redirect('back');
+    }
+
+    var password = req.body.password;
+    var new_password = req.body.new_password;
+    var new_password_confirmation = req.body.new_password_confirmation;
+
+    
+
+  }))
 
 module.exports = router;

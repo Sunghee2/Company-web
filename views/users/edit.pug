@@ -3,22 +3,44 @@ extends ../layout
 block content
   .container
     h1.main-title Profile Update
-    form(action=`/users/${user._id}?_method=PUT`, method='POST')
-      .form-group
-        label(for='name') Name
-        input.form-control(type='text', id='name', name='name', placeholder='Your name', value=user.name)
-      .form-group
-        label(for='email') Email address
-        input.form-control(type='email', id='email', name='email', placeholder='Email', value=user.email)
-      .form-group
-        label(for='current_password') Current Password
-        input.form-control(type='password', id='current_password', name='current_password', placeholder='Current Password')
-      .form-group
-        label(for='password') Password
-        input.form-control(type='password', id='password', name='password', placeholder='Password')
-      .form-group
-        label(for='password_confirmation') Password Confirmation
-        input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password Confirmation')
+    form(action=`/users/${user.employee_number}?_method=PUT`, method='POST')
+      p  
+      hr.featurette-divider
+      h4.mb-3 Profile
+      .row
+        .col-md-6.mb-3
+          label(for='lastName') Last name
+          input#lastName.form-control(type='text', placeholder='', name='name', value=user.name)
+      .mb-3
+        label(for='rrn') RRN
+        input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn', value=user.RRN)
+      .mb-3
+        label(for='department') Department
+        .input-group
+          input#department.form-control(type='text', placeholder='Click find and search your department', name='department', value=user.dept_id)
+          .input-group-prepend
+            span.input-group-text Find
+      label(for='gender') Gender
+      div
+        input#man(name='gender', value='m', type='radio')
+        |  Man
+        input#woman(name='gender', value='f', type='radio')
+        |  Woman
+        h6  
+      .mb-3
+        label(for='rrn') Final Education
+        input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track', value=user.final_education)
+      .mb-3
+        label(for='email')
+          | Email 
+          span.text-muted (Optional)
+        input#email.form-control(type='email', name='email',placeholder='you@example.com', value=user.email)
+        .invalid-feedback
+          | Please enter a valid email address for shipping updates.
+      .mb-3
+        label(for='address2') Phone Number
+        input#phone-number.form-control(type='text', placeholder='eg. 01012345678', name='phone_number', value=user.phone_number)
+      hr.mb-4
       a.btn.btn-outline-secondary(href='javascript:window.history.back();') Back 
       | 
       button.btn.btn-primary(type='submit') Update

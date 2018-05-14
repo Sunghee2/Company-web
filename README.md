@@ -73,12 +73,8 @@ https://github.com/mysqljs/mysql
 ###### 상세 내용, 클레스명 확인 및 수정 -> 권민찬
 
 - navbar
-- form action, method
-- input name
-- signin - 이메일 형식 아님. id로 
-- 회원가입에 사번 없음. 
-- 부트스트랩 4베타 바꾸기
 - 직원/ 프로젝트 검색 따로 분리하기.
+- 회원가입할 때 department select로 
 
 ###### 백엔드 합류 -> 배진영
 
@@ -103,6 +99,7 @@ https://github.com/mysqljs/mysql
 - ##### 18-05-14
   - 회원가입 form 변경
   - 로그인 버그 수정
+  - 비밀번호 수정 진행중
 
 > search url...? 어디에 들어가는 건지....
 >

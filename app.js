@@ -54,7 +54,7 @@ app.use(passport.session());
 passportConfig(passport);
 
 app.use(function(req, res, next) {
-  // res.locals.currentUser = req.user;  // passport는 req.user로 user정보 전달
+  res.locals.currentUser = req.user; 
   res.locals.flashMessages = req.flash();
   next();
 });
