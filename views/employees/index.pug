@@ -1,4 +1,4 @@
-.row.search-page
+.row
   nav.col-md-2.d-none.d-md-block.bg-light.sidebar
     .sidebar-sticky
       ul.nav.flex-column.mt-4
@@ -22,78 +22,31 @@
   main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
     .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
       .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
-    .search-project-date
+    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
       div
-        .mt-3
-          label(for='find-project-date')
-            h5 Search Date
-            form#frm(action='action.jsp')
-      p
-      h6
-        | project start : 
-        input#userdate(type='date', name='userdate', value='2017-01-01')
-      p
-      p
-      h6
-        | project end  : 
-        input#userdate(type='date', name='userdate', value='2018-12-31')
-      p
+        h1.h2 Search
+        .mb-3
+          label(for='find-employee-number') Employee Number
+          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing')
+        .mb-3
+          label(for='find-employee-name') Name
+          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing')
     h2 Result
-    table.table
-      thead
-        tr
-          th(scope='col') #
-          th(scope='col') First
-          th(scope='col') Last
-          th(scope='col') Handle
-      tbody
-        tr
-          th(scope='row') 1
-          td Mark
-          td Otto
-          td @mdo
-        tr
-          th(scope='row') 2
-          td Jacob
-          td Thornton
-          td @fat
-        tr
-          th(scope='row') 3
-          td Larry
-          td the Bird
-          td @twitter
-        tr
-          th(scope='row') 3
-          td Larry
-          td the Bird
-          td @twitter
-        tr
-          th(scope='row') 3
-          td Larry
-          td the Bird
-          td @twitter
-        tr
-          th(scope='row') 3
-          td Larry
-          td the Bird
-          td @twitter
-        tr
-          th(scope='row')  
-          td
-          td
-          td
-        tr
-          th(scope='row')  
-          td
-          td
-          td
-        tr
-          th(scope='row')  
-          td
-          td
-          td
-        tr
-          th(scope='row')  
-          td
-          td
-          td
+    if employees.total > 0
+      .small Total #{employees.total} employee(s)
+      table.table
+        thead
+          tr
+            th(scope='col') Employee Number
+            th(scope='col') Name
+            th(scope='col') Department
+            th(scope='col') Phone Number
+        tbody
+          each employee in employees.docs //이 부분은 data넘어오는 것 보고 다시 수정하겠음.
+            tr
+              a(href='')
+                th(scope='row')= employee.employee_number
+                td= employee.name
+                td= employee.department
+                td= employee.phone_number
+      
