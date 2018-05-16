@@ -84,7 +84,8 @@ https://github.com/mysqljs/mysql
     + 직원리스트, 직원 상세 페이지(경영진)
     + 직원 정보 조회, 직원 정보 수정(edit)
     + 개발자 emp 입력페이지, project 입력페이지
-    + (clear) 평가 페이지(PM, peer, client) -> pm & peer은 developer_forms, client는 client_forms
+    + (clear) 평가 페이지(PM, peer, client)
+    +    -> PM, peer는 developer_form, client는 client_form
     + (clear) signin -> signup button 
 
 *. 보고서(with. 권민찬)
