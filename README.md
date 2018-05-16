@@ -77,14 +77,14 @@ https://github.com/mysqljs/mysql
   - view 추가 및 수정
     - 추가: evaluation forms
     - 수정: refer to follow...
-      (clear) signup -> department는 dropitem으로
-      (clear) signup -> password (*)
-      search/employees, projects -> button
-      직원리스트, 직원 상세 페이지(경영진)
-      직원 정보 조회, 직원 정보 수정(edit)
-      개발자 emp 입력페이지, project 입력페이지
-      (clear) 평가 페이지(PM, peer, client) -> pm & peer은 developer_forms, client는 client_forms
-      (clear) signin -> signup button 
+      - (clear) signup -> department는 dropitem으로
+      - (clear) signup -> password (*)
+      - search/employees, projects -> button
+      - 직원리스트, 직원 상세 페이지(경영진)
+      - 직원 정보 조회, 직원 정보 수정(edit)
+      - 개발자 emp 입력페이지, project 입력페이지
+      - (clear) 평가 페이지(PM, peer, client) -> pm & peer은 developer_forms, client는 client_forms
+      - (clear) signin -> signup button 
 
 *. 보고서(with. 권민찬)
 *. 발표자료 만들어야 됨
