@@ -70,13 +70,27 @@ https://github.com/mysqljs/mysql
   - view 추가 및 수정
     - 추가: includes/cards.pug, includes/main_image.pug, includes/records.pug, searches/search.pug
     - 수정: layout.pug, footer.pug, signin.pug, new.pug, stylesheets/style.css
-###### 상세 내용, 클레스명 확인 및 수정 -> 권민찬
 
-- navbar
-- 직원/ 프로젝트 검색 따로 분리하기.
-- 회원가입할 때 department select로 
+###### 상세 내용, 클레스명 확인 및 수정(해야하는데... 아직 데이터베이스 insert문..) -> 권민찬
 
-###### 백엔드 합류 -> 배진영
+- **18-05-16**
+  - view 추가 및 수정
+    - 추가: evaluation forms
+    - 수정: refer to follow...
+      (clear) signup -> department는 dropitem으로
+      (clear) signup -> password (*)
+      search/employees, projects -> button
+      직원리스트, 직원 상세 페이지(경영진)
+      직원 정보 조회, 직원 정보 수정(edit)
+      개발자 emp 입력페이지, project 입력페이지
+      (clear) 평가 페이지(PM, peer, client) -> pm & peer은 developer_forms, client는 client_forms
+      (clear) signin -> signup button 
+
+*. 보고서(with. 권민찬)
+*. 발표자료 만들어야 됨
+*. 나중에 폼 확인할 수 있게 router도 달아야하는데 귀찮다..
+
+###### 백엔드 합류(연기) -> 배진영
 
 
 ### 이성희
