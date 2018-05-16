@@ -77,12 +77,10 @@ https://github.com/mysqljs/mysql
 
 - **18-05-16**
 
-  - view 추가 및 수정
-  
-    - 추가: evaluations/client_evaluations.pug, evaluations/developer_evaluations.pug
-    - 수정 완료: signin.pug, users/new.pug
-    - 수정중: users/edit.pug, users/show.pug
-    - 예정: employee_list, employee_detail page, admin_emp_insert_page, admin_project_insert_page
+  - 추가: evaluations/client_evaluations.pug, evaluations/developer_evaluations.pug
+  - 수정 완료: signin.pug, users/new.pug
+  - 수정중: users/edit.pug, users/show.pug
+  - 예정: employee_list, employee_detail page, admin_emp_insert_page, admin_project_insert_page
 
 > 보고서(with. 권민찬): 써야하는데 언제까지 insert문을 잡고 계실건가요
 >
