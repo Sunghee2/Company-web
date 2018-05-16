@@ -74,10 +74,9 @@ https://github.com/mysqljs/mysql
 ###### 상세 내용, 클레스명 확인 및 수정(해야하는데... 아직 데이터베이스 insert문..) -> 권민찬
 
 - **18-05-16**
-  - view 추가 및 수정
-    - 추가: evaluation forms
-    - 수정: refer to follow...
-    
+- view 추가 및 수정
+  - 추가: evaluation forms
+  - 수정: refer to follow
     + (clear) signup -> department는 dropitem으로, 평가 페이지(PM, peer, client)
     + (clear) signup -> password (*), signin -> signup button 
     + search/employees, projects -> button
