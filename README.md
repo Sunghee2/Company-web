@@ -78,17 +78,17 @@ https://github.com/mysqljs/mysql
     - 추가: evaluation forms
     - 수정: refer to follow...
     
-    + (clear) signup -> department는 dropitem으로
-    + (clear) signup -> password (*)
+    + (clear) signup -> department는 dropitem으로, 평가 페이지(PM, peer, client)
+    + (clear) signup -> password (*), signin -> signup button 
     + search/employees, projects -> button
     + 직원리스트, 직원 상세 페이지(경영진)
     + 직원 정보 조회, 직원 정보 수정(edit)
     + 개발자 emp 입력페이지, project 입력페이지
-    + (clear) 평가 페이지(PM, peer, client)
-    + (clear) signin -> signup button 
 
 > 보고서(with. 권민찬)
+>
 > 발표자료 만들어야 됨
+>
 > 나중에 폼 확인할 수 있게 router도 달아야하는데 귀찮다..
 
 ###### 백엔드 합류(연기) -> 배진영
