@@ -67,18 +67,22 @@ https://github.com/mysqljs/mysql
 ### 배진영
 
 - **18-05-12** 
+
   - view 추가 및 수정
+  
     - 추가: includes/cards.pug, includes/main_image.pug, includes/records.pug, searches/search.pug
     - 수정: layout.pug, footer.pug, signin.pug, new.pug, stylesheets/style.css
 
 ###### 상세 내용, 클레스명 확인 및 수정(해야하는데... 아직 데이터베이스 insert문..) -> 권민찬
 
 - **18-05-16**
+
   - view 추가 및 수정
+  
     - 추가: evaluations/client_evaluations.pug, evaluations/developer_evaluations.pug
-    - 수정 완료: signin.pug, users/new.pug
-    - 수정중: users/edit.pug, users/show.pug
-    - 예정: employee_list, employee_detail page / admin_emp_insert_page, admin_project_insert_page
+    - 수정 완료: signin.pug, users/new.pug
+    - 수정중: users/edit.pug, users/show.pug
+    - 예정: employee_list, employee_detail page, admin_emp_insert_page, admin_project_insert_page
 
 > 보고서(with. 권민찬): 써야하는데 언제까지 insert문을 잡고 계실건가요
 >
