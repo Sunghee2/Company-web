@@ -7,6 +7,12 @@ body {
 }
 
 /* main_body */
+
+.jumbotron.p-3.text-white.rounded.bg-dark.main-image > img {
+  max-height: 500px!important;
+  width: 100%;
+}
+
 div.header.clearfix{
   padding-top: 4em;
 }
@@ -47,6 +53,10 @@ div.notice_signup{
 
 .jumbotron {
   background: white;
+}
+
+select#departmentSelect.custom-select{
+  width: 29.3em;
 }
 
 /* signup */

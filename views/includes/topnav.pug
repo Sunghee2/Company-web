@@ -8,17 +8,19 @@
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
           li.nav-item
-            a.nav-link(href="/employees") Employee Management
+            a.nav-link(href="/searches/employees") Employee Management
           li.nav-item
-            a.nav-link(href="/projects") Project Management
+            a.nav-link(href="/searches/projects") Project Management
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') Signin
             li.nav-item
               a.nav-link(href='/users/new') Signup
+            li.nav-item
+              a.nav-link(href='/evaluations/pm_evaluation') pm_evaluation
           else
             li.nav-item.dropdown
-              //여기 알아서 잘 해주셈^^;
+              // ~ing 작업해야함 ㅠㅠㅠㅠ
               a.nav-link.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') currentUser.id
               .dropdown-menu(aria-labelledby='navbarDropdown')
                 a.dropdown-item(href=`/users/${currentUser.employee_number}/edit`) Profile Settings
