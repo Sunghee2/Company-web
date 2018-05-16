@@ -75,17 +75,12 @@ https://github.com/mysqljs/mysql
 
 - **18-05-16**
   - view 추가 및 수정
-    - 추가: evaluation forms
-    - 수정: refer to follow
-    
-  + (clear) signup -> department는 dropitem으로, 평가 페이지(PM, peer, client)
-  + (clear) signup -> password (*), signin -> signup button 
-  + search/employees, projects -> button
-  + 직원리스트, 직원 상세 페이지(경영진)
-  + 직원 정보 조회, 직원 정보 수정(edit) -> ing
-  + 개발자 emp 입력페이지, project 입력페이지
+    - 추가: evaluations/client_evaluations.pug, evaluations/developer_evaluations.pug
+    - 수정 완료: signin.pug, users/new.pug
+    - 수정중: users/edit.pug, users/show.pug
+    - 예정: employee_list, employee_detail page / admin_emp_insert_page, admin_project_insert_page
 
-> 보고서(with. 권민찬)
+> 보고서(with. 권민찬): 써야하는데 언제까지 insert문을 잡고 계실건가요
 >
 > 발표자료 만들어야 됨
 >
