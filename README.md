@@ -86,7 +86,7 @@ https://github.com/mysqljs/mysql
 >
 > 발표자료 만들어야 됨
 >
-> 나중에 폼 확인할 수 있게 router도 달아야하는데 귀찮다..
+> 나중에 폼 확인할 수 있게 router도 달아야하는데 귀찮다.. 달았음ㅇㅇ밑에서 url확인바람
 
 ###### 백엔드 합류(연기) -> 배진영
 
@@ -114,9 +114,29 @@ https://github.com/mysqljs/mysql
   - 프로필 정보 수정
   - 비밀번호 수정
 
-> search url...? 어디에 들어가는 건지....
+- ##### 18-05-15
+  - 수정 : employees/index.pug, projects/index.pug
+
+- ##### 18-05-17
+  - 추가 : routes/evaluations.js
+  - 수정 : app.js(router 추가), users/new.pug(value수정, placeholder로 변경), evaluations/client_evaluation_form.pug(name 수정/ projects들어왔을 경우 추가), evaluations/peer_evaluation_form.pug(name 수정/ projects들어왔을 경우 추가), includes/topnav.pug(pm url 변경)
+
+> user/new 왜 다 value로 되어있는지 의문??? > 그래서 내가 걍 고쳤는데 혹시 따로 이유가 있으면 말해주셈
+> 평가도 다 그러네 왜그런거임?
 >
-> user 정보 수정 / 정보 보기 해야되나..
+> 평가에 developer_evaluation_form.1.pug 여기서 1은 뭔지??? 그래서 걍 고침 
+> 평가 url: evaluations/peer evaluations/client evaluations/pm 으로 해놨음.
+> pm도 미리 연결해놨음. (대신 로그인 해야됨.)
+> 그리고 평가 get할 때 다 해당 user의 projects data 같이 보냄 dropdown에서 처리해주셈
+> 평가 전체 페이지 하나 만들어서 들어가는 건지 아니면 따로 따로 topnav에 넣을 건지 답 좀
+> 평가 문제 중에서 name 동일한 질문들 내가 바꿈 
+>
+> 그 id는 걍 이메일말고 id로 하자 ㅇㅇ 그리고 이름 제발 first, last 나누지마 제발 (넣기 귀찮으니깐)
+>
+> signin 맛간거 확인부탁
+>
+> user/new에 부서 value부분 저렇게 dept_id로 만들어달란 거.. 고쳐놓음 근데 data가 어떤
+> 식인지 몰라서 막 숫자 넣긴 했는데 저렇게 해주셈 data 오면 edit도 저렇게 ㅇㅇ
 
 ### 정지우
 

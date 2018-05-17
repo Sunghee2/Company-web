@@ -21,7 +21,7 @@ block content
     if (!projects)
       p 평가 가능한 프로젝트가 존재하지 않습니다.
     else
-      form(method='post', action='/evaluations/client')
+      form(method='post', action='/evaluations/peer')
         h3 Project
         p.mt-4
           .row.ml-3.form-labels
@@ -33,16 +33,21 @@ block content
             h6.col-md-2 Project Name:
             .col-md-5
               input#survey-form-project-name.form-control(type='text', value='DBProgramming Project', readonly='')
+        p.mt-2
+          .row.ml-3.form-labels
+            h6.col-md-2 Project Role:
+            .col-md-5
+              input#survey-form-project-role.form-control(type='text', value='Your Project Role', readonly='')
         hr.mt-5.mb-4
         h3 Your Profile
         p.mt-4
           .row.ml-3.form-labels
-            h6.col-md-2 Cilent Number:
+            h6.col-md-2 Employee Number:
             .col-md-5
               input#survey-form-employee-id.form-control(type='text', value='eg.12345678', readonly='')
         p.mt-2
           .row.ml-3.form-labels
-            h6.col-md-2 Client Name:
+            h6.col-md-2 Employee Name:
             .col-md-5
               input#survey-form-employee-name.form-control(type='text', value='Matilda', readonly='')
         hr.mt-5.mb-4
@@ -78,70 +83,108 @@ block content
             tbody
               tr(align='CENTER')
                 td(align='LEFT')
-                  | 1. Appropriateness of possession and development plan of development manpower and development equipment
+                  | 1. Utilization of development tools
                 td
-                  input(type='RADIO', name='appropriateness', value='1')
+                  input(type='RADIO', name='utilization-tools', value='1')
                 td
-                  input(type='RADIO', name='appropriateness', value='2')
+                  input(type='RADIO', name='utilization-tools', value='2')
                 td
-                  input(type='RADIO', name='appropriateness', value='3')
+                  input(type='RADIO', name='utilization-tools', value='3')
                 td
-                  input(type='RADIO', name='appropriateness', value='4')
+                  input(type='RADIO', name='utilization-tools', value='4')
                 td
-                  input(type='RADIO', name='appropriateness', value='5')
+                  input(type='RADIO', name='utilization-tools', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
-                  | 2. The level of technology possessed by the host organizations
+                  | 2. Working with the development pattern appropriate for the project
                 td
-                  input(type='RADIO', name='technology', value='1')
+                  input(type='RADIO', name='pattern', value='1')
                 td
-                  input(type='RADIO', name='technology', value='2')
+                  input(type='RADIO', name='pattern', value='2')
                 td
-                  input(type='RADIO', name='technology', value='3')
+                  input(type='RADIO', name='pattern', value='3')
                 td
-                  input(type='RADIO', name='technology', value='4')
+                  input(type='RADIO', name='pattern', value='4')
                 td
-                  input(type='RADIO', name='technology', value='5')
+                  input(type='RADIO', name='pattern', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
-                  | 3. Technological development goals and development methods, appropriateness of development period
+                  | 3. Intra-platform understanding
                 td
-                  input(type='RADIO', name='development', value='1')
+                  input(type='RADIO', name='intra-platform', value='1')
                 td
-                  input(type='RADIO', name='development', value='2')
+                  input(type='RADIO', name='intra-platform', value='2')
                 td
-                  input(type='RADIO', name='development', value='3')
+                  input(type='RADIO', name='intra-platform', value='3')
                 td
-                  input(type='RADIO', name='development', value='4')
+                  input(type='RADIO', name='intra-platform', value='4')
                 td
-                  input(type='RADIO', name='development', value='5')
+                  input(type='RADIO', name='intra-platform', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
-                  | 4. Fulfillment of Information Survey on Related Technologies and Market Trends
+                  | 4. Program decomposition ability
                 td
-                  input(type='RADIO', name='fulfillment', value='1')
+                  input(type='RADIO', name='program-decomposition', value='1')
                 td
-                  input(type='RADIO', name='fulfillment', value='2')
+                  input(type='RADIO', name='program-decomposition', value='2')
                 td
-                  input(type='RADIO', name='fulfillment', value='3')
+                  input(type='RADIO', name='program-decomposition', value='3')
                 td
-                  input(type='RADIO', name='fulfillment', value='4')
+                  input(type='RADIO', name='program-decomposition', value='4')
                 td
-                  input(type='RADIO', name='fulfillment', value='5')
+                  input(type='RADIO', name='program-decomposition', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
-                  | 5. Appropriateness of project cost and rationality of execution plan
+                  | 5. System decomposition ability
                 td
-                  input(type='RADIO', name='rationality', value='1')
+                  input(type='RADIO', name='system-decomposition', value='1')
                 td
-                  input(type='RADIO', name='rationality', value='2')
+                  input(type='RADIO', name='system-decomposition', value='2')
                 td
-                  input(type='RADIO', name='rationality', value='3')
+                  input(type='RADIO', name='system-decomposition', value='3')
                 td
-                  input(type='RADIO', name='rationality', value='4')
+                  input(type='RADIO', name='system-decomposition', value='4')
                 td
-                  input(type='RADIO', name='rationality', value='5')
-              
+                  input(type='RADIO', name='system-decomposition', value='5')
+              tr(align='CENTER')
+                td(align='LEFT')
+                  | 6. Component understanding ability
+                td
+                  input(type='RADIO', name='component', value='1')
+                td
+                  input(type='RADIO', name='component', value='2')
+                td
+                  input(type='RADIO', name='component', value='3')
+                td
+                  input(type='RADIO', name='component', value='4')
+                td
+                  input(type='RADIO', name='component', value='5')
+              tr(align='CENTER')
+                td(align='LEFT')
+                  | 7. Code readability
+                td
+                  input(type='RADIO', name='readability', value='1')
+                td
+                  input(type='RADIO', name='readability', value='2')
+                td
+                  input(type='RADIO', name='readability', value='3')
+                td
+                  input(type='RADIO', name='readability', value='4')
+                td
+                  input(type='RADIO', name='readability', value='5')
+              tr(align='CENTER')
+                td(align='LEFT')
+                  | 8. Error Handling
+                td
+                  input(type='RADIO', name='handling', value='1')
+                td
+                  input(type='RADIO', name='handling', value='2')
+                td
+                  input(type='RADIO', name='handling', value='3')
+                td
+                  input(type='RADIO', name='handling', value='4')
+                td
+                  input(type='RADIO', name='handling', value='5')
           br
           br
         hr.mt-5.mb-4
@@ -179,54 +222,54 @@ block content
                 td(align='LEFT')
                   | 1. Ability to easily explain to customers or team members
                 td
-                  input(type='RADIO', name='freedom', value='1')
+                  input(type='RADIO', name='easily', value='1')
                 td
-                  input(type='RADIO', name='freedom', value='2')
+                  input(type='RADIO', name='easily', value='2')
                 td
-                  input(type='RADIO', name='freedom', value='3')
+                  input(type='RADIO', name='easily', value='3')
                 td
-                  input(type='RADIO', name='freedom', value='4')
+                  input(type='RADIO', name='easily', value='4')
                 td
-                  input(type='RADIO', name='freedom', value='5')
+                  input(type='RADIO', name='easily', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 2. Ability to describe implementation and interface separately
                 td
-                  input(type='RADIO', name='demand', value='1')
+                  input(type='RADIO', name='describe', value='1')
                 td
-                  input(type='RADIO', name='demand', value='2')
+                  input(type='RADIO', name='describe', value='2')
                 td
-                  input(type='RADIO', name='demand', value='3')
+                  input(type='RADIO', name='describe', value='3')
                 td
-                  input(type='RADIO', name='demand', value='4')
+                  input(type='RADIO', name='describe', value='4')
                 td
-                  input(type='RADIO', name='demand', value='5')
+                  input(type='RADIO', name='describe', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 3. Ability to explain spheres and abstracts separately
                 td
-                  input(type='RADIO', name='creative', value='1')
+                  input(type='RADIO', name='explain', value='1')
                 td
-                  input(type='RADIO', name='creative', value='2')
+                  input(type='RADIO', name='explain', value='2')
                 td
-                  input(type='RADIO', name='creative', value='3')
+                  input(type='RADIO', name='explain', value='3')
                 td
-                  input(type='RADIO', name='creative', value='4')
+                  input(type='RADIO', name='explain', value='4')
                 td
-                  input(type='RADIO', name='creative', value='5')
+                  input(type='RADIO', name='explain', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 4. Ability to describe details and concepts separately
                 td
-                  input(type='RADIO', name='stimulat', value='1')
+                  input(type='RADIO', name='details', value='1')
                 td
-                  input(type='RADIO', name='stimulat', value='2')
+                  input(type='RADIO', name='details', value='2')
                 td
-                  input(type='RADIO', name='stimulat', value='3')
+                  input(type='RADIO', name='details', value='3')
                 td
-                  input(type='RADIO', name='stimulat', value='4')
+                  input(type='RADIO', name='details', value='4')
                 td
-                  input(type='RADIO', name='stimulat', value='5')
+                  input(type='RADIO', name='details', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 5. Listen to opinions without self-defense
