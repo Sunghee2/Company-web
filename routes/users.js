@@ -177,7 +177,16 @@ router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
       return res.redirect('back');
     } else {
       const user = rows[0];
-      res.render('users/edit', {user: user});
+      conn.query('SELECT dept_id, dept_name FROM departments', (err, rows2) => {
+        if (err) {
+          console.log('here');
+          req.flash('danger', err);
+          return res.redirect('back');
+        }
+        console.log(rows2);
+        const departments = rows2;
+        res.render('users/edit', {user: user, departments: departments});
+      });
     }
   })
 }))

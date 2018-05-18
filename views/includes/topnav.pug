@@ -16,15 +16,19 @@
               a.nav-link(href='/signin') Signin
             li.nav-item
               a.nav-link(href='/users/new') Signup
-            li.nav-item
-              a.nav-link(href='/evaluations/pm') pm_evaluation
           else
             li.nav-item.dropdown
               // ~ing 작업해야함 ㅠㅠㅠㅠ
-              a.nav-link.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') currentUser.id
+              a.nav-link.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= currentUser.ID
               .dropdown-menu(aria-labelledby='navbarDropdown')
                 a.dropdown-item(href=`/users/${currentUser.employee_number}/edit`) Profile Settings
                 a.dropdown-item(href=`/users/${currentUser.employee_number}/changePwd`) Change Password
+            li.nav-item
+              a.nav-link(href='/evaluations/pm') pm evaluation
+            li.nav-item
+              a.nav-link(href='/evaluations/peer') peer evaluation
+            li.nav-item
+              a.nav-link(href='/evaluations/client') client evaluation           
             li.nav-item
               a.nav-link(href='/signout') Signout
         

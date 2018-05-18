@@ -44,11 +44,12 @@ block content
           label(for='department') Department
             .col-md-6.mb-3
             select#departmentSelect.custom-select
-              option(selected='') Select your Department
-              option(value='01') Development
-              option(value='02') Marketing
-              option(value='03') Research
-              option(value='04') Administrative
+              option(data-hidden='true') Select your Department
+              option(value='801000') Development
+              option(value='801004') Marketing
+              option(value='801002') Management
+              option(value='801003') System Manager
+              option(value='801001') Human Resources
         .mb-3.mt-3
           label(for='gender') Gender
           p
