@@ -16,10 +16,14 @@ block content
         input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn', value=user.RRN)
       .mb-3
         label(for='department') Department
-        .input-group
-          input#department.form-control(type='text', placeholder='Click find and search your department', name='department', value=user.dept_id)
-          .input-group-prepend
-            span.input-group-text Find
+          .col-md-6.mb-3
+          select#departmentSelect.custom-select
+            option(data-hidden='true') Select your Department
+            each department in departments
+              if department.dept_id==user.dept_id
+                option(value=department.dept_id selected)= department.dept_name
+              else
+                option(value=department.dept_id)= department.dept_name
       label.form-check-label(for='gender') Gender
         if(user.gender=='m')
           input#man(name='gender', value='m', type='radio' checked)

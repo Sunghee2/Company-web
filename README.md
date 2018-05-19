@@ -1,23 +1,3 @@
-## CHECK
-
-- [x] Form name 최대한 column 이름과 동일하게 하기.
-- [x] Form name README.md에 명시하기.
-- [x] 각자 한 부분 적기(하단에 이름 적어둠).
-- [x] indentation 지키기. 최대한 깔끔하게.
-
-
-
-**또 추가해야 할 것 있으면 알아서 추가하기**
-
-
-
-## 해야할 것
-
-- [x] DB schema 생성 & query 최적화             
-- [x] data 만들기
-
-
-
 # 데이터베이스프로그래밍
 
 ##### Requirement
@@ -129,14 +109,12 @@ https://github.com/mysqljs/mysql
 > pm도 미리 연결해놨음. (대신 로그인 해야됨.)
 > 그리고 평가 get할 때 다 해당 user의 projects data 같이 보냄 dropdown에서 처리해주셈
 > 평가 전체 페이지 하나 만들어서 들어가는 건지 아니면 따로 따로 topnav에 넣을 건지 답 좀
-> 평가 문제 중에서 name 동일한 질문들 내가 바꿈 
->
-> 그 id는 걍 이메일말고 id로 하자 ㅇㅇ 그리고 이름 제발 first, last 나누지마 제발 (넣기 귀찮으니깐)
->
-> signin 맛간거 확인부탁
->
-> user/new에 부서 value부분 저렇게 dept_id로 만들어달란 거.. 고쳐놓음 근데 data가 어떤
-> 식인지 몰라서 막 숫자 넣긴 했는데 저렇게 해주셈 data 오면 edit도 저렇게 ㅇㅇ
+
+- ##### 18-05-18
+  - 수정 : signin.pug, users/new.pug(부서 data 맞게 넣음), users/edit.pug(해당하는 부서 data 넣고 선택 수정), includes/topnav.pug(계정id 보이도록 수정), lib/passport-config.js(session 수정), app.js(body-parser 추가), routes/evaluations.js(validate~수정), routes/users.js(정보수정할 때 부서정보 넘김)
+
+> 로그인 수정함
+> 
 
 ### 정지우
 
