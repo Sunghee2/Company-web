@@ -47,22 +47,20 @@ https://github.com/mysqljs/mysql
 ### 배진영
 
 - **18-05-12** 
-
   - view 추가 및 수정
-  
     - 추가: includes/cards.pug, includes/main_image.pug, includes/records.pug, searches/search.pug
     - 수정: layout.pug, footer.pug, signin.pug, new.pug, stylesheets/style.css
 
 - **18-05-16**
-
   - 추가: evaluations/client_evaluations.pug, evaluations/developer_evaluations.pug
   - 수정 완료: signin.pug, users/new.pug
   - 수정중: users/edit.pug, users/show.pug
   - 예정: employee_list, employee_detail page, admin_emp_insert_page, admin_project_insert_page
   
 - **18-05-19**
+  - 추가: searches/details/*
 
-  - 추가: searches/details/*
+
 
 
 > 발표자료 만들어야 됨
