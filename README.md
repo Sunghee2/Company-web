@@ -53,17 +53,18 @@ https://github.com/mysqljs/mysql
     - 추가: includes/cards.pug, includes/main_image.pug, includes/records.pug, searches/search.pug
     - 수정: layout.pug, footer.pug, signin.pug, new.pug, stylesheets/style.css
 
-###### 상세 내용, 클레스명 확인 및 수정(해야하는데... 아직 데이터베이스 insert문..) -> 권민찬
-
 - **18-05-16**
 
   - 추가: evaluations/client_evaluations.pug, evaluations/developer_evaluations.pug
   - 수정 완료: signin.pug, users/new.pug
   - 수정중: users/edit.pug, users/show.pug
   - 예정: employee_list, employee_detail page, admin_emp_insert_page, admin_project_insert_page
+  
+- **18-05-19**
 
-> 보고서(with. 권민찬): 써야하는데 언제까지 insert문을 잡고 계실건가요
->
+  - 추가: searches/details/*
+
+
 > 발표자료 만들어야 됨
 >
 > 나중에 폼 확인할 수 있게 router도 달아야하는데 귀찮다.. 달았음ㅇㅇ밑에서 url확인바람
@@ -108,7 +109,7 @@ https://github.com/mysqljs/mysql
 > 평가 url: evaluations/peer evaluations/client evaluations/pm 으로 해놨음.
 > pm도 미리 연결해놨음. (대신 로그인 해야됨.)
 > 그리고 평가 get할 때 다 해당 user의 projects data 같이 보냄 dropdown에서 처리해주셈
-> 평가 전체 페이지 하나 만들어서 들어가는 건지 아니면 따로 따로 topnav에 넣을 건지 답 좀
+> 평가 전체 페이지 하나 만들어서 들어가는 건지 아니면 따로 따로 topnav에 넣을 건지 답 좀 --> 페이지 생각중
 
 - ##### 18-05-18
   - 수정 : signin.pug, users/new.pug(부서 data 맞게 넣음), users/edit.pug(해당하는 부서 data 넣고 선택 수정), includes/topnav.pug(계정id 보이도록 수정), lib/passport-config.js(session 수정), app.js(body-parser 추가), routes/evaluations.js(validate~수정), routes/users.js(정보수정할 때 부서정보 넘김)
