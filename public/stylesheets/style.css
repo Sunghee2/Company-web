@@ -55,10 +55,6 @@ div.notice_signup{
   background: white;
 }
 
-select#departmentSelect.custom-select{
-  width: 29.3em;
-}
-
 /* signup */
 .py-5.text-center{
   padding-bottom: 0em !important;
@@ -82,6 +78,20 @@ button.btn.btn-primary.find-department{
 input#userdate{
   text-align: right;
 }
+
+.row.sidebar{
+  height: 80em;
+}
+
+.row.sidebar-details{
+  height: 50em;
+}
+
+.table-employee-attr{
+  width: 40%;
+}
+
+
 
 
 

@@ -1,5 +1,5 @@
-.row
-  nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+.row.sidebar-details
+  nav.col-md-3.d-none.d-md-block.bg-light.sidebar
     .sidebar-sticky
       ul.nav.flex-column.mt-4
         li.nav-item.py-1
@@ -19,34 +19,43 @@
               line(x1='16', y1='17', x2='8', y2='17')
               polyline(points='10 9 9 9 8 9')
             |                 Search: Project
-  main.col-md-9.ml-sm-auto.col-lg-10.px-4(role='main')
+  main.col-md-9.ml-sm-auto.px-4(role='main')
     .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
       .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
-    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-      div
-        h1.h2 Search
-        .mb-3
-          label(for='find-employee-number') Employee Number
-          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing')
-        .mb-3
-          label(for='find-employee-name') Name
-          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing')
-    h2 Result
-    if employees.total > 0
-      .small Total #{employees.total} employee(s)
-      table.table
-        thead
-          tr
-            th(scope='col') Employee Number
-            th(scope='col') Name
-            th(scope='col') Department
-            th(scope='col') Phone Number
-        tbody
-          each employee in employees.docs //이 부분은 data넘어오는 것 보고 다시 수정하겠음.
-            tr
-              a(href='')
-                th(scope='row')= employee.employee_number
-                td= employee.name
-                td= employee.department
-                td= employee.phone_number
-      
+    .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
+    h2
+      | Project Details
+    .row.float-right
+      a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button') Back to List
+    br
+    table.table.mt-5
+      thead
+        tr
+          th.table-employee-attr Attribute
+          th Value
+      tbody
+        tr
+          td Project ID
+          td ???
+        tr
+          td Project Name
+          td ???
+        tr
+          td Client ID
+          td ????
+        tr
+          td Client Name
+          td ????
+        tr
+          td Start Date
+          td ?????
+        tr
+          td End Date
+          td ?????
+        tr
+          td Project Manager
+          td ?????
+        tr
+          td PM Phone Number
+          td ?????
+        // 표 형식만 이렇다는거
