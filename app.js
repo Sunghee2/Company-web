@@ -13,6 +13,8 @@ var passport = require('passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var evaluationsRouter = require('./routes/evaluations');
+var employees = require('./routes/employees');
+var projects = require('./routes/projects');
 
 var passportConfig = require('./lib/passport-config');
 
@@ -55,6 +57,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRouter);
+app.use('/employees', employees);
+app.use('/projects', projects);
 app.use('/users', usersRouter);
 app.use('/evaluations', evaluationsRouter);
 require('./routes/auth')(app, passport);

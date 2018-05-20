@@ -36,11 +36,29 @@
           a.btn.btn-outline-secondary(role='button') Search
       .mb-3
     h2 Result
-
-    if employees.total > 0
-      .small Total #{employees.total} employee(s)
-      table.table
-        thead
+    table.table
+      thead
+        tr
+          th(scope='col') #
+          th(scope='col') First
+          th(scope='col') Last
+          th(scope='col') Handle
+      tbody
+        each employee in employees
+          tr
+            th(scope='row') #{employee.employee_number}
+            td #{employee.name}
+            td #{employee.RRN}
+            td #{employee.dept_id}
+            td #{employee.gender}
+            td #{employee.final_education}
+            td #{employee.email}
+            td #{employee.phonenumber}
+    
+    
+    
+    
+    // thead
           tr
             th(scope='col') Employee Number
             th(scope='col') Name
