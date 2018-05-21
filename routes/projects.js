@@ -48,4 +48,16 @@ router.get('/', (req, res, next) => {
     }
 });
 
+router.get('/:id', (req, res, next) => {
+    conn.query('SELECT project_id, project_name, start_date, end_date, name, phone_number, order_id, order_details, client_id, client_name from (SELECT * FROM projects p, employees e WHERE p.pm_number=e.employee_number) t1 NATURAL JOIN (SELECT order_id, order_details, client_id, client_name FROM orders NATURAL JOIN clients) t2 WHERE project_id=?', [req.params.id], (err, rows) => {
+        if (err) {
+          req.flash('danger', err);
+          console.log(err);
+          return res.redirect('back');  
+        }  
+        const project = rows[0];
+        res.render('projects/details', {project: project});
+    });   
+})
+
 module.exports = router;

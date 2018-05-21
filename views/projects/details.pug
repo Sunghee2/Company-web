@@ -1,4 +1,4 @@
-.row.sidebar
+.row.sidebar-details
   nav.col-md-3.d-none.d-md-block.bg-light.sidebar
     .sidebar-sticky
       ul.nav.flex-column.mt-4
@@ -22,37 +22,45 @@
   main.col-md-9.ml-sm-auto.px-4(role='main')
     .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
       .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
-    .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-    h1.mt-3.mb-3 Employee Management
-    .row
-      .col-sm-5.mb-3
-        form.form-inline(action='/employees', method='GET')
-          label.mr-3(for='find-employee-number') Employee Number
-          input#find-employee-number.form-control(type='text', placeholder='eg. 60100000', name='employee_number', value=employee_number)
-      .col-sm-5.mb-3
-        form.form-inline(action='/employees', method='GET')
-          label.mr-3(for='find-employee-name') Employee name
-          input#find-employee-name.form-control(type='text', placeholder='eg. King', name='name', value=name)
-    .mb-3
-    h3.mb-3.mt-3 Result
-    if employees.length <= 0
-      p 해당 직원이 존재하지 않습니다.
-    else
-      table.table
-        thead
-          tr
-            th(scope='col') EMP NUM
-            th(scope='col') Name
-            th(scope='col') Department
-            th(scope='col') E-mail
-            th(scope='col') Phone
-        tbody
-          each employee in employees
-            tr
-              a(href=`/employees/${employee.employee_number}`)
-                th(scope='row') #{employee.employee_number}
-                td #{employee.name}
-                td #{employee.dept_name}
-                td #{employee.email}
-                td #{employee.phone_number}
-      
+    .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
+    h2
+      | Project Details
+    .row.float-right
+      a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button') Back to List
+    br
+    table.table.mt-5
+      thead
+        tr
+          th.table-employee-attr Attribute
+          th Value
+      tbody
+        tr
+          td Project ID
+          td= project.project_id
+        tr
+          td Project Name
+          td= project.project_name
+        tr
+          td Project Manager
+          td= project.name
+        tr
+          td PM Phone Number
+          td= project.phone_number
+        tr
+          td Start Date
+          td= moment(project.start_date).format('YYYY-MM-DD')
+        tr
+          td End Date
+          td= (project.end_date)? moment(project.end_date).format('YYYY-MM-DD') : '미정'
+        tr
+          td Client ID
+          td= project.client_id
+        tr
+          td Client Name
+          td= project.client_name
+        tr
+          td Order id
+          td= project.order_id
+        tr
+          td Order details
+          td= project.order_details      
