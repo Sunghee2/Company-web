@@ -5,9 +5,8 @@ const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));
 conn.connect()
 
-router.get('/', function(req, res, next) {
-    res.render('searches/projects');
-
+router.get('/', (req, res, next) => {
+    res.render('projects/index');
 });
 
 module.exports = router;

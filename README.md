@@ -114,8 +114,8 @@ https://github.com/mysqljs/mysql
 - ##### 18-05-18
   - 수정 : signin.pug, users/new.pug(부서 data 맞게 넣음), users/edit.pug(해당하는 부서 data 넣고 선택 수정), includes/topnav.pug(계정id 보이도록 수정), lib/passport-config.js(session 수정), app.js(body-parser 추가), routes/evaluations.js(validate~수정), routes/users.js(정보수정할 때 부서정보 넘김)
 
-> 로그인 수정함
-> 
+- ##### 18-05-21
+  - 수정 : employees/index.pug(검색 & 정보 줄임), routes/employees.js(직원 검색), 
 
 ### 정지우
 

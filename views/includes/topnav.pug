@@ -8,19 +8,14 @@
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
           li.nav-item
-            a.nav-link(href="/searches/employees") Employee Management
+            a.nav-link(href="/employees") Employee Management
           li.nav-item
-            a.nav-link(href="/searches/projects") Project Management
+            a.nav-link(href="/projects") Project Management
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') Signin
             li.nav-item
               a.nav-link(href='/users/new') Signup
-          <<<<<<< HEAD
-            li.nav-item
-              a.nav-link(href='/evaluations/pm_evaluation_form') pm_evaluation
-=======
->>>>>>> a3ddd13e922ddfad49fd2104309badf253ff4d9d
           else
             li.nav-item.dropdown
               // ~ing 작업해야함 ㅠㅠㅠㅠ

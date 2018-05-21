@@ -48,7 +48,7 @@
             th(scope='col') Start Date
             th(scope='col') PM Number
         tbody
-          each project in projects.docs //이 부분은 data넘어오는 것 보고 다시 수정하겠음.
+          each project in projects 
             tr
               a(href='')
                 th(scope='row')= project.project_name
