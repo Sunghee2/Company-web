@@ -1,0 +1,127 @@
+extends layout
+
+block content
+    .container
+        .row.sidebar-details
+        nav.col-md-3.d-none.d-md-block.bg-light.sidebar
+            .sidebar-sticky
+            ul.nav.flex-column.mt-4
+                li.nav-item.py-1
+                a.nav-link.active(href='#')
+                    svg.feather.feather-users(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                    path(d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2')
+                    circle(cx='9', cy='7', r='4')
+                    path(d='M23 21v-2a4 4 0 0 0-3-3.87')
+                    path(d='M16 3.13a4 4 0 0 1 0 7.75')
+                    |                 Search: Employee
+                li.nav-item
+                a.nav-link.active(href='#')
+                    svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                    path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
+                    polyline(points='14 2 14 8 20 8')
+                    line(x1='16', y1='13', x2='8', y2='13')
+                    line(x1='16', y1='17', x2='8', y2='17')
+                    polyline(points='10 9 9 9 8 9')
+                    |                 Search: Project
+        main.col-md-9.ml-sm-auto.px-4(role='main')
+            .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
+            .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
+            .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
+            h2 Participating Projects
+            table.table.mt-5
+            thead
+                tr
+                th Project ID
+                th Project Name
+                th Order Name
+                th Start Date
+                th End Date
+                th Role
+                th Member
+            tbody
+                tr
+                td Project ID 1
+                td Project Name 1
+                td Order Name 1
+                td Start Date 1
+                td End Date 1
+                td Role 1
+                td.pt-2
+                    button.btn.btn-primary.btn-sm(type='button')  View
+                tr
+                td Project ID 2
+                td Project Name 2
+                td Order Name 2
+                td Start Date 2
+                td End Date 2
+                td Role 2
+                td.pt-2
+                    button.btn.btn-primary.btn-sm(type='button')  View
+                tr
+                td Project ID 3
+                td Project Name 3
+                td Order Name 3
+                td Start Date 3
+                td End Date 3
+                td Role 3
+                td.pt-2
+                    button.btn.btn-primary.btn-sm(type='button')  View
+                // 표 형식만 이렇다는거
+            hr.featurette-divider
+            .row.float-right
+            a.btn.btn-outline-secondary.md-5.mr-3(role='button') Back to List
+            br
+            h2.mt-5 Members
+            table.table.mt-5
+            thead
+                tr
+                th Employee ID
+                th Employee Name
+                th Department
+                th Current Role
+                th.text-center Deletion
+            tbody
+                tr
+                td Employee ID 1
+                td Employee Name 1
+                td Department
+                td Default=Null
+                td.text-center.pt-2
+                    button.btn.btn-danger.btn-sm(type='button') Delete
+                tbody
+                tr
+                    td Employee ID 2
+                    td Employee Name 2
+                    td Department
+                    td Default=Null
+                    td.text-center.pt-2
+                    button.btn.btn-danger.btn-sm(type='button') Delete
+                tbody
+                    tr
+                    td Employee ID 3
+                    td Employee Name 3
+                    td Department
+                    td Default=Null
+                    td.text-center.pt-2
+                        button.btn.btn-danger.btn-sm(type='button') Delete
+                    // 표 형식만 이렇다는거
+            hr.featurette-divider
+            .row.float-right
+            a.btn.btn-outline-secondary.md-5.mr-3(role='button')   Refresh  
+            br
+            h2.mt-5 Adding Members
+            .row.mt-5
+            .col-md-5
+                form.needs-validation(action='', method='POST')
+                .mb-5
+                    label(for='employee_id') Employee ID
+                    .input-group
+                    input.form-control(type='text', placeholder='employee_id', name='employee_id')
+            .col-md-5
+                .mb-5
+                label(for='password') Employee Name
+                .input-group
+                    input.form-control(type='text', placeholder='employee_name', name='employee_name')
+            .col-md-2.float-center.align-middle.mt-2.pl-3.pt-4
+                a.btn.btn-outline-secondary(role='button')   Adding  
+            hr.featurette-divider
