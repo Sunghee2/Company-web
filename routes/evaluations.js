@@ -1,4 +1,5 @@
 const express = require('express');
+const _ = require('underscore');
 const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const mysql = require('mysql');
@@ -149,20 +150,28 @@ router.route('/client')
 router.route('/pm')
   .get(needAuth, catchErrors(async(req, res, next) => {
     const user = req.user;
-    // 동료들 정보도 같이 보내기. 플젝 출력이 안됨 왜?
+    // 동료들 정보도 같이 보내기.
     conn.query('SELECT * FROM projects WHERE pm_number=?', [user.employee_number], (err, rows) => {
       if (err) {
         req.flash('danger', err);
         return res.redirect('back');     
       }
+      // console.log(rows);
       var projects = [];
       for (var i = 0; i < rows.length; i++) {
+        // projects.push(JSON.parse(JSON.stringify(rows[i])));
+        // console.log(projects[0]);
+        var project = JSON.parse(JSON.stringify(rows[i]));
         conn.query('SELECT employee_number, name, role FROM employees NATURAL JOIN (SELECT employee_number, role FROM assignments WHERE project_id=?) a', [rows[i].project_id], (err, rows2) => {
-          projects.push(rows[i]);
+          var res = JSON.parse(JSON.stringify(rows2));
+          // console.log(res);
+          console.log(_.extend(res, project));
+          // projects.push(res);
+          // console.log(Object.values(JSON.parse(JSON.stringify(rows2))));
         })
       }
       // const projects = JSON.stringify(rows);
-      console.log(projects);
+      // console.log(projects);
       res.render('evaluations/pm_evaluation_form', {projects: projects});
     })
   }))

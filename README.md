@@ -105,17 +105,14 @@ https://github.com/mysqljs/mysql
 > user/new 왜 다 value로 되어있는지 의문??? > 그래서 내가 걍 고쳤는데 혹시 따로 이유가 있으면 말해주셈
 > 평가도 다 그러네 왜그런거임?
 >
-> 평가에 developer_evaluation_form.1.pug 여기서 1은 뭔지??? 그래서 걍 고침 
-> 평가 url: evaluations/peer evaluations/client evaluations/pm 으로 해놨음.
-> pm도 미리 연결해놨음. (대신 로그인 해야됨.)
 > 그리고 평가 get할 때 다 해당 user의 projects data 같이 보냄 dropdown에서 처리해주셈
 > 평가 전체 페이지 하나 만들어서 들어가는 건지 아니면 따로 따로 topnav에 넣을 건지 답 좀 --> 페이지 생각중
 
 - ##### 18-05-18
   - 수정 : signin.pug, users/new.pug(부서 data 맞게 넣음), users/edit.pug(해당하는 부서 data 넣고 선택 수정), includes/topnav.pug(계정id 보이도록 수정), lib/passport-config.js(session 수정), app.js(body-parser 추가), routes/evaluations.js(validate~수정), routes/users.js(정보수정할 때 부서정보 넘김)
 
-> 로그인 수정함
-> 
+- ##### 18-05-21
+  - 수정 : employees/index.pug(검색 & 정보 줄임), projects/index.pug(검색), routes/employees.js(직원 검색), routes/projects.js(검색)
 
 ### 정지우
 

@@ -5,23 +5,48 @@ const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));
 conn.connect()
 
-
-
-
-
-
-
-router.get('/', function(req, res, next) {
-
-  conn.query('select * from employees ', function(err, rows) {
-    if(err) {
-        next();
-    }  
-    console.log(rows);
-    res.render('searches/employees', {
-        employees:rows
+router.get('/', (req, res, next) => {
+  const employee_number = req.query.employee_number;
+  const name = req.query.name;
+  
+  if (employee_number && name) {
+    conn.query('SELECT employee_number, name, email, phone_number, dept_name FROM employees NATURAL JOIN departments WHERE employee_number LIKE ? AND name LIKE ?', ['%'+employee_number+'%', '%'+name+'%'],function(err, rows) {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');  
+      }  
+      const employees = JSON.parse(JSON.stringify(rows));
+      res.render('employees/index', {employees: employees, employee_number: employee_number, name: name});
     });
-  });
+  } else if (employee_number) {
+    conn.query('SELECT employee_number, name, email, phone_number, dept_name FROM employees NATURAL JOIN departments WHERE employee_number LIKE ?', ['%'+employee_number+'%'],function(err, rows) {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');  
+      }  
+      const employees = JSON.parse(JSON.stringify(rows));
+      res.render('employees/index', {employees: employees, employee_number: employee_number});
+    });
+  } else if (name) {
+    conn.query('SELECT employee_number, name, email, phone_number, dept_name FROM employees NATURAL JOIN departments WHERE name LIKE ?', ['%'+name+'%'],function(err, rows) {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');  
+      }  
+      const employees = JSON.parse(JSON.stringify(rows));
+      res.render('employees/index', {employees: employees, name: name});
+    });
+  } else {
+    conn.query('SELECT employee_number, name, email, phone_number, dept_name FROM employees NATURAL JOIN departments', function(err, rows) {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');  
+      }  
+      const employees = JSON.parse(JSON.stringify(rows));
+      res.render('employees/index', {employees: employees});
+    });
+  }
+
 });
 
 
