@@ -27,30 +27,34 @@
         .mt-3
           label(for='find-project-date')
             h5 Search Date
-            form#frm(action='action.jsp')
-      p
-      h6
-        | project start : 
-        input#userdate(type='date', name='userdate', value='2017-01-01')
-      p
-      p
-      h6
-        | project end  : 
-        input#userdate(type='date', name='userdate', value='2018-12-31')
+      form.form-inline(action='/projects', method='GET')
+        h6
+          | project start : 
+          input#userdate(type='date', name='start_date', value=start_date)    
+        h6
+          | project end  : 
+          input#userdate(type='date', name='end_date', value=end_date)
+        button.btn.btn-primary.btn-lg.btn-block(type='submit') search
       p
     h2 Result
-    if projects.total > 0
-      .small Current #{projects.total} project(s)
+    if projects.length > 0
+      .small Current #{projects.length} project(s)
       table.table
         thead
           tr
+            th(scope='col') Project ID
             th(scope='col') Project Name
             th(scope='col') Start Date
+            th(scope='col') end Date
             th(scope='col') PM Number
         tbody
           each project in projects 
             tr
               a(href='')
-                th(scope='row')= project.project_name
-                td= project.start_date
-                td= project.pm_number
+                th(scope='row')= project.project_id
+                td= project.project_name || ''
+                td= moment(project.start_date).format('YYYY-MM-DD')
+                td= moment(project.end_date).format('YYYY-MM-DD')
+                td= project.name
+    else 
+      p 해당하는 프로젝트가 존재하지 않습니다.
