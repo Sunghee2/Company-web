@@ -13,8 +13,9 @@ var passport = require('passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var evaluationsRouter = require('./routes/evaluations');
-var employees = require('./routes/employees');
-var projects = require('./routes/projects');
+var employeesRouter = require('./routes/employees');
+var projectsRouter = require('./routes/projects');
+var pmRouter = require('./routes/pm');
 
 var passportConfig = require('./lib/passport-config');
 
@@ -59,10 +60,11 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/employees', employees);
-app.use('/projects', projects);
+app.use('/employees', employeesRouter);
+app.use('/projects', projectsRouter);
 app.use('/users', usersRouter);
 app.use('/evaluations', evaluationsRouter);
+app.use('/pm', pmRouter);
 require('./routes/auth')(app, passport);
 
 app.use(function(req, res, next) {
