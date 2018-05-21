@@ -49,12 +49,12 @@
             th(scope='col') PM Number
         tbody
           each project in projects 
-            tr
-              a(href='')
+            a(href=`/projects/${project.project_id}`)
+              tr
                 th(scope='row')= project.project_id
-                td= project.project_name || ''
+                td= project.project_name
                 td= moment(project.start_date).format('YYYY-MM-DD')
-                td= moment(project.end_date).format('YYYY-MM-DD')
+                td= (project.end_date)? moment(project.end_date).format('YYYY-MM-DD'):'미정'
                 td= project.name
     else 
       p 해당하는 프로젝트가 존재하지 않습니다.
