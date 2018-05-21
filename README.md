@@ -59,9 +59,39 @@ https://github.com/mysqljs/mysql
   
 - **18-05-19**
   - 추가: searches/details/*
+  
+- **18-05-21**
+  - 추가: views/pm/*, views/peer/* --> evaluate link page, set role page, add/delete member page, etc.
+  - 수정: PM and peer evaluate link page(18-05-22)
+  
+< 공통 >
+  1. 메인페이지 - ing
+  2. signin - clear
+  3. signup - clear
+  4. 자기 정보 조회 - ing
+  5. 자기 정보 수정 - done by SH
 
+< 일반사용자 >
 
+< 개발자 >
+  1. 참여 프로젝트 정보 조회 - clear
+  2. 동료 평가 페이지 - clear
+  3. 동료 평가 양식 - clear
 
+< PM >
+  1. 참여 프로젝트 정보 조회 - clear
+  2. PM 평가 페이지 - clear
+  3. Client 평가 페이지 - ???? 어디있지...
+  4. 역할 분담 페이지 - clear
+  5. 프로젝트 인원 추가/삭제 - clear
+
+< 경영진 >
+  1. 사내 직원 정보 조회 - clear
+  2. 사내 프로젝트 내역 조회 - clear
+  3. 직원 정보 상세페이지 - clear
+  4. 프로젝트 정보 상세페이지 - clear
+  5. 직원 평가 리스트(정렬 가능한) - ing... 얘는 해야해
+  6. 경영진 PM 설정 페이지
 
 > 발표자료 만들어야 됨
 > 
