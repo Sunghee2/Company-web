@@ -137,19 +137,18 @@ router.route('/')
               employee_number, name, rrn, department,
               gender, final_education, email, phone_number
             ]
-            conn.query('INSERT INTO employees values (?,?,?,?,?,?,?,?)', employee, function(err, rows) {
+            conn.query('INSERT INTO employees values (?,?,?,?,?,?,?,?)', employee, function(err, rows2) {
               if (err) {
                 req.flash('danger', err);
                 return res.redirect('back');
               }
             })
-            conn.query('INSERT INTO accounts values (?,?,?)', account, function(err, rows) {
+            conn.query('INSERT INTO accounts values (?,?,?)', account, function(err, rows3) {
               if (err) {
                 req.flash('danger', err);
                 return res.redirect('back');
               }
             })
-
           })
         } else {
           req.flash('danger', '이미 가입된 사번입니다.');

@@ -146,7 +146,7 @@ https://github.com/mysqljs/mysql
   - 추가 : projects/details.pug, employees.details.pug(복구)
 
 - ##### 18-05-22
-  - 수정 : pm/index.pug, pm/client_evaluation.pug, routes/pm.js(client목록)
+  - 수정 : pm/index.pug, pm/client_evaluation.pug, routes/pm.js(client목록), client_evaluation_form.pug(정보 출력), routes/evaluations.js(client post), view/user/edit, new.pug(select name)
 
 ### 정지우
 
