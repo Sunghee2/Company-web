@@ -95,7 +95,7 @@ https://github.com/mysqljs/mysql
   
 - **18-05-22**
   - 수정: routers/users.js
-  -        └> signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 
+  - signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 
 
 > 발표자료 만들어야 됨
 > 
