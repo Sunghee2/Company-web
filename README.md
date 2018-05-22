@@ -152,5 +152,9 @@ https://github.com/mysqljs/mysql
 - ##### 18-05-22
   - 수정 : pm/index.pug, pm/client_evaluation.pug, routes/pm.js(client목록), client_evaluation_form.pug(정보 출력), routes/evaluations.js(client post), view/user/edit, new.pug(select name)
 
+> 멤버 추가할 때 role not null이라 추가 form 있어야됨.
+> 나만 버튼들 하나도 안먹음?
+> 
+
 ### 정지우
 
