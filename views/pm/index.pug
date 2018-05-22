@@ -36,64 +36,50 @@ block content
                 th Start Date
                 th End Date
                 th Client
-                th Member
+                th details
             tbody
                 each project in projects 
                     tr
-                        a(href=`/projects/${project.project_id}`)
-                            th(scope='row')= project.project_id
-                            td= project.project_name
-                            td= moment(project.start_date).format('YYYY-MM-DD')
-                            td= (project.end_date)? moment(project.end_date).format('YYYY-MM-DD'):'미정'
-                            td= project.client_name
-                            td.pt-2
-                                button.btn.btn-primary.btn-sm(type='button')  View
+                        th(scope='row')= project.project_id
+                        td= project.project_name
+                        td= moment(project.start_date).format('YYYY-MM-DD')
+                        td= (project.end_date)? moment(project.end_date).format('YYYY-MM-DD'):'미정'
+                        td= project.client_name
+                        td.pt-2
+                            a.btn.btn-primary.btn-sm(href=`/projects/${project.project_id}`)  View
             hr.featurette-divider
             .row.float-right
             a.btn.btn-outline-secondary.md-5.mr-3(role='button') Back to List
             br
             h2.mt-5 Members
-            table.table.mt-5
-            thead
-                tr
-                th Employee ID
-                th Employee Name
-                th Department
-                th Current Role
-                th.text-center Deletion
-            tbody
-                tr
-                td Employee ID 1
-                td Employee Name 1
-                td Department
-                td Default=Null
-                td.text-center.pt-2
-                    button.btn.btn-danger.btn-sm(type='button') Delete
-                tbody
-                tr
-                    td Employee ID 2
-                    td Employee Name 2
-                    td Department
-                    td Default=Null
-                    td.text-center.pt-2
-                    button.btn.btn-danger.btn-sm(type='button') Delete
-                tbody
+            if (!members || members.length <= 0)
+                p ~~~~~~~~~~~~~~~
+            else
+                table.table.mt-5
+                thead
                     tr
-                    td Employee ID 3
-                    td Employee Name 3
-                    td Department
-                    td Default=Null
-                    td.text-center.pt-2
-                        button.btn.btn-danger.btn-sm(type='button') Delete
-                    // 표 형식만 이렇다는거
+                        th Employee ID
+                        th Employee Name
+                        th Department
+                        th Current Role
+                        th.text-center Deletion
+                tbody
+                    each member in members
+                        tr
+                            td= member.employee_number
+                            td= name
+                            td= dept_name
+                            td= role
+                            td.text-center.pt-2
+                                a.btn.btn-danger.btn-sm(href=`/pm/${member.project_id}/${employee_id}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
             hr.featurette-divider
             .row.float-right
             a.btn.btn-outline-secondary.md-5.mr-3(role='button')   Refresh  
             br
             h2.mt-5 Adding Members
             .row.mt-5
+            form.needs-validation(action=`/pm/${member.project_id}/new`, method='POST')
             .col-md-5
-                form.needs-validation(action='', method='POST')
                 .mb-5
                     label(for='employee_id') Employee ID
                     .input-group
@@ -104,5 +90,5 @@ block content
                 .input-group
                     input.form-control(type='text', placeholder='employee_name', name='employee_name')
             .col-md-2.float-center.align-middle.mt-2.pl-3.pt-4
-                a.btn.btn-outline-secondary(role='button')   Adding  
+                a.btn.btn-outline-secondary(type='submit')   Adding  
             hr.featurette-divider
