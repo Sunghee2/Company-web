@@ -103,7 +103,7 @@ router.route('/:project_id/:emp_id')
   })
   .delete(needAuth, (req, res, next) => {
     const project_id = req.params.project_id;
-    const employee_number = req.params.employee_number;
+    const employee_number = req.params.emp_id;
 
     conn.query('DELETE FROM assignments WHERE project_id=? AND employee_number=?', [project_id, employee_number], (err, rows) => {
       if (err) {

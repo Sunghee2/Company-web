@@ -92,6 +92,7 @@ https://github.com/mysqljs/mysql
   4. 프로젝트 정보 상세페이지 - clear
   5. 직원 평가 리스트(정렬 가능한) - ing... 얘는 해야해
   6. 경영진 PM 설정 페이지
+  7. 평가 점수 조회 페이지
   
 - **18-05-22**
   - 수정: routers/users.js
@@ -153,7 +154,7 @@ https://github.com/mysqljs/mysql
   - 수정 : pm/index.pug, pm/client_evaluation.pug, routes/pm.js(client목록), client_evaluation_form.pug(정보 출력), routes/evaluations.js(client post), view/user/edit, new.pug(select name)
 
 - ##### 18-05-23
-  - 수정 : routes/pm.js(form, details get, 일단 add member ~ing, delete), pm/index.pug(프로젝트 form 복구), pm/project_details.pug(form, url)
+  - 수정 : routes/pm.js(form, details get, 일단 add member ~ing, delete), pm/index.pug(프로젝트 form 복구), pm/project_details.pug(form, url), evaluations/forms/pm_evaluation_form.pug(input name, value, url 수정), routes/evaluations.js(pm get, post 추가)
   - 버튼 되면 redirect확인, curdate() 확인
 
 > 멤버 추가할 때 role not null이라 추가 form 있어야됨.

@@ -45,23 +45,26 @@ block content
                                 td= participant.dept_name
                                 td.text-center.pt-2
                                     button.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Roles
-                                    .dropdown-menu
-                                    a.dropdown-item Cheif Product Manager
-                                    a.dropdown-item Product Manager
-                                    a.dropdown-item Enterprise Architect
-                                    a.dropdown-item Architect
-                                    a.dropdown-item Scrum Master
-                                    a.dropdown-item Developer
-                                    a.dropdown-item QA
+                                        .dropdown-menu
+                                            a.dropdown-item Cheif Product Manager
+                                            a.dropdown-item Product Manager
+                                            a.dropdown-item Enterprise Architect
+                                            a.dropdown-item Architect
+                                            a.dropdown-item Scrum Master
+                                            a.dropdown-item Developer
+                                            a.dropdown-item QA
                                 td
-                                    a(href=`/evaluations/pm/${participant.project_id}`) Evaluation
+                                    if (participant.evaluation_id)
+                                        p 완료
+                                    else
+                                        a(href=`/evaluations/pm/${participant.project_id}/${participant.employee_number}`) Evaluation
                                 td.text-center.pt-2
-                                    a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${employee_id}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
+                                    a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
                 br
                 h2.mt-5 Adding Members
                 .row.mt-5
                 .col-md-5
-                    form.needs-validation(action=`/pm/${participants[0].project_id}/${employee_id}`, method='POST')
+                    form.needs-validation(action=`/pm/${participants[0].project_id}/${participants[0].employee_number}`, method='POST')
                     .mb-5
                         label(for='employee_id') Employee ID
                         .input-group

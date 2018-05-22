@@ -1,4 +1,4 @@
-extends ../layout
+extends ../../layout
 
 block content
   .container
@@ -18,38 +18,35 @@ block content
         | Please answer them carefully for the purposes stated above.
       p.mt-4
       hr.mt-5.mb-4
-    if (!projects)
-      p 평가 가능한 프로젝트가 존재하지 않습니다.
-    else
-      form(method='post', action='/evaluations/peer')
+      form(method='post', action=`/evaluations/pm/${project.project_id}/${employee.employee_number}`)
         h3 Project
         p.mt-4
           .row.ml-3.form-labels
             h6.col-md-2 Project ID:
             .col-md-5
-              input#survey-form-project-id.form-control(type='text', value='eg.12345678', readonly='')
+              input#survey-form-project-id.form-control(type='text', value=project.project_id, name='project_id',readonly='')
         p.mt-2
           .row.ml-3.form-labels
             h6.col-md-2 Project Name:
             .col-md-5
-              input#survey-form-project-name.form-control(type='text', value='DBProgramming Project', readonly='')
-        p.mt-2
-          .row.ml-3.form-labels
-            h6.col-md-2 Project Role:
-            .col-md-5
-              input#survey-form-project-role.form-control(type='text', value='Your Project Role', readonly='')
+              input#survey-form-project-name.form-control(type='text', value=project.project_name,readonly='')
         hr.mt-5.mb-4
-        h3 Your Profile
+        h3 Profile
         p.mt-4
           .row.ml-3.form-labels
             h6.col-md-2 Employee Number:
             .col-md-5
-              input#survey-form-employee-id.form-control(type='text', value='eg.12345678', readonly='')
+              input#survey-form-employee-id.form-control(type='text', value=employee.employee_number, name='employee_number',readonly='')
         p.mt-2
           .row.ml-3.form-labels
             h6.col-md-2 Employee Name:
             .col-md-5
-              input#survey-form-employee-name.form-control(type='text', value='Matilda', readonly='')
+              input#survey-form-employee-name.form-control(type='text', value=employee.name, readonly='')
+        p.mt-2
+          .row.ml-3.form-labels
+            h6.col-md-2 Role:
+            .col-md-5
+              input#survey-form-project-role.form-control(type='text', value=employee.role, readonly='')
         hr.mt-5.mb-4
         h3.mt-5 Business Performance
         p
@@ -85,15 +82,15 @@ block content
                 td(align='LEFT')
                   | 1. Utilization of development tools
                 td
-                  input(type='RADIO', name='utilization-tools', value='1')
+                  input(type='RADIO', name='utilization', value='1')
                 td
-                  input(type='RADIO', name='utilization-tools', value='2')
+                  input(type='RADIO', name='utilization', value='2')
                 td
-                  input(type='RADIO', name='utilization-tools', value='3')
+                  input(type='RADIO', name='utilization', value='3')
                 td
-                  input(type='RADIO', name='utilization-tools', value='4')
+                  input(type='RADIO', name='utilization', value='4')
                 td
-                  input(type='RADIO', name='utilization-tools', value='5')
+                  input(type='RADIO', name='utilization', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 2. Working with the development pattern appropriate for the project
@@ -111,41 +108,41 @@ block content
                 td(align='LEFT')
                   | 3. Intra-platform understanding
                 td
-                  input(type='RADIO', name='intra-platform', value='1')
+                  input(type='RADIO', name='platform', value='1')
                 td
-                  input(type='RADIO', name='intra-platform', value='2')
+                  input(type='RADIO', name='platform', value='2')
                 td
-                  input(type='RADIO', name='intra-platform', value='3')
+                  input(type='RADIO', name='platform', value='3')
                 td
-                  input(type='RADIO', name='intra-platform', value='4')
+                  input(type='RADIO', name='platform', value='4')
                 td
-                  input(type='RADIO', name='intra-platform', value='5')
+                  input(type='RADIO', name='platform', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 4. Program decomposition ability
                 td
-                  input(type='RADIO', name='program-decomposition', value='1')
+                  input(type='RADIO', name='decomposition', value='1')
                 td
-                  input(type='RADIO', name='program-decomposition', value='2')
+                  input(type='RADIO', name='decomposition', value='2')
                 td
-                  input(type='RADIO', name='program-decomposition', value='3')
+                  input(type='RADIO', name='decomposition', value='3')
                 td
-                  input(type='RADIO', name='program-decomposition', value='4')
+                  input(type='RADIO', name='decomposition', value='4')
                 td
-                  input(type='RADIO', name='program-decomposition', value='5')
+                  input(type='RADIO', name='decomposition', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 5. System decomposition ability
                 td
-                  input(type='RADIO', name='system-decomposition', value='1')
+                  input(type='RADIO', name='system', value='1')
                 td
-                  input(type='RADIO', name='system-decomposition', value='2')
+                  input(type='RADIO', name='system', value='2')
                 td
-                  input(type='RADIO', name='system-decomposition', value='3')
+                  input(type='RADIO', name='system', value='3')
                 td
-                  input(type='RADIO', name='system-decomposition', value='4')
+                  input(type='RADIO', name='system', value='4')
                 td
-                  input(type='RADIO', name='system-decomposition', value='5')
+                  input(type='RADIO', name='system', value='5')
               tr(align='CENTER')
                 td(align='LEFT')
                   | 6. Component understanding ability
@@ -295,7 +292,7 @@ block content
               |  button below.
               h6
           .col-sm-5
-            button.btn.btn-primary(type='submit', value='send-info') Send 
+            button.btn.btn-primary(type='submit') Send 
         p
         p
         hr
