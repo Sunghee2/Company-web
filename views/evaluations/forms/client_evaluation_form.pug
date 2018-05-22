@@ -1,4 +1,4 @@
-extends ../layout
+extends ../../layout
 
 block content
   .container
@@ -18,132 +18,139 @@ block content
         | Please answer them carefully for the purposes stated above.
       p.mt-4
       hr.mt-5.mb-4
-    if (!projects)
-      p 평가 가능한 프로젝트가 존재하지 않습니다.
-    else
-      form(method='post', action='/evaluations/client')
-        h3 Project
-        p.mt-4
-          .row.ml-3.form-labels
-            h6.col-md-2 Project ID:
-            .col-md-5
-              input#survey-form-project-id.form-control(type='text', value='eg.12345678', readonly='')
-        p.mt-2
-          .row.ml-3.form-labels
-            h6.col-md-2 Project Name:
-            .col-md-5
-              input#survey-form-project-name.form-control(type='text', value='DBProgramming Project', readonly='')
-        hr.mt-5.mb-4
-        h3 Your Profile
-        p.mt-4
-          .row.ml-3.form-labels
-            h6.col-md-2 Cilent Number:
-            .col-md-5
-              input#survey-form-employee-id.form-control(type='text', value='eg.12345678', readonly='')
-        p.mt-2
-          .row.ml-3.form-labels
-            h6.col-md-2 Client Name:
-            .col-md-5
-              input#survey-form-employee-name.form-control(type='text', value='Matilda', readonly='')
-        hr.mt-5.mb-4
-        h3.mt-5 Business Performance
-        p
-          table.table.table-hover.business-performance-table
-            thead
-              tr(align='CENTER')
-                th(width='50%')
-                th(width='8%')
-                  b
-                    | Strongly
-                    br
-                    | disagree
-                th(width='8%')
-                  b Disagree
-                th(width='8%')
-                  b
-                    | Neither
-                    br
-                    | agree
-                    br
-                    | nor
-                    br
-                    | disagree
-                th(width='8%')
-                  b Agree
-                th(width='8%')
-                  b
-                    | Strongly
-                    br
-                    | agree
-            tbody
-              tr(align='CENTER')
-                td(align='LEFT')
-                  | 1. Appropriateness of possession and development plan of development manpower and development equipment
-                td
-                  input(type='RADIO', name='appropriateness', value='1')
-                td
-                  input(type='RADIO', name='appropriateness', value='2')
-                td
-                  input(type='RADIO', name='appropriateness', value='3')
-                td
-                  input(type='RADIO', name='appropriateness', value='4')
-                td
-                  input(type='RADIO', name='appropriateness', value='5')
-              tr(align='CENTER')
-                td(align='LEFT')
-                  | 2. The level of technology possessed by the host organizations
-                td
-                  input(type='RADIO', name='technology', value='1')
-                td
-                  input(type='RADIO', name='technology', value='2')
-                td
-                  input(type='RADIO', name='technology', value='3')
-                td
-                  input(type='RADIO', name='technology', value='4')
-                td
-                  input(type='RADIO', name='technology', value='5')
-              tr(align='CENTER')
-                td(align='LEFT')
-                  | 3. Technological development goals and development methods, appropriateness of development period
-                td
-                  input(type='RADIO', name='development', value='1')
-                td
-                  input(type='RADIO', name='development', value='2')
-                td
-                  input(type='RADIO', name='development', value='3')
-                td
-                  input(type='RADIO', name='development', value='4')
-                td
-                  input(type='RADIO', name='development', value='5')
-              tr(align='CENTER')
-                td(align='LEFT')
-                  | 4. Fulfillment of Information Survey on Related Technologies and Market Trends
-                td
-                  input(type='RADIO', name='fulfillment', value='1')
-                td
-                  input(type='RADIO', name='fulfillment', value='2')
-                td
-                  input(type='RADIO', name='fulfillment', value='3')
-                td
-                  input(type='RADIO', name='fulfillment', value='4')
-                td
-                  input(type='RADIO', name='fulfillment', value='5')
-              tr(align='CENTER')
-                td(align='LEFT')
-                  | 5. Appropriateness of project cost and rationality of execution plan
-                td
-                  input(type='RADIO', name='rationality', value='1')
-                td
-                  input(type='RADIO', name='rationality', value='2')
-                td
-                  input(type='RADIO', name='rationality', value='3')
-                td
-                  input(type='RADIO', name='rationality', value='4')
-                td
-                  input(type='RADIO', name='rationality', value='5')
-              
-          br
-          br
+      h3 Project
+      p.mt-4
+        .row.ml-3.form-labels
+          h6.col-md-2 Project ID:
+          .col-md-5
+            input#survey-form-project-id.form-control(type='text', value=project.project_id, readonly='')
+      p.mt-2
+        .row.ml-3.form-labels
+          h6.col-md-2 Project Name:
+          .col-md-5
+            input#survey-form-project-name.form-control(type='text', value=project.project_name, readonly='')
+      hr.mt-5.mb-4
+      h3 Your Profile
+      p.mt-4
+        .row.ml-3.form-labels
+          h6.col-md-2 Cilent Number:
+          .col-md-5
+            input#survey-form-employee-id.form-control(type='text', value=project.client_id, readonly='')
+      p.mt-2
+        .row.ml-3.form-labels
+          h6.col-md-2 Client Name:
+          .col-md-5
+            input#survey-form-employee-name.form-control(type='text', value=project.client_name, readonly='')
+      p.mt-2
+        .row.ml-3.form-labels
+          h6.col-md-2 Order Number:
+          .col-md-5
+            input#survey-form-employee-name.form-control(type='text', value=project.order_id, readonly='')
+      p.mt-2
+        .row.ml-3.form-labels
+          h6.col-md-2 Order Details:
+          .col-md-5
+            input#survey-form-employee-name.form-control(type='text', value=project.order_details, readonly='')
+      hr.mt-5.mb-4
+      h3.mt-5 Business Performance
+      p
+      form(method='post', action=`/evaluations/client/${project.project_id}`)
+        table.table.table-hover.business-performance-table
+          thead
+            tr(align='CENTER')
+              th(width='50%')
+              th(width='8%')
+                b
+                  | Strongly
+                  br
+                  | disagree
+              th(width='8%')
+                b Disagree
+              th(width='8%')
+                b
+                  | Neither
+                  br
+                  | agree
+                  br
+                  | nor
+                  br
+                  | disagree
+              th(width='8%')
+                b Agree
+              th(width='8%')
+                b
+                  | Strongly
+                  br
+                  | agree
+          tbody
+            tr(align='CENTER')
+              td(align='LEFT')
+                | 1. Appropriateness of possession and development plan of development manpower and development equipment
+              td
+                input(type='RADIO', name='appropriateness', value='1')
+              td
+                input(type='RADIO', name='appropriateness', value='2')
+              td
+                input(type='RADIO', name='appropriateness', value='3')
+              td
+                input(type='RADIO', name='appropriateness', value='4')
+              td
+                input(type='RADIO', name='appropriateness', value='5')
+            tr(align='CENTER')
+              td(align='LEFT')
+                | 2. The level of technology possessed by the host organizations
+              td
+                input(type='RADIO', name='technology', value='1')
+              td
+                input(type='RADIO', name='technology', value='2')
+              td
+                input(type='RADIO', name='technology', value='3')
+              td
+                input(type='RADIO', name='technology', value='4')
+              td
+                input(type='RADIO', name='technology', value='5')
+            tr(align='CENTER')
+              td(align='LEFT')
+                | 3. Technological development goals and development methods, appropriateness of development period
+              td
+                input(type='RADIO', name='development', value='1')
+              td
+                input(type='RADIO', name='development', value='2')
+              td
+                input(type='RADIO', name='development', value='3')
+              td
+                input(type='RADIO', name='development', value='4')
+              td
+                input(type='RADIO', name='development', value='5')
+            tr(align='CENTER')
+              td(align='LEFT')
+                | 4. Fulfillment of Information Survey on Related Technologies and Market Trends
+              td
+                input(type='RADIO', name='fulfillment', value='1')
+              td
+                input(type='RADIO', name='fulfillment', value='2')
+              td
+                input(type='RADIO', name='fulfillment', value='3')
+              td
+                input(type='RADIO', name='fulfillment', value='4')
+              td
+                input(type='RADIO', name='fulfillment', value='5')
+            tr(align='CENTER')
+              td(align='LEFT')
+                | 5. Appropriateness of project cost and rationality of execution plan
+              td
+                input(type='RADIO', name='rationality', value='1')
+              td
+                input(type='RADIO', name='rationality', value='2')
+              td
+                input(type='RADIO', name='rationality', value='3')
+              td
+                input(type='RADIO', name='rationality', value='4')
+              td
+                input(type='RADIO', name='rationality', value='5')
+            
+        br
+        br
         hr.mt-5.mb-4
         h3.mt-5 Communication
         p
@@ -252,7 +259,7 @@ block content
               |  button below.
               h6
           .col-sm-5
-            button.btn.btn-primary(type='submit', value='send-info') Send 
+            button.btn.btn-primary(type='submit') Send 
         p
         p
         hr

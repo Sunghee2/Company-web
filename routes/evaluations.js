@@ -100,7 +100,7 @@ function validateFormForCommunication(form, type) {
 }
 
 
-router.route('/peer')
+router.route('/peer/:id')
   .get(needAuth, catchErrors(async(req, res, next) => {
     const user = req.user;
     // 7일 내에 평가하는 것은 차후 수정하겠음.
@@ -111,7 +111,7 @@ router.route('/peer')
       }
       const projects = rows;
       console.log(projects);
-      res.render('evaluations/peer_evaluation_form', {projects: projects});
+      res.render('evaluations/forms/peer_evaluation_form', {projects: projects});
     })
   }))
   .post(needAuth, catchErrors(async(req, res, next) => {
@@ -123,18 +123,16 @@ router.route('/peer')
 
   }))
 
-router.route('/client')
+router.route('/client/:id')
   .get(needAuth, catchErrors(async(req, res, next) => {
-    const user = req.user;
-    //project정보와 client 정보 다 있음.
-    conn.query('SELECT * FROM projects NATURAL JOIN (SELECT * FROM orders NATURAL JOIN clients) orders_clients WHERE pm_number=?', [user.employee_number], function(err, rows) {
+    const project_id = req.params.id;
+    conn.query('SELECT * FROM projects NATURAL JOIN (SELECT * FROM orders NATURAL JOIN clients) orders_clients WHERE project_id=?', [project_id], function(err, rows) {
       if (err) {
         req.flash('danger', err);
         return res.redirect('back');     
       }
-      const projects = rows;
-      console.log(rows);
-      res.render('evaluations/client_evaluation_form', {projects: projects});
+      const project = rows[0];
+      res.render('evaluations/forms/client_evaluation_form', {project: project});
     })
   }))
   .post(needAuth, catchErrors(async(req, res, next) => {
@@ -145,9 +143,10 @@ router.route('/client')
     }
     var performanceValue = (req.body.appropriateness + req.body.technology + req.body.development + req.body.fulfillment + req.body.rationality) / 5;
     var communicationValue = (req.body.freedom + req.body.demand + req.body.creative + req.body.stimulat + req.body.opinions) / 5;
+    console.log(performanceValue+" "+communicationValue);
   }))
 
-router.route('/pm')
+router.route('/pm/:id')
   .get(needAuth, catchErrors(async(req, res, next) => {
     const user = req.user;
     // 동료들 정보도 같이 보내기.
@@ -172,7 +171,7 @@ router.route('/pm')
       }
       // const projects = JSON.stringify(rows);
       // console.log(projects);
-      res.render('evaluations/pm_evaluation_form', {projects: projects});
+      res.render('evaluations/forms/pm_evaluation_form', {projects: projects});
     })
   }))
   .post(needAuth, catchErrors(async(req, res, next) => {

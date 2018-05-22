@@ -18,14 +18,13 @@ function needAuth(req, res, next) {
 function validateForm(form, type, options) {
   var name = form.name || "";
   var rrn = form.rrn || "";
-  var department = form.department || "";
   var gender = form.gender || "";
+  var department = form.department || "";
   var final_education = form.final_education || "";
   var phone_number = form.phone_number || "";
   
   name = name.trim();
   rrn = rrn.trim();
-  department = department.trim();
   final_education = final_education.trim();
   phone_number = phone_number.trim();
   
