@@ -92,6 +92,10 @@ https://github.com/mysqljs/mysql
   4. 프로젝트 정보 상세페이지 - clear
   5. 직원 평가 리스트(정렬 가능한) - ing... 얘는 해야해
   6. 경영진 PM 설정 페이지
+  
+- **18-05-22**
+  - 수정: routers/users.js
+  -        └> signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 
 
 > 발표자료 만들어야 됨
 > 
