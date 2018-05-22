@@ -101,6 +101,20 @@ router.route('/:project_id/:emp_id')
       res.redirect(`../../pm/${project_id}`);
     });
   })
+  .delete(needAuth, (req, res, next) => {
+    const project_id = req.params.project_id;
+    const employee_number = req.params.employee_number;
+
+    conn.query('DELETE FROM assignments WHERE project_id=? AND employee_number=?', [project_id, employee_number], (err, rows) => {
+      if (err) {
+        req.flash('danger', err);
+        res.redirect('back');
+      }
+
+      req.flash('success', '성공적으로 삭제하였습니다.');
+      res.redirect(`../../pm/${project_id}`);
+    })
+  })
 
 // router.get('/pm_evaluations', needAuth, (req, res, next) => {
 //   conn.query('', [req.user.employee_number], (err, rows) => {
