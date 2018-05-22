@@ -141,9 +141,19 @@ router.route('/client/:id')
       req.flash('danger', err);
       return res.redirect('back');
     }
-    var performanceValue = (req.body.appropriateness + req.body.technology + req.body.development + req.body.fulfillment + req.body.rationality) / 5;
-    var communicationValue = (req.body.freedom + req.body.demand + req.body.creative + req.body.stimulat + req.body.opinions) / 5;
-    console.log(performanceValue+" "+communicationValue);
+    const project_id = req.body.project_id;
+    const order_id = req.body.order_id;
+    var performanceValue = (parseInt(req.body.appropriateness) + parseInt(req.body.technology) + parseInt(req.body.development) + parseInt(req.body.fulfillment) + parseInt(req.body.rationality)) / 5.0;
+    var communicationValue = (parseInt(req.body.freedom) + parseInt(req.body.demand) + parseInt(req.body.creative) + parseInt(req.body.stimulat) + parseInt(req.body.opinions)) / 5.0;
+    
+    conn.query('INSERT INTO client_evaluations(project_id, order_id, performance_score, communication_score) VALUES (?,?,?,?)', [project_id, order_id, performanceValue, communicationValue],(err, rows) => {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');
+      }
+      req.flash('success', '평가를 완료하였습니다.');
+      res.redirect('../../pm/client_evaluations');
+    })
   }))
 
 router.route('/pm/:id')
