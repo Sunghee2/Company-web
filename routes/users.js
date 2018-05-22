@@ -131,12 +131,16 @@ router.route('/')
       if (!rows.length) {
         bcrypt.hash(password, 10, function(err, hash) {
             var account = [
-              employee_number, id, hash
+              // employee_number, id, hash
+              id, hash, employee_number
             ];
             var employee = [
               employee_number, name, rrn, department,
               gender, final_education, email, phone_number
             ]
+            conn.query('INSERT INTO employees values (?,?,?,?,?,?,?,?)', employee);
+            conn.query('INSERT INTO accounts values (?,?,?)', account);
+            /*
             conn.query('INSERT INTO employees values (?,?,?,?,?,?,?,?)', employee, function(err, rows2) {
               if (err) {
                 req.flash('danger', err);
@@ -149,6 +153,7 @@ router.route('/')
                 return res.redirect('back');
               }
             })
+            */
           })
         } else {
           req.flash('danger', '이미 가입된 사번입니다.');
