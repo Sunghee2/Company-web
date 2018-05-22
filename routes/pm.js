@@ -39,7 +39,7 @@ router.get('/', needAuth, (req, res, next) => {
   });
 })
 
-router.get('/client_evaluation', needAuth, (req, res, next)=>{
+router.get('/client_evaluations', needAuth, (req, res, next) => {
   conn.query('SELECT s.project_id, project_name, start_date, end_date, client_name, evaluation_id, s.order_id, client_id from (SELECT * FROM (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) s LEFT JOIN client_evaluations c ON s.project_id=c.project_id WHERE end_date >= CURRENT_TIMESTAMP OR end_date is NULL', [req.user.employee_number], (err, rows) => {
     if (err) {
       req.flash('danger', err);
@@ -50,5 +50,17 @@ router.get('/client_evaluation', needAuth, (req, res, next)=>{
     res.render('pm/client_evaluation', {projects: projects});
   })
 })
+
+// router.get('/pm_evaluations', needAuth, (req, res, next) => {
+//   conn.query('', [req.user.employee_number], (err, rows) => {
+//     if (err) {
+//       req.flash('danger', err);
+//       return res.redirect('back');
+//     }
+
+//     const projects = rows;
+//     res.render('pm/client_evaluation', {projects: projects});
+//   })
+// })
 
 module.exports = router;
