@@ -1,0 +1,55 @@
+extends ../layout
+
+block content
+  .container
+        .pt-5.pb-1.text-center
+        h2 Register Employee
+        hr.mt-5.featurette-divider
+        .col-md-12
+        form.needs-validation(action='/users', method='POST')
+            p  
+            h4.mb-3 Profile
+            .mb-3
+            label(for='name') Name
+            input#name.form-control(type='text', placeholder='Jean', name='name')
+            .mb-3
+            label(for='rrn') RRN
+            input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn')
+            .col-md-6.mb-3
+            .mb-3
+            label(for='department')
+                | Department
+                .col-md-6.mb-3
+                select#departmentSelect.custom-select(name='department')
+                option(data-hidden='true') Select your Department
+                option(value='801000') Development
+                option(value='801004') Marketing
+                option(value='801002') Management
+                option(value='801003') System Manager
+                option(value='801001') Human Resources
+            .mb-3.mt-3
+            label(for='gender') Gender
+            p
+            input#man(name='gender', value='m', type='radio')
+            |  Man    
+            input#woman(name='gender', value='f', type='radio')
+            |  Woman
+            h6  
+            .mb-3
+            label(for='rrn') Final Education
+            input#final-education.form-control(type='text', name='final_education', placeholder='Graduated from Myongji University, Data Technology Track')
+            .mb-3
+            label(for='email')
+                | Email 
+                span.text-muted (Optional)
+            input#email.form-control(type='email', name='email', placeholder='you@example.com')
+            .invalid-feedback Please enter a valid email address for shipping updates.
+            .mb-3
+            label(for='address2') Phone Number
+            input#phone-number.form-control(type='text', placeholder='eg. 01012345678', name='phone_number')
+            hr.featurette-divider
+                .row
+                .col-sm-5
+                .col-sm-5
+                .col-sm-2
+                    button.btn.btn-primary.btn-lg.btn-block(type='submit') Register
