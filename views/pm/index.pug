@@ -29,22 +29,22 @@ block content
                 .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
                 h2 Participating Projects
                 table.table.mt-5
-                thead
-                    tr
-                        th ID
-                        th Name
-                        th Start Date
-                        th End Date
-                        th Client
-                        th Details
-                tbody
-                    each project in projects 
+                    thead
                         tr
-                            th(scope='row')= project.project_id
-                            td= project.project_name
-                            td= moment(project.start_date).format('YYYY-MM-DD')
-                            td= (project.end_date)? moment(project.end_date).format('YYYY-MM-DD'):'미정'
-                            td= project.client_name
-                            td.pt-2
-                                a.btn.btn-primary.btn-sm(href=`pm/${project.project_id}`)  View
+                            th ID
+                            th Name
+                            th Start Date
+                            th End Date
+                            th Client
+                            th Details
+                    tbody
+                        each project in projects 
+                            tr
+                                th(scope='row')= project.project_id
+                                td= project.project_name
+                                td= moment(project.start_date).format('YYYY-MM-DD')
+                                td= (project.end_date)? moment(project.end_date).format('YYYY-MM-DD'):'미정'
+                                td= project.client_name
+                                td.pt-2
+                                    a.btn.btn-primary.btn-sm(href=`pm/${project.project_id}`)  View
 
