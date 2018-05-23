@@ -90,8 +90,7 @@ input#userdate{
   width: 40%;
 }
 
-
-
-
-
-/*# sourceMappingURL=style.css.map */
+/* user edit */
+select#departmentSelect.custom-select{
+  width: 38.5em;
+}

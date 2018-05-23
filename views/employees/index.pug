@@ -7,7 +7,7 @@ block content
         .sidebar-sticky
           ul.nav.flex-column.mt-4
             li.nav-item.py-1
-              a.nav-link.active(href='#')
+              a.nav-link.active(href='/employees')
                 svg.feather.feather-users(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
                   path(d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2')
                   circle(cx='9', cy='7', r='4')
@@ -15,7 +15,7 @@ block content
                   path(d='M16 3.13a4 4 0 0 1 0 7.75')
                 |                 Search: Employee
             li.nav-item
-              a.nav-link.active(href='#')
+              a.nav-link.active(href='/projects')
                 svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
                   path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
                   polyline(points='14 2 14 8 20 8')
@@ -28,15 +28,18 @@ block content
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
         .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
         h1.mt-3.mb-3 Employee Management
-        .row
-          .col-sm-5.mb-3
-            form.form-inline(action='/employees', method='GET')
-              label.mr-3(for='find-employee-number') Employee Number
-              input#find-employee-number.form-control(type='text', placeholder='eg. 60100000', name='employee_number', value=employee_number)
-          .col-sm-5.mb-3
-            form.form-inline(action='/employees', method='GET')
-              label.mr-3(for='find-employee-name') Employee name
-              input#find-employee-name.form-control(type='text', placeholder='eg. King', name='name', value=name)
+        .row.mt-5
+          form.form-inline.col-sm-12(action='/employees', method='GET')
+            span.col-sm-5
+              label.text-left.mr-3.mb-3(for='find-employee-number') Employee Number
+              .input-group
+                input#find-employee-number.form-control(type='text', placeholder='eg. 60100000', name='employee_number', value=employee_number)
+            span.col-sm-5
+              label.mr-3.mb-3(for='find-employee-name') Employee name
+              .input-group
+                input#find-employee-name.form-control(type='text', placeholder='eg. King', name='name', value=name)
+            span.col-sm-2
+              button.btn.btn-primary.btn-block(type='submit') Search
         .mb-3
         h3.mb-3.mt-3 Result
         if employees.length <= 0
@@ -53,10 +56,10 @@ block content
             tbody
               each employee in employees
                 tr
-                  a(href=`/employees/${employee.employee_number}`)
-                    th(scope='row') #{employee.employee_number}
-                    td #{employee.name}
-                    td #{employee.dept_name}
-                    td #{employee.email}
-                    td #{employee.phone_number}
+                  td
+                    a(href=`/employees/${employee.employee_number}`) #{employee.employee_number}
+                  td #{employee.name}
+                  td #{employee.dept_name}
+                  td #{employee.email}
+                  td #{employee.phone_number}
           
