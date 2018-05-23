@@ -1,43 +1,46 @@
 extends ../layout
 
 block content
-  .container
+  #profile_update.container.mt-5
     h1.main-title Profile Update
     form(action=`/users/${user.employee_number}?_method=PUT`, method='POST')
-      p  
-      hr.featurette-divider
-      h4.mb-3 Profile
+      hr.featurette-divider.mt-4
+      h4 Profile
+      .col-md-12
       .row
-        .col-md-6.mb-3
-          label(for='Name') Name
-          input#Name.form-control(type='text', placeholder='', name='name', value=user.name)
+        .col-md-6.mb-3.mt-3
+            label(for='Name') Name
+            input#Name.form-control(type='text', placeholder='', name='name', value=user.name, readonly='')
+        .col-md-6.mb-3.mt-3
+          label(for='rrn') RRN
+          input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn', value=user.RRN, readonly='')
+      .row
+        .col-md-12.mb-3.mt-3
+          label(for='department') Department
+            .col-md-6.mb-3
+            select#departmentSelect.custom-select(name='department', readonly='', style='background-color:rgba(233,236,239)' onfocus='this.initialSelect = this.selectedIndex;', onchange='this.selectedIndex = this.initialSelect;')
+              option(data-hidden='true') Select your Department
+              each department in departments
+                if department.dept_id==user.dept_id
+                  option(value=department.dept_id selected='')= department.dept_name
+                else
+                  option(value=department.dept_id)= department.dept_name
       .mb-3
-        label(for='rrn') RRN
-        input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn', value=user.RRN)
-      .mb-3
-        label(for='department') Department
-          .col-md-6.mb-3
-          select#departmentSelect.custom-select(name='department')
-            option(data-hidden='true') Select your Department
-            each department in departments
-              if department.dept_id==user.dept_id
-                option(value=department.dept_id selected)= department.dept_name
-              else
-                option(value=department.dept_id)= department.dept_name
-      label.form-check-label(for='gender') Gender
-        if(user.gender=='m')
-          input#man(name='gender', value='m', type='radio' checked)
-          |  Man
-        else
-          input#man(name='gender', value='m', type='radio')
-          |  Man
-        if(user.gender=='f')         
-          input#woman(name='gender', value='f', type='radio' checked)
-          |  Woman
-        else
-          input#woman(name='gender', value='f', type='radio')
-          |  Woman
-        h6  
+        label.form-check-label.pl-0(for='gender') Gender
+          p
+          if(user.gender=='m')
+            input#man(name='gender', value='m', type='radio' checked)
+            |  Man &emsp;&ensp;
+          else
+            input#man(name='gender', value='m', type='radio')
+            |  Man
+          if(user.gender=='f')         
+            input#woman(name='gender', value='f', type='radio' checked)
+            |  Woman
+          else
+            input#woman(name='gender', value='f', type='radio')
+            |  Woman
+          h6  
       .mb-3
         label(for='rrn') Final Education
         input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track', value=user.final_education)
@@ -52,6 +55,10 @@ block content
         label(for='address2') Phone Number
         input#phone-number.form-control(type='text', placeholder='eg. 01012345678', name='phone_number', value=user.phone_number)
       hr.mb-4
-      a.btn.btn-outline-secondary(href='javascript:window.history.back();') Back 
-      | 
-      button.btn.btn-primary(type='submit') Update
+      .row
+        .col-sm-8
+        .col-sm-2.text-right
+          a.btn.btn-outline-secondary(href='javascript:window.history.back();') &ensp;Back&ensp; 
+        .col-sm-2.text-right
+          button.btn.btn-primary(type='submit') Update
+

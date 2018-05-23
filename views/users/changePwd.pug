@@ -2,15 +2,22 @@ extends ../layout
 
 block content
   .container
-    h1.main-title Change Password
-    form(action=`/users/${currentUser.employee_number}/changePwd?_method=PUT`, method='POST')
-      .form-group
-        label(for='current_password') Current Password
-        input.form-control(type='password', name='password', placeholder='Current Password')
-      .form-group
-        label(for='new_password') New Password
-        input#password.form-control(type='password', name='new_password', placeholder='New Password')
-      .form-group
-        label(for='new_password_confirmation') New Password Confirmation
-        input#password_confirmation.form-control(type='password', name='new_password_confirmation', placeholder='New Password Confirmation')
+    h1.main-title.mt-5 Change Password
+    hr.featurette-divider.mt-4
+    .container
+      .col-sm-7
+        form(action=`/users/${currentUser.employee_number}/changePwd?_method=PUT`, method='POST')
+          .form-group
+            label(for='current_password') Current Password
+            input.form-control(type='password', name='password', placeholder='Current Password')
+          .form-group
+            label(for='new_password') New Password
+            input#password.form-control(type='password', name='new_password', placeholder='New Password')
+          .form-group
+            label(for='new_password_confirmation') New Password Confirmation
+            input#password_confirmation.form-control(type='password', name='new_password_confirmation', placeholder='New Password Confirmation')
+    br/
+    hr.mt-3
+    .row
+      .col-sm-12.text-right
         button.btn.btn-primary(type='submit') Update
