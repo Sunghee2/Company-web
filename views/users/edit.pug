@@ -28,13 +28,13 @@ block content
       .mb-3
         label.form-check-label.pl-0(for='gender') Gender
           p
-          if(user.gender=='m')
+          if(user.gender=='M')
             input#man(name='gender', value='m', type='radio' checked)
             |  Man &emsp;&ensp;
           else
             input#man(name='gender', value='m', type='radio')
             |  Man
-          if(user.gender=='f')         
+          if(user.gender=='F')         
             input#woman(name='gender', value='f', type='radio' checked)
             |  Woman
           else
