@@ -23,13 +23,15 @@
               .dropdown-menu(aria-labelledby='navbarDropdown')
                 a.dropdown-item(href=`/users/${currentUser.employee_number}/edit`) Profile Settings
                 a.dropdown-item(href=`/users/${currentUser.employee_number}/changePwd`) Change Password
-            li.nav-item
-              a.nav-link(href='/evaluations/pm') pm evaluation
-            li.nav-item
-              a.nav-link(href='/evaluations/peer') peer evaluation
-            li.nav-item
-              a.nav-link(href='/evaluations/client') client evaluation           
+            //- li.nav-item
+            //-   a.nav-link(href='/evaluations/pm') pm evaluation
+            //- li.nav-item
+            //-   a.nav-link(href='/evaluations/peer') peer evaluation
+            //- li.nav-item
+            //-   a.nav-link(href='/evaluations/client') client evaluation           
             li.nav-item
               a.nav-link(href='/signout') Signout
+            // 경영진인 경우
+            if (currentUser.manager)
         
           

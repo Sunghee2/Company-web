@@ -7,7 +7,16 @@ conn.connect()
 
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    next();
+    conn.query('SELECT * FROM assignments WHERE employee_number=? AND role="PM" AND (end_date+7 >= CURRENT_TIMESTAMP OR end_date is NULL)', [req.user.employee_number], (err, rows) => {
+      if (!rows.length) {
+        console.log("here");
+        req.flash('danger', 'PM이 아니므로 접근이 불가능합니다.');
+        return res.redirect('back');
+      } else {
+        console.log("here222");
+        next();
+      }
+    })
   } else {
     req.flash('danger', 'Please signin first.');
     res.redirect('/');
