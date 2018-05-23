@@ -39,9 +39,11 @@ block content
               .input-group
                 input#find-employee-name.form-control(type='text', placeholder='eg. King', name='name', value=name)
             span.col-sm-2
-              button.btn.btn-primary.btn-block(type='submit') Search
+              label.mr-3.mb-3 View Result
+              .input-group
+                button.btn.btn-primary.btn-block(type='submit') Search
         .mb-3
-        h3.mb-3.mt-3 Result
+        h3.mb-3.mt-5 Result
         if employees.length <= 0
           p 해당 직원이 존재하지 않습니다.
         else

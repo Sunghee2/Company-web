@@ -27,23 +27,27 @@ block content
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
         .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-        .search-project-date
-          div
-            .mt-3
-              label(for='find-project-date')
-                h5 Search Date
-          form.form-inline(action='/projects', method='GET')
-            h6
-              | project start : 
-              input#userdate(type='date', name='start_date', value=start_date)    
-            h6
-              | project end  : 
-              input#userdate(type='date', name='end_date', value=end_date)
-            button.btn.btn-primary.btn-lg.btn-block(type='submit') search
-          p
-        h2 Result
+        h2.mt-3.mb-3 Search Projects
+        .row.mt-5
+          form.form-inline.col-sm-12(action='/projects', method='GET')
+            span.col-sm-5
+              label.mr-3.mb-3 Start Date 
+              .input-group
+                input#userdate(type='date', class="btn btn-outline-secondary", name='start_date', value=start_date)    
+            span.col-sm-5
+              label.mr-3.mb-3 End Date 
+              .input-group
+                input#userdate(type='date', class="btn btn-outline-secondary", name='end_date', value=end_date)
+            span.col-sm-2
+              label.mr-3.mb-3 View Result
+              .input-group
+                button.btn.btn-primary.btn-block(type='submit') Search
+          .mb-3
+        h3.mb-3.mt-5 Result
         if projects.length > 0
+          p
           .small Current #{projects.length} project(s)
+          p
           table.table
             thead
               tr
