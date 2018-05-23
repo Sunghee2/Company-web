@@ -7,7 +7,7 @@ block content
         .sidebar-sticky
           ul.nav.flex-column.mt-4
             li.nav-item.py-1
-              a.nav-link.active(href='#')
+              a.nav-link.active(href='/employees')
                 svg.feather.feather-users(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
                   path(d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2')
                   circle(cx='9', cy='7', r='4')
@@ -15,7 +15,7 @@ block content
                   path(d='M16 3.13a4 4 0 0 1 0 7.75')
                 |                 Search: Employee
             li.nav-item
-              a.nav-link.active(href='#')
+              a.nav-link.active(href='/projects')
                 svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
                   path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
                   polyline(points='14 2 14 8 20 8')
@@ -30,7 +30,7 @@ block content
         h2
           | EMPLOYEE PROFILE
         .row.float-right
-          a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button') Back to List
+          a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button' href="/employees") Back to List
         br
         table.table.mt-5
           thead
