@@ -157,9 +157,11 @@ https://github.com/mysqljs/mysql
   - 수정 : routes/pm.js(form, details get, 일단 add member ~ing, delete), pm/index.pug(프로젝트 form 복구), pm/project_details.pug(form, url), evaluations/forms/pm_evaluation_form.pug(input name, value, url 수정), routes/evaluations.js(pm get, post 추가)
   - 버튼 되면 redirect확인, curdate() 확인
 
+
 > 멤버 추가할 때 role not null이라 추가 form 있어야됨.
 > 나만 버튼들 하나도 안먹음?
-> css 자꾸 push에 change삭제하는데 날라가면서 사라짐ㅋㅋ
+
+> evaluation
 
 ### 정지우
 

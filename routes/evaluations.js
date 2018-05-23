@@ -16,33 +16,6 @@ function needAuth(req, res, next) {
 }
 
 function validateFormForPerformance(form, type) {
-  if (type == 'peer') {
-    if (!form.utilization-tools) {
-      return 'No. 1 is not entered.';
-    }
-    if (!form.pattern) {
-      return 'No. 2 is not entered.';
-    }
-    if (!form.intra-platform) {
-      return 'No. 3 is not entered.';
-    }
-    if (!form.program-decomposition) {
-      return 'No. 4 is not entered.';
-    }
-    if (!form.system-decomposition) {
-      return 'No. 5 is not entered.';
-    }
-    if (!form.component) {
-      return 'No. 6 is not entered.';      
-    }
-    if (!form.readability) {
-      return 'No. 7 is not entered.';
-    }
-    if (!form.handling) {
-      return 'No. 8 is not entered.';
-    }
-  }
-
   if (type == 'client') {
     if (!form.appropriateness) {
       return 'No. 1 is not entered.';
@@ -60,7 +33,7 @@ function validateFormForPerformance(form, type) {
       return 'No. 5 is not entered.';
     }
   }
-  if (type == 'pm') {
+  if (type == 'pm' || type == 'peer') {
     if (!form.utilization) {
       return 'No. 1 is not entered.';
     }
@@ -126,18 +99,24 @@ function validateFormForCommunication(form, type) {
 }
 
 
-router.route('/peer/:id')
+router.route('/peer/:project_id/:emp_id')
   .get(needAuth, catchErrors(async(req, res, next) => {
-    const user = req.user;
-    // 7일 내에 평가하는 것은 차후 수정하겠음.
-    conn.query('SELECT * FROM projects WHERE project_id IN (SELECT project_id FROM assignments WHERE employee_number=?)', [user.employee_number], function(err, rows) {
+    const project_id = req.params.project_id;
+    const be_evaluated_number = req.params.emp_id;
+    conn.query('SELECT project_id, project_name FROM projects WHERE project_id=?', [project_id], function(err, rows) {
       if (err) {
         req.flash('danger', err);
         return res.redirect('back');     
       }
-      const projects = rows;
-      console.log(projects);
-      res.render('evaluations/forms/peer_evaluation_form', {projects: projects});
+      conn.query('SELECT employee_number, name, role FROM assignments NATURAL JOIN employees WHERE employee_number=? AND project_id=?', [be_evaluated_number, project_id], (err, rows2) => {
+        if (err) {
+          req.flash('danger', err);
+          return res.redirect('back');
+        }
+        const project = rows[0];
+        const employee = rows2[0];
+        res.render('evaluations/forms/peer_evaluation_form', {project: project, employee: employee});
+      })
     })
   }))
   .post(needAuth, catchErrors(async(req, res, next) => {
@@ -146,6 +125,22 @@ router.route('/peer/:id')
       req.flash('danger', err);
       return res.redirect('back');
     }
+
+    const evaluator_number = req.user.employee_number;
+    const be_evaluated_number = req.params.emp_id;
+    const project_id = req.params.project_id;
+    var performanceValue = (parseInt(req.body.utilization) + parseInt(req.body.pattern) + parseInt(req.body.platform) + parseInt(req.body.decomposition) + parseInt(req.body.system) + parseInt(req.body.component) + parseInt(req.body.readability) + parseInt(req.body.handling)) / 8.0;
+    var communicationValue = (parseInt(req.body.easily) + parseInt(req.body.describe) + parseInt(req.body.explain) + parseInt(req.body.details) + parseInt(req.body.opinions)) / 5.0;
+
+    conn.query('INSERT INTO peer_evaluations(project_id, evaluator_number, be_evaluated_number, performance_score, communication_score) VALUES (?,?,?,?,?)', [project_id, evaluator_number, be_evaluated_number, performanceValue, communicationValue],(err, rows) => {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');
+      }
+      req.flash('success', '평가를 완료하였습니다.');
+      // redirect 어디로 해야할 지 봐야됨.
+      res.redirect(`../../../../pm/${project_id}`);
+    });
 
   }))
 
@@ -178,7 +173,7 @@ router.route('/client/:id')
         return res.redirect('back');
       }
       req.flash('success', '평가를 완료하였습니다.');
-      res.redirect('../../pm/client_evaluations');
+      res.redirect('../../../pm/client_evaluations');
     })
   }))
 
@@ -192,12 +187,12 @@ router.route('/pm/:project_id/:emp_id')
         return res.redirect('back');     
       }
       const project = rows[0];
-      conn.query('SELECT employee_number, name, role FROM assignments NATURAL JOIN employees WHERE employee_number=? AND project_id=?', [employee_number, project_id], (err, rows) => {
+      conn.query('SELECT employee_number, name, role FROM assignments NATURAL JOIN employees WHERE employee_number=? AND project_id=?', [employee_number, project_id], (err, rows2) => {
         if (err) {
           req.flash('danger', err);
           return res.redirect('back');
         }
-        const employee = rows[0];
+        const employee = rows2[0];
         res.render('evaluations/forms/pm_evaluation_form', {project: project, employee: employee});
       })
     })

@@ -7,13 +7,11 @@ conn.connect()
 
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    conn.query('SELECT * FROM assignments WHERE employee_number=? AND role="PM" AND (end_date+7 >= CURRENT_TIMESTAMP OR end_date is NULL)', [req.user.employee_number], (err, rows) => {
+    conn.query('SELECT * FROM assignments WHERE employee_number=? AND role="PM" AND (end_date+7 >= CURRENT_DATE OR end_date is NULL)', [req.user.employee_number], (err, rows) => {
       if (!rows.length) {
-        console.log("here");
         req.flash('danger', 'PM이 아니므로 접근이 불가능합니다.');
         return res.redirect('back');
       } else {
-        console.log("here222");
         next();
       }
     })
@@ -42,7 +40,7 @@ function validateForm(form) {
 router.get('/', needAuth, (req, res, next) => {
   const project_id = req.query.project_id;
 
-  conn.query('SELECT * from (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id FROM orders NATURAL JOIN clients) t2 WHERE end_date >= CURRENT_TIMESTAMP OR end_date is NULL', [req.user.employee_number],(err, rows) => {
+  conn.query('SELECT * from (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id FROM orders NATURAL JOIN clients) t2 WHERE end_date+7 >= CURRENT_DATE OR end_date is NULL', [req.user.employee_number],(err, rows) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');  
@@ -65,7 +63,7 @@ router.get('/', needAuth, (req, res, next) => {
 })
 
 router.get('/client_evaluations', needAuth, (req, res, next) => {
-  conn.query('SELECT s.project_id, project_name, start_date, end_date, client_name, evaluation_id, s.order_id, client_id from (SELECT * FROM (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) s LEFT JOIN client_evaluations c ON s.project_id=c.project_id WHERE end_date >= CURRENT_TIMESTAMP OR end_date is NULL', [req.user.employee_number], (err, rows) => {
+  conn.query('SELECT s.project_id, project_name, start_date, end_date, client_name, evaluation_id, s.order_id, client_id from (SELECT * FROM (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) s LEFT JOIN client_evaluations c ON s.project_id=c.project_id WHERE end_date+7 >= CURRENT_DATE OR end_date is NULL', [req.user.employee_number], (err, rows) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
