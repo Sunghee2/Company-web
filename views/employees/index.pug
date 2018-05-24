@@ -47,7 +47,7 @@ block content
         if employees.length <= 0
           p 해당 직원이 존재하지 않습니다.
         else
-          table.table
+          table.table#empTable
             thead
               tr
                 th(scope='col') EMP NUM
@@ -65,3 +65,15 @@ block content
                   td #{employee.email}
                   td #{employee.phone_number}
           
+          script.
+            $(document).ready(function() {
+                $('#empTable').dataTable({
+                  "searching": false,
+                  "columns": [
+                    null,
+                    null,
+                    null,
+                    { 'orderable': false },
+                    { 'orderable': false }
+                  ]});
+            });

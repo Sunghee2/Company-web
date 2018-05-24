@@ -187,7 +187,6 @@ router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
       return res.redirect('back');
     } else {
       const user = rows[0];
-      console.log(user);
       conn.query('SELECT dept_id, dept_name FROM departments', (err, rows2) => {
         if (err) {
           req.flash('danger', err);
