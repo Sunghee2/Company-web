@@ -48,16 +48,22 @@ router.get('/', (req, res, next) => {
   }
 });
 
+
+
+
 router.get('/:id', (req, res, next) => {
-  conn.query('SELECT * FROM employees NATURAL JOIN departments WHERE employee_number=?', [req.params.id],function(err, rows) {
+  conn.query('select * from  employees NATURAL JOIN departments NATURAL JOIN emp_skill NATURAL JOIN skill_sets NATURAL JOIN careers WHERE employee_number=? ' , [req.params.id],function(err, rows) {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');  
     }  
     const employee = rows[0];
+    
     res.render('employees/details', {employee: employee});
   });
 })
+
+
 
 
 
