@@ -58,7 +58,7 @@ router.get('/:id', (req, res, next) => {
       return res.redirect('back');  
     }  
     const employee = rows[0];
-    console.log(employee)
+    
     res.render('employees/details', {employee: employee});
   });
 })
