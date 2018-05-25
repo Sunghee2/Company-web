@@ -165,3 +165,6 @@ https://github.com/mysqljs/mysql
 
 ### 정지우
 
+
+
+(select peer_evaluations.be_evaluated_number, avg(peer_evaluations.performance_score) peer1,avg(peer_evaluations.communication_score) peer2, pm1, pm2 from peer_evaluations LEFT JOIN (SELECT p.be_evaluated_number, avg(performance_score) pm1, avg(communication_score) pm2 FROM pm_evaluations p group by p.be_evaluated_number) e ON peer_evaluations.be_evaluated_number=e.be_evaluated_number group by peer_evaluations.be_evaluated_number) UNION (select pm_evaluations.be_evaluated_number, peer1, peer2, avg(pm_evaluations.performance_score) pm1, avg(pm_evaluations.communication_score) pm2 from (SELECT r.be_evaluated_number, avg(r.performance_score) peer1, avg(r.communication_score) peer2 FROM peer_evaluations r group by r.be_evaluated_number) t2 RIGHT JOIN pm_evaluations ON t2.be_evaluated_number=pm_evaluations.be_evaluated_number group by pm_evaluations.be_evaluated_number);

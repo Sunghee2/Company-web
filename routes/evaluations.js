@@ -98,6 +98,16 @@ function validateFormForCommunication(form, type) {
   }
 }
 
+router.get('/list', needAuth, (req, res, next) => {
+  conn.query('SELECT * FROM ((select be_evaluated_number employee_number, peer1, peer2, pm1, pm2, client1, client2 from ((select peer_evaluations.be_evaluated_number, avg(peer_evaluations.performance_score) peer1,avg(peer_evaluations.communication_score) peer2, pm1, pm2 from peer_evaluations LEFT JOIN (SELECT p.be_evaluated_number, avg(performance_score) pm1, avg(communication_score) pm2 FROM pm_evaluations p group by p.be_evaluated_number) e ON peer_evaluations.be_evaluated_number=e.be_evaluated_number group by peer_evaluations.be_evaluated_number) UNION (select pm_evaluations.be_evaluated_number, peer1, peer2, avg(pm_evaluations.performance_score) pm1, avg(pm_evaluations.communication_score) pm2 from (SELECT r.be_evaluated_number, avg(r.performance_score) peer1, avg(r.communication_score) peer2 FROM peer_evaluations r group by r.be_evaluated_number) t2 RIGHT JOIN pm_evaluations ON t2.be_evaluated_number=pm_evaluations.be_evaluated_number group by pm_evaluations.be_evaluated_number)) tt LEFT JOIN (select employee_number, avg(performance_score) client1, avg(communication_score) client2 from assignments LEFT JOIN client_evaluations ON assignments.project_id=client_evaluations.project_id group by employee_number) ttt ON tt.be_evaluated_number=ttt.employee_number) UNION (select employee_number, peer1, peer2, pm1, pm2, client1, client2 from ((select peer_evaluations.be_evaluated_number, avg(peer_evaluations.performance_score) peer1,avg(peer_evaluations.communication_score) peer2, pm1, pm2 from peer_evaluations LEFT JOIN (SELECT p.be_evaluated_number, avg(performance_score) pm1, avg(communication_score) pm2 FROM pm_evaluations p group by p.be_evaluated_number) e ON peer_evaluations.be_evaluated_number=e.be_evaluated_number group by peer_evaluations.be_evaluated_number) UNION (select pm_evaluations.be_evaluated_number, peer1, peer2, avg(pm_evaluations.performance_score) pm1, avg(pm_evaluations.communication_score) pm2 from (SELECT r.be_evaluated_number, avg(r.performance_score) peer1, avg(r.communication_score) peer2 FROM peer_evaluations r group by r.be_evaluated_number) t2 RIGHT JOIN pm_evaluations ON t2.be_evaluated_number=pm_evaluations.be_evaluated_number group by pm_evaluations.be_evaluated_number)) ww RIGHT JOIN (select employee_number, avg(performance_score) client1, avg(communication_score) client2 from assignments LEFT JOIN client_evaluations ON assignments.project_id=client_evaluations.project_id group by employee_number) www ON ww.be_evaluated_number=www.employee_number)) ds ORDER BY employee_number', (err, rows) => {
+    if (err) {
+      req.flash('danger', err);
+      return res.redirect('back');      
+    }
+    const evaluations = rows;
+    res.render('evaluations/index', {evaluations: evaluations});
+  })
+})
 
 router.route('/peer/:project_id/:emp_id')
   .get(needAuth, catchErrors(async(req, res, next) => {

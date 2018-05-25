@@ -77,3 +77,23 @@ block content
             tr
               td Order details
               td= project.order_details      
+
+        h2.mt-5 Project Members
+        table.table.mt-3
+          thead
+            tr
+              th ID
+              th Name
+              th Department
+              th Current Role
+              th Start Date
+              th End Date
+          tbody
+            each participant in participants
+              tr
+                td= participant.employee_number
+                td= participant.name
+                td= participant.dept_name
+                td= participant.role
+                td= moment(participant.start_date).format('YYYY-MM-DD')
+                td= moment(participant.end_date).format('YYYY-MM-DD')

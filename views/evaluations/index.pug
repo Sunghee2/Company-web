@@ -1,0 +1,85 @@
+extends ../layout
+
+block content
+  .container
+    .row.sidebar-details
+      nav.col-md-3.d-none.d-md-block.bg-light.sidebar
+        .sidebar-sticky
+          ul.nav.flex-column.mt-4
+            li.nav-item.py-1
+              a.nav-link.active(href='/employees')
+                svg.feather.feather-users(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                  path(d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2')
+                  circle(cx='9', cy='7', r='4')
+                  path(d='M23 21v-2a4 4 0 0 0-3-3.87')
+                  path(d='M16 3.13a4 4 0 0 1 0 7.75')
+                |                 Search: Employee
+            li.nav-item
+              a.nav-link.active(href='/departments')
+                svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                  path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
+                  polyline(points='14 2 14 8 20 8')
+                  line(x1='16', y1='13', x2='8', y2='13')
+                  line(x1='16', y1='17', x2='8', y2='17')
+                  polyline(points='10 9 9 9 8 9')
+                |                 Search: Department
+      main.col-md-9.ml-sm-auto.px-4(role='main')
+        .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
+          .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
+        .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
+        h2
+          | EMPLOYEE EVALUATIONS
+        br
+        table.table.mt-5#evaluationTable
+          thead
+            tr
+              th.text-center(rowspan="2") EMP NUM
+              th.text-center(colspan="3") Peer evaluation
+              th.text-center(colspan="3") PM evaluation
+              th.text-center(colspan="3") Client evaluation
+              th.text-center(rowspan="2") Total Score
+            tr
+              th.text-center(scope="col") Performance (Peer)
+              th.text-center(scope="col") Communication (Peer)
+              th.text-center(scope="col") Total Score
+              th.text-center(scope="col") Performance (PM)
+              th.text-center(scope="col") Communication (PM)
+              th.text-center(scope="col") Total Score
+              th.text-center(scope="col") Performance (Client)
+              th.text-center(scope="col") Communication (Client) 
+              th.text-center(scope="col") Total Score           
+          tbody
+            each evaluation in evaluations
+              - var count = 0; 
+              tr
+                th(scope="row")= evaluation.employee_number
+                td= (evaluation.peer1)? parseFloat(evaluation.peer1).toFixed(2) : ""
+                td= (evaluation.peer2)? parseFloat(evaluation.peer2).toFixed(2) : ""
+                td= (evaluation.peer1)? ((parseFloat(evaluation.peer1) + parseFloat(evaluation.peer2)/2)).toFixed(2) : ""
+                td= (evaluation.pm1)? parseFloat(evaluation.pm1).toFixed(2) : ""
+                td= (evaluation.pm2)? parseFloat(evaluation.pm2).toFixed(2) : ""
+                td= (evaluation.pm1)? ((parseFloat(evaluation.pm1) + parseFloat(evaluation.pm2)/2)).toFixed(2) : ""
+                td= (evaluation.client1)? parseFloat(evaluation.client1).toFixed(2) : ""
+                td= (evaluation.client2)? parseFloat(evaluation.client2).toFixed(2) : ""
+                td= (evaluation.client1)? ((parseFloat(evaluation.client1) + parseFloat(evaluation.client2))/2).toFixed(2) : ""
+                td= (((parseFloat(evaluation.peer1) || null) + (parseFloat(evaluation.peer2) || null) + (parseFloat(evaluation.pm1) || null) + (parseFloat(evaluation.pm2) || null) + (parseFloat(evaluation.client1) || null) + (parseFloat(evaluation.client2)) || null) / count).toFixed(2)
+      
+          script.
+            $(document).ready(function() {
+                $('#evaluationTable').dataTable({
+                  "pageLength": 25,
+                  "columns": [
+                    null,
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false},
+                    {"searchable": false}
+                  ]
+                });
+            });

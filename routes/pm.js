@@ -9,7 +9,7 @@ function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
     conn.query('SELECT * FROM assignments WHERE employee_number=? AND role="PM" AND (end_date+7 >= CURRENT_DATE OR end_date is NULL)', [req.user.employee_number], (err, rows) => {
       if (!rows.length) {
-        req.flash('danger', 'PM이 아니므로 접근이 불가능합니다.');
+        req.flash('danger', '접근 권한이 없습니다.');
         return res.redirect('back');
       } else {
         next();

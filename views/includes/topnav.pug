@@ -1,37 +1,29 @@
 .header.clearfix
   nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
     .container
-      a.navbar-brand(href="/") Team1
+      a.navbar-brand(href="/") Prompt Solution
       button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarsExampleDefault", aria-controls="navbarsExampleDefault", aria-expanded="false", aria-label="Toggle navigation")
         span.navbar-toggler-icon
 
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
-          li.nav-item
-            a.nav-link(href="/employees/") Employee Management
-          li.nav-item
-            a.nav-link(href="/projects/") Project Management
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') Signin
             li.nav-item
               a.nav-link(href='/users/new') Signup
           else
+            if (currentUser.manager || currentUser.dept_id == 801001)
+              li.nav-item
+                a.nav-link(href="/employees/") Employee Management
+            li.nav-item
+              a.nav-link(href="/projects/") Project Management
             li.nav-item.dropdown
-              // ~ing 작업해야함 ㅠㅠㅠㅠ
               a.nav-link.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= currentUser.ID
               .dropdown-menu(aria-labelledby='navbarDropdown')
                 a.dropdown-item(href=`/users/${currentUser.employee_number}/edit`) Profile Settings
-                a.dropdown-item(href=`/users/${currentUser.employee_number}/changePwd`) Change Password
-            //- li.nav-item
-            //-   a.nav-link(href='/evaluations/pm') pm evaluation
-            //- li.nav-item
-            //-   a.nav-link(href='/evaluations/peer') peer evaluation
-            //- li.nav-item
-            //-   a.nav-link(href='/evaluations/client') client evaluation           
+                a.dropdown-item(href=`/users/${currentUser.employee_number}/changePwd`) Change Password         
             li.nav-item
               a.nav-link(href='/signout') Signout
-            // 경영진인 경우
-            if (currentUser.manager)
         
           

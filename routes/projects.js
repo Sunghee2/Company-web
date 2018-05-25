@@ -54,8 +54,16 @@ router.get('/:id', (req, res, next) => {
           req.flash('danger', err);
           return res.redirect('back');  
         }  
-        const project = rows[0];
-        res.render('projects/details', {project: project});
+        conn.query('SELECT employee_number, t1.project_id, start_date, end_date, role, name, dept_name, evaluation_id FROM (SELECT * FROM assignments NATURAL JOIN (SELECT employee_number, name, dept_name FROM employees NATURAL JOIN departments) e) t1 LEFT JOIN pm_evaluations t2 ON t1.project_id=t2.project_id AND t1.employee_number=t2.be_evaluated_number WHERE t1.project_id=?', [req.params.id], (err, rows2) => {
+            if (err) {
+              req.flash('danger', err);
+              return res.redirect('back');
+            }
+        
+            const project = rows[0];
+            const participants = rows2;
+            res.render('projects/details', {project: project, participants: participants});
+          })
     });   
 })
 

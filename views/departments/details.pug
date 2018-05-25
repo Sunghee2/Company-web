@@ -64,8 +64,11 @@ block content
             tbody
               each employee in employees
                 tr
-                  td
-                    a(href=`/departments/${department.dept_id}/${employee.employee_number}`)= employee.employee_number
+                  if (currentUser.dept_id == 801001)
+                    td
+                      a(href=`/departments/${department.dept_id}/${employee.employee_number}`)= employee.employee_number
+                  else
+                    td= employee.employee_number
                   td= employee.name
                   td= employee.email
                   td= employee.phone_number
