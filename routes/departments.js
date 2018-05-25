@@ -32,5 +32,22 @@ router.get('/', needAuth, (req, res, next) => {
   })
 })
 
+router.get('/:id', needAuth, (req, res, next) => {
+  conn.query('select employee_number, name, email, phone_number, score FROM (employees LEFT JOIN (select be_evaluated_number, round(avg(score),2) score from ((select be_evaluated_number, (avg(performance_score)+avg(communication_score))/2 score from peer_evaluations group by be_evaluated_number) UNION (select be_evaluated_number, (avg(performance_score)+avg(communication_score))/2 score from pm_evaluations group by be_evaluated_number)) t group by be_evaluated_number) a ON employees.employee_number=a.be_evaluated_number) where dept_id =?',[req.params.id], (err, rows)=>{
+    if (err) {
+      req.flash('danger', err);
+      res.redirect('back');
+    }
+    conn.query('select departments.dept_id, dept_name, dept_manager, name, email, phone_number from departments, employees where dept_manager=employee_number AND departments.dept_id=?', [req.params.id], (err, rows2)=>{
+      if (err) {
+        req.flash('danger', err);
+        res.redirect('back');
+      }
+      const department = rows2[0];
+      const employees = rows;
+      res.render('departments/details', {department: department, employees: employees});
+    })
+  })
+})
 
 module.exports = router;
