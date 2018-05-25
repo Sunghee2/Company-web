@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h1.main-title Move Department
+    form(action=`/departments/${employee.employee_number}?_method=PUT`, method='POST')
+      .row
+        .col-md-6.mb-3.mt-3
+            label(for='employee_number') Employee Number
+            input#employee_number.form-control(type='text', name='employee_number', value=employee.employee_number, readonly='')
+        .col-md-6.mb-3.mt-3
+          label(for='name') Name
+          input#name.form-control(type='text', name='name', value=employee.name, readonly='')
+      .row
+        .col-md-12.mb-3.mt-3
+          label(for='department') Department
+            .col-md-6.mb-3
+            select#departmentSelect.custom-select(name='department')
+              option(data-hidden='true') Select your Department
+              each department in departments
+                if department.dept_id==employee.dept_id
+                  option(value=department.dept_id selected='')= department.dept_name
+                else
+                  option(value=department.dept_id)= department.dept_name
+      hr.mb-4
+      .row
+        .col-sm-8
+        .col-sm-2.text-right
+          a.btn.btn-outline-secondary(href='javascript:window.history.back();') &ensp;Back&ensp; 
+        .col-sm-2.text-right
+          button.btn.btn-primary(type='submit') Update
+

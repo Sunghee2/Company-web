@@ -47,10 +47,9 @@ block content
           script.
             $(document).ready(function() {
                 $('#dptTable').dataTable({
-                  "searching": false,
-                  "columns": [
+                    "columns": [
                     null,
                     null,
-                    { 'orderable': false },
-                  ]});
+                    { 'orderable': false, 'searchable': false },
+                    ]});
             });

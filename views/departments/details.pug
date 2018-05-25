@@ -64,14 +64,15 @@ block content
             tbody
               each employee in employees
                 tr
-                  td= employee.employee_number
+                  td
+                    a(href=`/departments/${department.dept_id}/${employee.employee_number}`)= employee.employee_number
                   td= employee.name
                   td= employee.email
                   td= employee.phone_number
 
         script.
             $(document).ready(function() {
-                $('#empTable').dataTable({
+                 $('#empTable').dataTable({
                 "searching": false,
                 "columns": [
                     null,

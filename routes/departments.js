@@ -50,4 +50,35 @@ router.get('/:id', needAuth, (req, res, next) => {
   })
 })
 
+router.get('/:dept_id/:emp_id', needAuth, (req, res, next) => {
+  conn.query('SELECT employee_number, name, dept_id FROM employees WHERE employee_number=?', [req.params.emp_id], (err, rows) => {
+    if (err) {
+      req.flash('danger', err);
+      res.render('back');
+    }
+    conn.query('SELECT * FROM departments', (err, rows2) => {
+      if (err) {
+        req.flash('danger', err);
+        res.render('back');
+      }
+      const employee = rows[0];
+      const departments = rows2;
+      res.render('departments/edit', {employee: employee, departments: departments});
+    })
+  })
+})
+
+router.put('/:id', needAuth, (req, res, next) => {
+  const employee_number = req.body.employee_number;
+  const dept_id = req.body.department;
+  conn.query('UPDATE employees SET dept_id=? WHERE employee_number=?', [dept_id, employee_number], (err, rows) => {
+    if (err) {
+      req.flash('danger', err);
+      res.render('back');
+    }
+    req.flash('success', 'Updated successfully.');
+    res.redirect('/departments');
+  })
+})
+
 module.exports = router;
