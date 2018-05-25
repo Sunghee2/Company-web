@@ -7,26 +7,32 @@ block content
                 .sidebar-sticky
                 ul.nav.flex-column.mt-4
                     li.nav-item.py-1
-                    a.nav-link.active(href='#')
-                        svg.feather.feather-users(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
-                        path(d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2')
-                        circle(cx='9', cy='7', r='4')
-                        path(d='M23 21v-2a4 4 0 0 0-3-3.87')
-                        path(d='M16 3.13a4 4 0 0 1 0 7.75')
-                        |                 Search: Employee
+                        a.nav-link.active(href='/projects')
+                            svg.feather.feather-users(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2')
+                            circle(cx='9', cy='7', r='4')
+                            path(d='M23 21v-2a4 4 0 0 0-3-3.87')
+                            path(d='M16 3.13a4 4 0 0 1 0 7.75')
+                            |                 Search: Project
                     li.nav-item
-                    a.nav-link.active(href='#')
-                        svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
-                        path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
-                        polyline(points='14 2 14 8 20 8')
-                        line(x1='16', y1='13', x2='8', y2='13')
-                        line(x1='16', y1='17', x2='8', y2='17')
-                        polyline(points='10 9 9 9 8 9')
-                        |                 Search: Project
+                        a.nav-link.active(href='/pm')
+                            svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
+                            polyline(points='14 2 14 8 20 8')
+                            line(x1='16', y1='13', x2='8', y2='13')
+                            line(x1='16', y1='17', x2='8', y2='17')
+                            polyline(points='10 9 9 9 8 9')
+                            |                 PM page
+                    li.nav-item
+                        a.nav-link.active(href='/pm/client_evaluations')
+                            svg.feather.feather-file-text(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z')
+                            polyline(points='14 2 14 8 20 8')
+                            line(x1='16', y1='13', x2='8', y2='13')
+                            line(x1='16', y1='17', x2='8', y2='17')
+                            polyline(points='10 9 9 9 8 9')
+                            |                 Client evalutions
             main.col-md-9.ml-sm-auto.px-4(role='main')
-                .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
-                .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
-                .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
                 h2.mt-3 Project Members
                 table.table.mt-5
                     thead
@@ -43,37 +49,33 @@ block content
                                 td= participant.employee_number
                                 td= participant.name
                                 td= participant.dept_name
-                                td.text-center.pt-2
-                                    button.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Roles
-                                        .dropdown-menu
-                                            a.dropdown-item Cheif Product Manager
-                                            a.dropdown-item Product Manager
-                                            a.dropdown-item Enterprise Architect
-                                            a.dropdown-item Architect
-                                            a.dropdown-item Scrum Master
-                                            a.dropdown-item Developer
-                                            a.dropdown-item QA
+                                td= participant.role
                                 td
                                     if (participant.evaluation_id)
                                         p 완료
-                                    else
-                                        a(href=`/evaluations/pm/${participant.project_id}/${participant.employee_number}`) Evaluation
+                                    else if (participant.employee_number != currentUser.employee_number)
+                                        a(href=`/evaluations/pm/${participant.project_id}/${participant.employee_number}`) 평가하기
                                 td.text-center.pt-2
-                                    a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
+                                    if (participant.employee_number != currentUser.employee_number)
+                                        a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
                 br
                 h2.mt-5 Adding Members
                 .row.mt-5
-                .col-md-5
-                    form.needs-validation(action=`/pm/${participants[0].project_id}/${participants[0].employee_number}`, method='POST')
-                    .mb-5
-                        label(for='employee_id') Employee ID
-                        .input-group
-                        input.form-control(type='text', placeholder='employee number', name='employee_number')
-                .col-md-5
-                    .mb-5
-                    label(for='name') Employee Name
-                    .input-group
-                        input.form-control(type='text', placeholder='employee name', name='employee_name')
-                .col-md-2.float-center.align-middle.mt-2.pl-3.pt-4
-                    a.btn.btn-outline-secondary(type='submit')   Adding  
-                hr.featurette-divider
+                    form(action=`/pm/${participants[0].project_id}/${participants[0].employee_number}`, method='POST')
+                    .col-md-5
+                        .mb-5
+                            label(for='employee_id') Employee ID
+                            .input-group
+                            input.form-control(type='text', placeholder='employee number', name='employee_number')
+                    .col-md-5.mt-4
+                        button.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Roles
+                            .dropdown-menu
+                                a.dropdown-item Cheif Product Manager
+                                a.dropdown-item Product Manager
+                                a.dropdown-item Enterprise Architect
+                                a.dropdown-item Architect
+                                a.dropdown-item Scrum Master
+                                a.dropdown-item Developer
+                                a.dropdown-item QA
+                    .col-md-2.float-center.align-middle.mt-2.pl-3.pt-4
+                        btn.btn.btn-outline-secondary(type='submit')   Adding 

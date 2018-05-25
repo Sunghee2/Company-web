@@ -57,7 +57,6 @@ passportConfig(passport);
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user; 
   res.locals.flashMessages = req.flash();
-  console.log(res.locals.flashMessages);
   next();
 });
 
