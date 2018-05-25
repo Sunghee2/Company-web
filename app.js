@@ -16,6 +16,7 @@ var evaluationsRouter = require('./routes/evaluations');
 var employeesRouter = require('./routes/employees');
 var projectsRouter = require('./routes/projects');
 var pmRouter = require('./routes/pm');
+var departmentsRouter = require('./routes/departments');
 
 var passportConfig = require('./lib/passport-config');
 
@@ -66,6 +67,7 @@ app.use('/projects', projectsRouter);
 app.use('/users', usersRouter);
 app.use('/evaluations', evaluationsRouter);
 app.use('/pm', pmRouter);
+app.use('/departments', departmentsRouter);
 require('./routes/auth')(app, passport);
 
 app.use(function(req, res, next) {

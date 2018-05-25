@@ -27,56 +27,30 @@ block content
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
         .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-        h1.mt-3.mb-3 Employee Management
+        h1.mt-3.mb-3 Department Management
         .row.mt-5
-          form.form-inline.col-sm-12(action='/employees', method='GET')
-            span.col-sm-5
-              label.text-left.mr-3.mb-3(for='find-employee-number') Employee Number
-              .input-group
-                input#find-employee-number.form-control(type='text', placeholder='eg. 60100000', name='employee_number', value=employee_number)
-            span.col-sm-5
-              label.mr-3.mb-3(for='find-employee-name') Employee name
-              .input-group
-                input#find-employee-name.form-control(type='text', placeholder='eg. King', name='name', value=name)
-            span.col-sm-2
-              label.mr-3.mb-3 View Result
-              .input-group
-                button.btn.btn-primary.btn-block(type='submit') Search
         .mb-3
-        h3.mb-3.mt-5 Result
-        if employees.length <= 0
-          p 해당 직원이 존재하지 않습니다.
-        else
-          table.table#empTable
+          table.table#dptTable
             thead
               tr
-                th(scope='col') EMP NUM
+                th(scope='col') Department Number
                 th(scope='col') Name
-                th(scope='col') Department
-                th(scope='col') E-mail
-                th(scope='col') Phone
-                th(scope='col') Score
+                th(scope='col') Manager
             tbody
-              each employee in employees
+              each department in departments
                 tr
                   td
-                    a(href=`/employees/${employee.employee_number}`) #{employee.employee_number}
-                  td #{employee.name}
-                  td #{employee.dept_name}
-                  td #{employee.email}
-                  td #{employee.phone_number}
-                  td #{employee.score}
+                    a(href=`/department/${department.dept_id}`) #{department.dept_id}
+                  td #{department.dept_name}
+                  td #{department.dept_manager}
           
           script.
             $(document).ready(function() {
-                $('#empTable').dataTable({
+                $('#dptTable').dataTable({
                   "searching": false,
                   "columns": [
                     null,
                     null,
-                    null,
                     { 'orderable': false },
-                    { 'orderable': false },
-                    null
                   ]});
             });
