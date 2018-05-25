@@ -67,14 +67,27 @@ router.get('/', needAuth, (req, res, next) => {
 
 
 router.get('/:id', (req, res, next) => {
-  conn.query('select * from  employees NATURAL JOIN departments NATURAL JOIN emp_skill NATURAL JOIN skill_sets NATURAL JOIN careers WHERE employee_number=? ' , [req.params.id],function(err, rows) {
+  conn.query('select * from  employees NATURAL JOIN departments WHERE employee_number=? ' , [req.params.id] ,function(err, rows) {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');  
     }  
-    const employee = rows[0];
-    
-    res.render('employees/details', {employee: employee});
+    conn.query('select skill_name, skill_rank from emp_skill NATURAL JOIN skill_sets where employee_number=?', [req.params.id], (err, rows2)=> {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');  
+      } 
+      conn.query('select career, period_start, period_end from careers where employee_number=?', [req.params.id], (err, rows3) => {
+        if (err) {
+          req.flash('danger', err);
+          return res.redirect('back');  
+        } 
+        const employee = rows[0];
+        const skills = rows2;
+        const careers = rows3;
+        res.render('employees/details', {employee: employee, skills: skills, careers: careers});
+      })
+    })
   });
 })
 

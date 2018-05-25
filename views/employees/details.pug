@@ -62,10 +62,31 @@ block content
             tr
               td PHONE Number
               td= employee.phone_number
+
+        br
+        h5.mt-2.mb-2 SKILL
+        table.table 
+          thead
             tr
-              td SKILL
-              td= employee.skill_name
-            tr
-              td CAREER
-              td= employee.career
+              th(scope="col") NAME
+              th(scope="col") LEVEL
+          tbody
+            each skill in skills
+              tr
+                td= skill.skill_name
+                td= skill.skill_rank     
             
+        br
+        h5.mt-2.mb-2 CAREER
+        table.table 
+          thead
+            tr
+              th(scope="col") CAREER
+              th(scope="col") START DATE
+              th(scope="col") END DATE
+          tbody
+            each career in careers
+              tr
+                td= career.career
+                td= moment(career.period_start).format('YYYY-MM-DD')
+                td= moment(career.period_end).format('YYYY-MM-DD')
