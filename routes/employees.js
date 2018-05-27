@@ -63,9 +63,6 @@ router.get('/', needAuth, (req, res, next) => {
   }
 });
 
-
-
-
 router.get('/:id', (req, res, next) => {
   conn.query('select * from  employees NATURAL JOIN departments WHERE employee_number=? ' , [req.params.id] ,function(err, rows) {
     if (err) {
@@ -82,20 +79,20 @@ router.get('/:id', (req, res, next) => {
           req.flash('danger', err);
           return res.redirect('back');  
         } 
-        const employee = rows[0];
-        const skills = rows2;
-        const careers = rows3;
-        res.render('employees/details', {employee: employee, skills: skills, careers: careers});
+        conn.query('select project_name, client_performance_score, client_communication_score, peer_performance_score, peer_communication_score, pm_performance_score, pm_communication_score from projects NATURAL JOIN assignments NATURAL JOIN client_evaluations NATURAL JOIN peer_evaluations NATURAL JOIN pm_evaluations WHERE employee_number=?', [req.params.id], (err, rows4) => {
+          if (err) {
+            req.flash('danger', err);
+            return res.redirect('back');  
+          } 
+          const employee = rows[0];
+          const skills = rows2;
+          const careers = rows3;
+          const projects = rows4;
+          res.render('employees/details', {employee: employee, skills: skills, careers: careers, projects:projects});
+        })
       })
     })
-  });
-})
-
-
-
-
-
-
-
+  })
+});
 
 module.exports = router;
