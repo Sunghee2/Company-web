@@ -98,11 +98,18 @@ https://github.com/mysqljs/mysql
   - 수정: routers/users.js
   - signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 register
 
-> 발표자료 만들어야 됨
-> 
-> 아오 css...
-> 
-> 나중에 폼 확인할 수 있게 router도 달아야하는데 귀찮다.. 달았음ㅇㅇ밑에서 url확인바람
+
+
+ALTER TABLE `peer_evaluations` CHANGE `performance_score` `peer_performance_score` FLOAT NOT NULL;
+ALTER TABLE `peer_evaluations` CHANGE `communication_score` `peer_communication_score` FLOAT NOT NULL;
+
+ALTER TABLE `pm_evaluations` CHANGE `performance_score` `pm_performance_score` FLOAT NULL;
+ALTER TABLE `pm_evaluations` CHANGE `communication_score` `pm_communication_score` FLOAT NULL;
+
+ALTER TABLE `client_evaluations` CHANGE `performance_score` `client_performance_score` FLOAT NOT NULL;
+ALTER TABLE `client_evaluations` CHANGE `communication_score` `client_communication_score` FLOAT NOT NULL;
+
+컬럼명 바꿔주세요 
 
 ###### 백엔드 합류(연기) -> 배진영
 
