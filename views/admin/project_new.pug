@@ -2,11 +2,11 @@ extends ../layout
 
 block content
   .container
-        .pt-5.pb-1.text-center
+            .pt-5.pb-1.text-center
             h2 Register Project
             hr.mt-5.featurette-divider
             .col-md-12
-            form.needs-validation(action='/projcets', method='POST')
+            form.needs-validation(action='/admin/project_new', method='POST')
                 p  
                 h4.mb-3 Project Info
                 .mb-3
@@ -14,12 +14,12 @@ block content
                 input#name.form-control(type='text', placeholder='Project Name', name='name')
                 .mb-3
                 .row
-                    .col-sm-6
-                    label(for='rrn') Start Date
-                    input#start_date.form-control(type='date', name='start_date')
-                    .col-sm-6
-                    label(for='rrn') End Date
-                    input#end_date.form-control(type='date', name='end_date')
+                .col-sm-6
+                label(for='rrn') Start Date
+                input#start_date.form-control(type='date', name='start_date')
+                .col-sm-6
+                label(for='rrn') End Date
+                input#end_date.form-control(type='date', name='end_date')
                 .mb-3
                 label(for='pm') PM number
                 input#pm.form-control(type='text', name='pm', placeholder='PM Employee_numbers')
