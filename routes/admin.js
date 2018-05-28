@@ -93,9 +93,11 @@ router.post('/emp_new', needAuth, catchErrors(async(req, res, next) => {
     var phone_number = req.body.phone_number;
     
 
+   console.log(req.body.dept_id,'나와주세요');
+   console.log(req.body.department,'나와주');
 
-   conn.query('INSERT INTO employees(name,employee_number, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?,?,?)',
-   [name,employee_number, rrn, dept_id, gender, final_education, email, phone_number], function(err, rows) {
+   conn.query('INSERT INTO employees(name,employee_number, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?,?)',
+   [name,employee_number, rrn, department, gender, final_education, email, phone_number], function(err, rows) {
 
       if (err)  throw(err);
       console.log(rows,'결과확인@@@@@')
