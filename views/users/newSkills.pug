@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  .container
+        .pt-5.pb-1.text-center
+        h2 New Skill
+        hr.mt-5.featurette-divider
+        .col-md-12
+        form.needs-validation(action=`/users/${currentUser.employee_number}/newSkills?_method=PUT`, method='POST')
+            p  
+            .mb-3
+            label(for='skill')
+                | Select Skill
+                .col-md-6.mb-3
+                select#skillSelect.custom-select(name='skill')
+                    option(data-hidden='true') Select Skill
+                    option(value='1') JAVA
+                    option(value='2') Python
+                    option(value='3') Bigdata
+                    option(value='4') C+
+                    option(value='5') sql
+                    
+        br
+        hr.mt-3
+        .row
+          .col-sm-12.text-right
+            button.btn.btn-primary(type='submit') Update

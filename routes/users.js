@@ -192,12 +192,18 @@ router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
           req.flash('danger', err);
           return res.redirect('back');
         }
-        const departments = rows2;
-        res.render('users/edit', {user: user, departments: departments});
+        conn.query('select skill_name, skill_rank from emp_skill NATURAL JOIN skill_sets where employee_number=?', [req.params.id], (err, rows3)=> {
+          if (err) {
+            req.flash('danger', err);
+            return res.redirect('back');  
+          } 
+          const departments = rows2;
+          const skills = rows3;
+        res.render('users/edit', {user: user, departments: departments, skills:skills});
       });
-    }
-  })
-}))
+    })
+  }})
+}));
 
 router.put('/:id', needAuth, catchErrors(async(req, res, next) => {
   var err = validateForm(req.body, 'edit');
@@ -274,4 +280,45 @@ router.route('/:id/changePwd')
     })
   }));
 
+router.get('/:id/skills', (req, res, next) => {
+  conn.query('select * from  employees NATURAL JOIN departments WHERE employee_number=? ' , [req.params.id] ,function(err, rows) {
+    if (err) {
+      req.flash('danger', err);
+      return res.redirect('back');  
+    }  
+    conn.query('select skill_name, skill_rank from emp_skill NATURAL JOIN skill_sets where employee_number=?', [req.params.id], (err, rows2)=> {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');  
+      } 
+      const skills = rows2;
+      res.render('users/skills', {skills: skills});
+    })
+  })
+});
+
+router.route('/:id/newSkills')
+  .get(needAuth, catchErrors(async(req, res, next) => {
+    res.render('users/newSkills');
+  }))
+  .post(needAuth, catchErrors(async(req, res, next) => {
+    if (err) {
+      req.flash('danger', err);
+      return res.redirect('back');
+    }
+    var id = req.body.id;
+    var password = req.body.password;
+    var skill = [
+      req.body.skill, req.params.id
+    ];
+    conn.query('INSERT INTO emp_skills(skill_id, employee_number) values (?,?)', skill, (err, rows3) => {
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');
+      }
+      req.flash('success', 'success');
+      return res.redirect('back');
+    });
+}));
+     
 module.exports = router;
