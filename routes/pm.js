@@ -21,6 +21,21 @@ function needAuth(req, res, next) {
   }
 }
 
+function needManagerAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    const user = req.user;
+    if (user.dept_id == 801001) {
+      next();
+    } else {
+      req.flash('danger', '접근 권한이 없습니다');
+      res.redirect('/');
+    }
+  } else {
+    req.flash('danger', 'Please signin first.');
+    res.redirect('/');
+  }
+}
+
 function validateForm(form) {
   var employee_number = form.employee_number || "";
   var name = form.name || "";
@@ -62,8 +77,8 @@ router.get('/', needAuth, (req, res, next) => {
   });
 })
 
-router.get('/client_evaluations', needAuth, (req, res, next) => {
-  conn.query('SELECT s.project_id, project_name, start_date, end_date, client_name, evaluation_id, s.order_id, client_id from (SELECT * FROM (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) s LEFT JOIN client_evaluations c ON s.project_id=c.project_id WHERE end_date+7 >= CURRENT_DATE OR end_date is NULL', [req.user.employee_number], (err, rows) => {
+router.get('/client_evaluations', needManagerAuth, (req, res, next) => {
+  conn.query('SELECT t3.project_id, project_name, start_date, end_date, client_name, evaluation_id, t3.order_id, client_id from (SELECT * FROM projects t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) t3 LEFT JOIN client_evaluations t4 ON t3.project_id=t4.project_id WHERE end_date+7>=CURRENT_DATE OR end_date is NULL', (err, rows) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
