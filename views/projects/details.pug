@@ -15,6 +15,9 @@ block content
             li.nav-item
               a.nav-link.active(href='/pm/client_evaluations')
                   |                 Client evalutions
+            li.nav-item
+              a.nav-link.active(href='/admin/project_new')
+                  |                 Admin          
       main.col-md-9.ml-sm-auto.px-4(role='main')
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
@@ -74,7 +77,8 @@ block content
           tbody
             each participant in participants
               tr
-                td= participant.employee_number
+                td
+                  a(href=`/employees/${participant.employee_number}`)= participant.employee_number
                 td= participant.name
                 td= participant.dept_name
                 td= participant.role
