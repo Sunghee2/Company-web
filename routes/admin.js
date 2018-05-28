@@ -31,14 +31,12 @@ function validateForm(form, type, options) {
 
   if (type == 'emp_new') {
     var name = form.name || "";
-    var employee_number = form.employee_number || "";
     var gender = form.gender || "";
-    var department = form.department || "";
+    var department = form.dept_id || "";
     var final_education = form.final_education || "";
     var phone_number = form.phone_number || "";
     
     name = name.trim();
-    employee_number = employee_number.trim();
     gender = gender.trim();
     department = department.trim();
     final_education = final_education.trim();
@@ -46,9 +44,6 @@ function validateForm(form, type, options) {
     
     if (!name) {
       return 'Name is required.';
-    }
-    if (!employee_id) {
-      return 'Employee_id is required.';
     }
     if (!department) {
       return 'Department is required.';
@@ -84,7 +79,6 @@ router.get('/emp_new', (req, res, next) => {
 router.post('/emp_new', needAuth, catchErrors(async(req, res, next) => {
   
     var name = req.body.name;
-    var employee_number = req.body.employee_number;
     var rrn = req.body.rrn;
     var department = req.body.dept_id;
     var gender = req.body.gender;
@@ -94,8 +88,8 @@ router.post('/emp_new', needAuth, catchErrors(async(req, res, next) => {
     
 
 
-   conn.query('INSERT INTO employees(name,employee_number, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?,?,?)',
-   [name,employee_number, rrn, dept_id, gender, final_education, email, phone_number], function(err, rows) {
+   conn.query('INSERT INTO employees(name, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?)',
+   [name, rrn, department, gender, final_education, email, phone_number], function(err, rows) {
 
       if (err)  throw(err);
       console.log(rows,'결과확인@@@@@')
