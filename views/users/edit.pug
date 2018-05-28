@@ -31,19 +31,13 @@ block content
           if(user.gender=='M')
             input#man(name='gender', value='M', type='radio' checked)
             |  Man &emsp;&ensp;
-          else
-            input#man(name='gender', value='M', type='radio')
-            |  Man
           if(user.gender=='W')         
-            input#woman(name='gender', value='F', type='radio' checked)
-            |  Woman
-          else
-            input#woman(name='gender', value='F', type='radio')
+            input#woman(name='gender', value='W', type='radio' checked)
             |  Woman
           h6  
       .mb-3
         label(for='rrn') Final Education
-        input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track', value=user.final_education)
+        input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track', value=user.final_education, readonly='')
       .mb-3
         label(for='email')
           | Email 

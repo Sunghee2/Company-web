@@ -77,7 +77,8 @@ block content
           tbody
             each participant in participants
               tr
-                td= participant.employee_number
+                td
+                  a(href=`/employees/${participant.employee_number}`)= participant.employee_number
                 td= participant.name
                 td= participant.dept_name
                 td= participant.role
