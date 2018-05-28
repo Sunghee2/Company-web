@@ -88,6 +88,7 @@ router.get('/:id', needAuth, (req, res, next) => {
 
 router.route('/:project_id/:emp_id')
   .post(needAuth, (req, res, next) => {
+    console.log("please");
     var err = validateForm(req.body);
     if (err) {
       req.flash('danger', err);
@@ -108,16 +109,14 @@ router.route('/:project_id/:emp_id')
       res.redirect(`../../pm/${project_id}`);
     });
   })
-  .delete(needAuth, (req, res, next) => {
+  .put(needAuth, (req, res, next) => {
     const project_id = req.params.project_id;
     const employee_number = req.params.emp_id;
-
-    conn.query('DELETE FROM assignments WHERE project_id=? AND employee_number=?', [project_id, employee_number], (err, rows) => {
+    conn.query('update assignments set end_date = current_date() where project_id=? AND employee_number=?', [project_id, employee_number], (err, rows) => {
       if (err) {
         req.flash('danger', err);
         res.redirect('back');
       }
-
       req.flash('success', '성공적으로 삭제하였습니다.');
       res.redirect(`../../pm/${project_id}`);
     })

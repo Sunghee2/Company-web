@@ -56,7 +56,8 @@ block content
               if evaluation.client2
                 - count++
               tr
-                th(scope="row")= evaluation.employee_number
+                th(scope="row")
+                  a(href=`/employees/${evaluation.employee_number}`)= evaluation.employee_number
                 td= (evaluation.peer1)? parseFloat(evaluation.peer1).toFixed(2) : ""
                 td= (evaluation.peer2)? parseFloat(evaluation.peer2).toFixed(2) : ""
                 td= (evaluation.peer1)? ((parseFloat(evaluation.peer1) + parseFloat(evaluation.peer2)/2)).toFixed(2) : ""

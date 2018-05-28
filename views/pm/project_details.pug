@@ -57,25 +57,23 @@ block content
                                         a(href=`/evaluations/pm/${participant.project_id}/${participant.employee_number}`) 평가하기
                                 td.text-center.pt-2
                                     if (participant.employee_number != currentUser.employee_number)
-                                        a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
+                                        if (!participant.end_date)
+                                            a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=put` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
+                                        else
+                                            p 종료
                 br
                 h2.mt-5 Adding Members
                 .row.mt-5
                     form(action=`/pm/${participants[0].project_id}/${participants[0].employee_number}`, method='POST')
-                    .col-md-5
-                        .mb-5
-                            label(for='employee_id') Employee ID
-                            .input-group
+                        .input-group
                             input.form-control(type='text', placeholder='employee number', name='employee_number')
-                    .col-md-5.mt-4
-                        button.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Roles
-                            .dropdown-menu
-                                a.dropdown-item Cheif Product Manager
-                                a.dropdown-item Product Manager
-                                a.dropdown-item Enterprise Architect
-                                a.dropdown-item Architect
-                                a.dropdown-item Scrum Master
-                                a.dropdown-item Developer
-                                a.dropdown-item QA
-                    .col-md-2.float-center.align-middle.mt-2.pl-3.pt-4
-                        btn.btn.btn-outline-secondary(type='submit')   Adding 
+                        //- button.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Roles
+                        //-     .dropdown-menu
+                        //-         a.dropdown-item Cheif Product Manager
+                        //-         a.dropdown-item Product Manager
+                        //-         a.dropdown-item Enterprise Architect
+                        //-         a.dropdown-item Architect
+                        //-         a.dropdown-item Scrum Master
+                        //-         a.dropdown-item Developer
+                        //-         a.dropdown-item QA
+                        btn.btn.btn-primary(type='submit') Adding 
