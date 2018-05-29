@@ -23,8 +23,9 @@ block content
         .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
         h2
           | Project Details
-        .row.float-right
-          a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button' href="/projects") Back to List
+        if (currentUser.manager || currentUser.dept_id == 801001)
+          .row.float-right
+            a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button' href="/projects") Back to List
         br
         table.table.mt-5
           thead
