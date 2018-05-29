@@ -45,7 +45,10 @@ block content
                     td 완료
                   else
                     td
-                      a.btn.btn-primary(href=`/evaluations/client/${project.project_id}`) 평가 
+                      if(project.end_date)
+                        a.btn.btn-primary(href=`/evaluations/client/${project.project_id}`) 평가 
+                      else
+                        btn.btn.btn-secondary(disabled) 평가
           hr.featurette-divider
           .row.float-right
             a.btn.btn-outline-secondary.md-5.mr-3(role='button') Back to List

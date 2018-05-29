@@ -124,7 +124,7 @@ router.get('/list', needAuth, (req, res, next) => {
 })
 
 router.get('/client', needManagerAuth, (req, res, next) => {
-  conn.query('SELECT t3.project_id, project_name, start_date, end_date, client_name, evaluation_id, t3.order_id, client_id from (SELECT * FROM projects t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) t3 LEFT JOIN client_evaluations t4 ON t3.project_id=t4.project_id WHERE end_date+7>=CURRENT_DATE OR end_date is NULL', (err, rows) => {
+  conn.query('SELECT t3.project_id, project_name, start_date, end_date, client_name, evaluation_id, t3.order_id, client_id from (SELECT * FROM projects t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) t3 LEFT JOIN client_evaluations t4 ON t3.project_id=t4.project_id WHERE (DATE(DATE_ADD(end_date, INTERVAL 7 DAY))>=CURRENT_DATE OR end_date is NULL)', (err, rows) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
