@@ -1,33 +1,9 @@
 extends ../layout
 
 block content
-  .container
-    .row.sidebar-details
-      nav.col-md-3.d-none.d-md-block.bg-light.sidebar
-        .sidebar-sticky
-          ul.nav.flex-column.mt-4
-            li.nav-item.py-1
-              a.nav-link.active(href='/employees')
-                |                 Search: Employee
-            li.nav-item
-              a.nav-link.active(href='/departments')
-                |                 Search: Department
-            li.nav-item
-              a.nav-link.active(href='/evaluations/list')
-                |                 Evaluation List
-            if (currentUser.dept_id == 801001)
-              li.nav-item
-                a.nav-link.active(href='/employees/new')
-                  |                 Add employee    
-            
-      main.col-md-9.ml-sm-auto.px-4(role='main')
-        .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
-          .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
-        .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
+    .container
         h2
-          | EMPLOYEE PROFILE
-        .row.float-right
-          a.btn.btn-outline-secondary.mt-3.md-5.mr-3(role='button' href="/employees") Back to List
+          | PROFILE
         br
         table.table.mt-5
           thead
@@ -115,3 +91,4 @@ block content
                 td= project.peer_communication_score
                 td= project.pm_performance_score
                 td= project.pm_communication_score
+
