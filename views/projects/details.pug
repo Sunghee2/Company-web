@@ -76,8 +76,11 @@ block content
           tbody
             each participant in participants
               tr
-                td
-                  a(href=`/employees/${participant.employee_number}`)= participant.employee_number
+                if (currentUser.manager || currentUser.dept_id == 801001)
+                  td
+                    a(href=`/employees/${participant.employee_number}`)= participant.employee_number
+                else
+                  td= participant.employee_number
                 td= participant.name
                 td= participant.dept_name
                 td= participant.role
