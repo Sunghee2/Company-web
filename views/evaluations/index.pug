@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .container
-    .row.sidebar-details
+    .row.sidebar
       nav.col-md-3.d-none.d-md-block.bg-light.sidebar
         .sidebar-sticky
           ul.nav.flex-column.mt-4
@@ -16,7 +16,7 @@ block content
               li.nav-item
                 a.nav-link.active(href='/evaluations/list')
                   |                 Evaluation List
-      main.col-md-9.ml-sm-auto.px-4(role='main')
+      main.col-md-9(role='main')
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
         .justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3
