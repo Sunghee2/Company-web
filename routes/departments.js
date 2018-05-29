@@ -1,5 +1,4 @@
 const express = require('express');
-const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));

@@ -1,5 +1,4 @@
 const express = require('express');
-const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));
@@ -18,6 +17,50 @@ function needAuth(req, res, next) {
     req.flash('danger', 'Please signin first.');
     res.redirect('/');
   }
+}
+
+function validateForm(form) {
+  var rrn = form.rrn || "";
+  
+  rrn = rrn.trim();
+
+  var name = form.name || "";
+  var employee_number = form.employee_number || "";
+  var gender = form.gender || "";
+  var department = form.department || "";
+  var final_education = form.final_education || "";
+  var phone_number = form.phone_number || "";
+  
+  name = name.trim();
+  employee_number = employee_number.trim();
+  gender = gender.trim();
+  department = department.trim();
+  final_education = final_education.trim();
+  phone_number = phone_number.trim();
+  
+  if (!name) {
+    return 'Name is required.';
+  }
+  if (!employee_number) {
+    return 'Employee number is required.';
+  }
+  if (!department) {
+    return 'Department is required.';
+  }
+
+  if (!gender) {
+    return 'Gender is required.';
+  }
+
+  if (!final_education) {
+    return 'Final education is required.';
+  }
+
+  if (!phone_number) {
+    return 'Phone number is required.';
+  }
+  
+  return null;
 }
 
 router.get('/', needAuth, (req, res, next) => {
@@ -63,6 +106,36 @@ router.get('/', needAuth, (req, res, next) => {
   }
 });
 
+router.get('/new', (req, res, next) => {
+  res.render('employees/new');
+});
+
+
+router.post('/new', needAuth, (req, res, next) => {
+  var err = validateForm(req.body);
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
+
+  var name = req.body.name;
+  var employee_number = req.body.employee_number;
+  var rrn = req.body.rrn;
+  var department = req.body.dept_id;
+  var gender = req.body.gender;
+  var final_education = req.body.final_education;
+  var email = req.body.email || "";
+  var phone_number = req.body.phone_number;
+  
+ conn.query('INSERT INTO employees(name,employee_number, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?,?)',
+ [name,employee_number, rrn, department, gender, final_education, email, phone_number], function(err, rows) {
+    if (err)  throw(err);
+
+    req.flash('success', 'Updated successfully.');
+    res.redirect('/employees');
+  })
+})
+
 router.get('/:id', (req, res, next) => {
   conn.query('select * from  employees NATURAL JOIN departments WHERE employee_number=? ' , [req.params.id] ,function(err, rows) {
     if (err) {
@@ -97,6 +170,9 @@ router.get('/:id', (req, res, next) => {
     })
   })
 });
+
+
+
 
 
 module.exports = router;

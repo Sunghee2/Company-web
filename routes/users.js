@@ -1,5 +1,4 @@
 const express = require('express');
-const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const mysql = require('mysql');
@@ -107,7 +106,7 @@ function validateFormForChangePwd(form) {
 }
 
 router.route('/')
-  .post(catchErrors(async (req, res, next) => {
+  .post((req, res, next) => {
     var err = validateForm(req.body, 'signup', {needPassword: true});
     if (err) {
       req.flash('danger', err);
@@ -169,14 +168,14 @@ router.route('/')
           return res.redirect('back');
         }
       })
-  }));
+  });
 
 router.route('/new')
   .get(function(req, res, next) {
     res.render('users/new');
   })
 
-router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
+router.get('/:id/edit', needAuth, (req, res, next) => {
   conn.query('SELECT * FROM employees WHERE employee_number=?', [req.params.id], function(err, rows) {
     if (err) {
       req.flash('danger', err);
@@ -203,9 +202,9 @@ router.get('/:id/edit', needAuth, catchErrors(async(req, res, next) => {
       });
     })
   }})
-}));
+});
 
-router.put('/:id', needAuth, catchErrors(async(req, res, next) => {
+router.put('/:id', needAuth, (req, res, next) => {
   var err = validateForm(req.body, 'edit');
   if (err) {
     req.flash('danger', err);
@@ -230,13 +229,13 @@ router.put('/:id', needAuth, catchErrors(async(req, res, next) => {
     req.flash('success', 'Updated successfully.');
     res.redirect('/');
   })
-}))
+})
 
 router.route('/:id/changePwd')
-  .get(needAuth, catchErrors(async(req, res, next) => {
+  .get(needAuth, (req, res, next) => {
     res.render('users/changePwd');
-  }))
-  .put(needAuth, catchErrors(async(req, res, next) => {
+  })
+  .put(needAuth, (req, res, next) => {
     var err = validateFormForChangePwd(req.body);
     if (err) {
       req.flash('danger', err);
@@ -278,7 +277,7 @@ router.route('/:id/changePwd')
         })
       }
     })
-  }));
+  });
 
 router.get('/:id/skills', (req, res, next) => {
   conn.query('select * from  employees NATURAL JOIN departments WHERE employee_number=? ' , [req.params.id] ,function(err, rows) {
@@ -298,10 +297,10 @@ router.get('/:id/skills', (req, res, next) => {
 });
 
 router.route('/:id/newSkills')
-  .get(needAuth, catchErrors(async(req, res, next) => {
+  .get(needAuth, (req, res, next) => {
     res.render('users/newSkills');
-  }))
-  .post(needAuth, catchErrors(async(req, res, next) => {
+  })
+  .post(needAuth, (req, res, next) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
@@ -319,6 +318,6 @@ router.route('/:id/newSkills')
       req.flash('success', 'success');
       return res.redirect('back');
     });
-}));
+});
      
 module.exports = router;

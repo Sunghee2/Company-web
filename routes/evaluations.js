@@ -1,6 +1,5 @@
 const express = require('express');
 const _ = require('underscore');
-const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));
@@ -9,6 +8,21 @@ conn.connect()
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
     next();
+  } else {
+    req.flash('danger', 'Please signin first.');
+    res.redirect('/');
+  }
+}
+
+function needManagerAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    const user = req.user;
+    if (user.dept_id == 801001) {
+      next();
+    } else {
+      req.flash('danger', '접근 권한이 없습니다');
+      res.redirect('/');
+    }
   } else {
     req.flash('danger', 'Please signin first.');
     res.redirect('/');
@@ -109,8 +123,20 @@ router.get('/list', needAuth, (req, res, next) => {
   })
 })
 
+router.get('/client', needManagerAuth, (req, res, next) => {
+  conn.query('SELECT t3.project_id, project_name, start_date, end_date, client_name, evaluation_id, t3.order_id, client_id from (SELECT * FROM projects t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) t3 LEFT JOIN client_evaluations t4 ON t3.project_id=t4.project_id WHERE end_date+7>=CURRENT_DATE OR end_date is NULL', (err, rows) => {
+    if (err) {
+      req.flash('danger', err);
+      return res.redirect('back');
+    }
+
+    const projects = rows;
+    res.render('evaluations/client_evaluation_list', {projects: projects});
+  })
+})
+
 router.route('/peer/:project_id/:emp_id')
-  .get(needAuth, catchErrors(async(req, res, next) => {
+  .get(needAuth, (req, res, next) => {
     const project_id = req.params.project_id;
     const be_evaluated_number = req.params.emp_id;
     conn.query('SELECT project_id, project_name FROM projects WHERE project_id=?', [project_id], function(err, rows) {
@@ -128,8 +154,8 @@ router.route('/peer/:project_id/:emp_id')
         res.render('evaluations/forms/peer_evaluation_form', {project: project, employee: employee});
       })
     })
-  }))
-  .post(needAuth, catchErrors(async(req, res, next) => {
+  })
+  .post(needAuth, (req, res, next) => {
     var err = validateFormForPerformance(req.body, 'peer') || validateFormForCommunication(req.body, 'peer');
     if (err) {
       req.flash('danger', err);
@@ -152,10 +178,10 @@ router.route('/peer/:project_id/:emp_id')
       res.redirect(`../../../../pm/${project_id}`);
     });
 
-  }))
+  })
 
 router.route('/client/:id')
-  .get(needAuth, catchErrors(async(req, res, next) => {
+  .get(needAuth, (req, res, next) => {
     const project_id = req.params.id;
     conn.query('SELECT * FROM projects NATURAL JOIN (SELECT * FROM orders NATURAL JOIN clients) orders_clients WHERE project_id=?', [project_id], function(err, rows) {
       if (err) {
@@ -165,8 +191,8 @@ router.route('/client/:id')
       const project = rows[0];
       res.render('evaluations/forms/client_evaluation_form', {project: project});
     })
-  }))
-  .post(needAuth, catchErrors(async(req, res, next) => {
+  })
+  .post(needAuth, (req, res, next) => {
     var err = validateFormForPerformance(req.body, 'client') || validateFormForCommunication(req.body, 'client');
     if (err) {
       req.flash('danger', err);
@@ -185,10 +211,10 @@ router.route('/client/:id')
       req.flash('success', '평가를 완료하였습니다.');
       res.redirect('../../../pm/client_evaluations');
     })
-  }))
+  })
 
 router.route('/pm/:project_id/:emp_id')
-  .get(needAuth, catchErrors(async(req, res, next) => {
+  .get(needAuth, (req, res, next) => {
     const project_id = req.params.project_id;
     const employee_number = req.params.emp_id;
     conn.query('SELECT project_id, project_name FROM projects WHERE project_id=?', [project_id], (err, rows) => {
@@ -206,8 +232,8 @@ router.route('/pm/:project_id/:emp_id')
         res.render('evaluations/forms/pm_evaluation_form', {project: project, employee: employee});
       })
     })
-  }))
-  .post(needAuth, catchErrors(async(req, res, next) => {
+  })
+  .post(needAuth, (req, res, next) => {
     var err = validateFormForPerformance(req.body, 'pm') || validateFormForCommunication(req.body, 'pm');
     if (err) {
       req.flash('danger', err);
@@ -227,6 +253,6 @@ router.route('/pm/:project_id/:emp_id')
       req.flash('success', '평가를 완료하였습니다.');
       res.redirect(`../../../../pm/${project_id}`);
     })
-  }));
+  });
 
 module.exports = router;

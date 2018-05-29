@@ -1,5 +1,4 @@
 const express = require('express');
-const catchErrors = require('../lib/async-error');
 const router = express.Router();
 const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));
@@ -15,21 +14,6 @@ function needAuth(req, res, next) {
         next();
       }
     })
-  } else {
-    req.flash('danger', 'Please signin first.');
-    res.redirect('/');
-  }
-}
-
-function needManagerAuth(req, res, next) {
-  if (req.isAuthenticated()) {
-    const user = req.user;
-    if (user.dept_id == 801001) {
-      next();
-    } else {
-      req.flash('danger', '접근 권한이 없습니다');
-      res.redirect('/');
-    }
   } else {
     req.flash('danger', 'Please signin first.');
     res.redirect('/');
@@ -77,18 +61,6 @@ router.get('/', needAuth, (req, res, next) => {
   });
 })
 
-router.get('/client_evaluations', needManagerAuth, (req, res, next) => {
-  conn.query('SELECT t3.project_id, project_name, start_date, end_date, client_name, evaluation_id, t3.order_id, client_id from (SELECT * FROM projects t1 NATURAL JOIN (SELECT client_name, order_id, client_id FROM orders NATURAL JOIN clients) t2) t3 LEFT JOIN client_evaluations t4 ON t3.project_id=t4.project_id WHERE end_date+7>=CURRENT_DATE OR end_date is NULL', (err, rows) => {
-    if (err) {
-      req.flash('danger', err);
-      return res.redirect('back');
-    }
-
-    const projects = rows;
-    res.render('pm/client_evaluation', {projects: projects});
-  })
-})
-
 router.get('/:id', needAuth, (req, res, next) => {
   conn.query('SELECT employee_number, t1.project_id, start_date, end_date, role, name, dept_name, evaluation_id FROM (SELECT * FROM assignments NATURAL JOIN (SELECT employee_number, name, dept_name FROM employees NATURAL JOIN departments) e) t1 LEFT JOIN pm_evaluations t2 ON t1.project_id=t2.project_id AND t1.employee_number=t2.be_evaluated_number WHERE t1.project_id=?', [req.params.id], (err, rows) => {
     if (err) {
@@ -97,7 +69,7 @@ router.get('/:id', needAuth, (req, res, next) => {
     }
 
     const participants = rows;
-    res.render('pm/project_details', {participants: participants})
+    res.render('pm/details', {participants: participants})
   })
 });
 

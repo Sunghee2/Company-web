@@ -16,7 +16,7 @@ block content
               a.nav-link.active(href='/evaluations/list')
                 |                 Evaluation List
             li.nav-item
-              a.nav-link.active(href='/admin')
+              a.nav-link.active(href='/employees/new')
                 |                 Add employee    
       main.col-md-9.ml-sm-auto.px-4(role='main')
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
@@ -50,7 +50,6 @@ block content
                 th(scope='col') Department
                 th(scope='col') E-mail
                 th(scope='col') Phone
-                th(scope='col')
             tbody
               each employee in employees
                 tr
@@ -60,8 +59,6 @@ block content
                   td #{employee.dept_name}
                   td #{employee.email}
                   td #{employee.phone_number}
-                  td.text-center.pt-2
-                    a.btn.btn-danger.btn-sm(href=`/employees/${employee.employee_number}?_method=delete` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
           
           script.
             $(document).ready(function() {
@@ -73,6 +70,5 @@ block content
                     null,
                     { 'orderable': false },
                     { 'orderable': false },
-                    null
                   ]});
             });

@@ -6,7 +6,7 @@ block content
         h2 Register Employee
         hr.mt-5.featurette-divider
         .col-md-12
-        form.needs-validation(action='/admin/emp_new', method='POST')
+        form.needs-validation(action='/employees/new', method='POST')
             p  
             h4.mb-3 Profile
             .mb-3
@@ -14,7 +14,7 @@ block content
             input#name.form-control(type='text', placeholder='Jean', name='name')
             .mb-3
             label(for='rrn') RRN
-            input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn')
+            input#rrn.form-control(type='text', placeholder='', name='rrn')
             .col-md-6.mb-3
             .mb-3
             label(for='dept_id')
@@ -24,8 +24,8 @@ block content
                     option(data-hidden='true') Select your Department
                     option(value='801000') Development
                     option(value='801004') Marketing
-                    option(value='801002') Management
-                    option(value='801003') System Manager
+                    option(value='801002') Business Management
+                    option(value='801003') R&D
                     option(value='801001') Human Resources
             .mb-3.mt-3
             label(for='gender') Gender
