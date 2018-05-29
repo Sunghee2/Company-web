@@ -7,14 +7,15 @@ block content
                 .sidebar-sticky
                 ul.nav.flex-column.mt-4
                     li.nav-item.py-1
-                    a.nav-link.active(href='/projects')
-                        |                 Search: Project
+                        a.nav-link.active(href='/projects')
+                            |                 Search: Project
                     li.nav-item
-                    a.nav-link.active(href='/pm')
-                        |                 PM page
-                    li.nav-item
-                    a.nav-link.active(href='/evaluations/client')
-                        |                 Client evalutions 
+                        a.nav-link.active(href='/pm')
+                            |                 PM page
+                    if (currentUser.dept_id == 801001)
+                        li.nav-item
+                            a.nav-link.active(href='/evaluations/client')
+                                |                 Client evalutions 
             main.col-md-9.ml-sm-auto.px-4(role='main')
                 h2 Participating Projects
                 table.table.mt-5

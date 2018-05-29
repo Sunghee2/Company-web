@@ -12,9 +12,10 @@ block content
             li.nav-item
               a.nav-link.active(href='/pm')
                 |                 PM page
-            li.nav-item
-              a.nav-link.active(href='/evaluations/client')
-                |                 Client evalutions        
+            if (currentUser.dept_id == 801001)
+              li.nav-item
+                a.nav-link.active(href='/evaluations/client')
+                  |                 Client evalutions        
       main.col-md-9.ml-sm-auto.px-4(role='main')
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
@@ -80,4 +81,4 @@ block content
                 td= participant.dept_name
                 td= participant.role
                 td= moment(participant.start_date).format('YYYY-MM-DD')
-                td= moment(participant.end_date).format('YYYY-MM-DD')
+                td= (participant.end_date)? moment(participant.end_date).format('YYYY-MM-DD') : '미정'
