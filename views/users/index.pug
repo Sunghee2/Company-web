@@ -63,6 +63,22 @@ block content
                 td= career.career
                 td= moment(career.period_start).format('YYYY-MM-DD')
                 td= moment(career.period_end).format('YYYY-MM-DD')
+        br
+        h5.mt-2.mb-2 CURRENT ASSIGNMENTS
+        table.table 
+          thead
+            tr
+              th(scope="col") PROJECT ID
+              th(scope="col") NAME
+              th(scope="col") START DATE
+              th(scope="col") ROLE
+          tbody
+            each cur_project in cur_projects
+                td
+                    a(href=`/projects/${cur_project.project_id}`)= cur_project.project_id
+                td= cur_project.project_name
+                td= moment(cur_project.start_date).format('YYYY-MM-DD')
+                td= cur_project.role
 
         br
         h5.mt-2.mb-2 COMPLETED ASSIGNMENTS
@@ -84,7 +100,8 @@ block content
           tbody
             each project in projects
               tr
-                td= project.project_name
+                td
+                    a(href=`/projects/${project.project_id}`)= project.project_name
                 td= project.client_performance_score
                 td= project.client_communication_score
                 td= project.peer_performance_score

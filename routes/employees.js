@@ -152,7 +152,7 @@ router.get('/:id', (req, res, next) => {
           req.flash('danger', err);
           return res.redirect('back');  
         } 
-        conn.query('select pjts.project_name, clnt.performance_score as client_performance_score, clnt.communication_score as client_communication_score, round(peer.performance_score,2) as peer_performance_score, round(peer.communication_score,2) as peer_communication_score, pjtm.performance_score as pm_performance_score, pjtm.communication_score as pm_communication_score from projects pjts natural join assignments asmt join client_evaluations clnt join (select evaluation_id, project_id, evaluator_number, be_evaluated_number, avg(performance_score) performance_score, avg(communication_score) communication_score from peer_evaluations group by be_evaluated_number) peer join (select	evaluation_id, project_id, pm_number, be_evaluated_number, avg(performance_score) performance_score, avg(communication_score) communication_score from pm_evaluations group by be_evaluated_number) pjtm where pjts.project_id = clnt.project_id and asmt.employee_number = peer.be_evaluated_number and asmt.employee_number = pjtm.be_evaluated_number and asmt.employee_number=?', [req.params.id], (err, rows4) => {
+        conn.query('select pjts.project_id, pjts.project_name, clnt.performance_score as client_performance_score, clnt.communication_score as client_communication_score, round(peer.performance_score,2) as peer_performance_score, round(peer.communication_score,2) as peer_communication_score, pjtm.performance_score as pm_performance_score, pjtm.communication_score as pm_communication_score from projects pjts natural join assignments asmt join client_evaluations clnt join (select evaluation_id, project_id, evaluator_number, be_evaluated_number, avg(performance_score) performance_score, avg(communication_score) communication_score from peer_evaluations group by be_evaluated_number) peer join (select	evaluation_id, project_id, pm_number, be_evaluated_number, avg(performance_score) performance_score, avg(communication_score) communication_score from pm_evaluations group by be_evaluated_number) pjtm where pjts.project_id = clnt.project_id and asmt.employee_number = peer.be_evaluated_number and asmt.employee_number = pjtm.be_evaluated_number and asmt.employee_number=?', [req.params.id], (err, rows4) => {
           if (err) {
             req.flash('danger', err);
             return res.redirect('back');  
@@ -160,11 +160,18 @@ router.get('/:id', (req, res, next) => {
           if(!rows4){
             rows4 = ['null', null, null, null, null, null, null, null];
           }
-          const employee = rows[0];
-          const skills = rows2;
-          const careers = rows3;
-          const projects = rows4;
-          res.render('employees/details', {employee: employee, skills: skills, careers: careers, projects:projects});
+          conn.query('SELECT t1.project_id, project_name, t2.start_date, role FROM projects t1, assignments t2 WHERE t1.project_id=t2.project_id AND (t1.end_date+7 >= CURRENT_DATE OR t2.end_date is NULL) AND t2.end_date is NULL AND employee_number=?',[req.params.id], (err, rows5) => {
+            if (err) {
+              req.flash('danger', err);
+              return res.redirect('back');
+            }
+            const employee = rows[0];
+            const skills = rows2;
+            const careers = rows3;
+            const projects = rows4;
+            const cur_projects = rows5;
+            res.render('employees/details', {employee: employee, skills: skills, careers: careers, projects:projects, cur_projects: cur_projects});
+          })
         })
       })
     })

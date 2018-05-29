@@ -6,9 +6,10 @@ block content
             nav.col-md-3.d-none.d-md-block.bg-light.sidebar
                 .sidebar-sticky
                 ul.nav.flex-column.mt-4
-                    li.nav-item.py-1
-                        a.nav-link.active(href='/projects')
-                            |                 Search: Project
+                    if (currentUser.manager || currentUser.dept_id == 801001)
+                        li.nav-item.py-1
+                            a.nav-link.active(href='/projects')
+                                |                 Search: Project
                     li.nav-item
                         a.nav-link.active(href='/pm')
                             |                 PM page
