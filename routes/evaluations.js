@@ -209,7 +209,7 @@ router.route('/client/:id')
         return res.redirect('back');
       }
       req.flash('success', '평가를 완료하였습니다.');
-      res.redirect('../../../pm/client_evaluations');
+      res.redirect('../client');
     })
   })
 

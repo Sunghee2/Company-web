@@ -9,7 +9,6 @@ var session = require('express-session');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
 var passport = require('passport');
-var adminRouter = require('./routes/admin');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var evaluationsRouter = require('./routes/evaluations');
@@ -18,7 +17,7 @@ var projectsRouter = require('./routes/projects');
 var pmRouter = require('./routes/pm');
 var departmentsRouter = require('./routes/departments');
 
-var passportConfig = require('./lib/passport-config');
+var passportConfig = require('./config/passport-config');
 
 var app = express();
 
@@ -67,7 +66,6 @@ app.use('/users', usersRouter);
 app.use('/evaluations', evaluationsRouter);
 app.use('/pm', pmRouter);
 app.use('/departments', departmentsRouter);
-app.use('/admin', adminRouter);
 require('./routes/auth')(app, passport);
 
 app.use(function(req, res, next) {
