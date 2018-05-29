@@ -122,7 +122,7 @@ router.route('/')
         req.flash('danger', err);
         return res.redirect('back');
       }
-      if (rows.length >= 0) {
+      if (rows.length <= 0) {
         conn.query('SELECT * FROM accounts WHERE id=?', [id], (err, rows3) => {
           if (err) {
             req.flash('danger', err);
