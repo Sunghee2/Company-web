@@ -40,6 +40,77 @@ https://github.com/mysqljs/mysql
 
 
 
+```
+company_web/
+	bin/
+	config/
+		dbconfig.js
+	lib/
+		async-error.js
+		passport-config.js
+	node_modules/
+	public/
+	routes/
+		admin.js
+		auth.js
+		departments.js
+		employees.js
+		evaluations.js
+		index.js
+		pm.js
+		projects.js
+		users.js
+	views/
+		admin/
+			emp_new.pug
+			project_new.pug
+		departments/
+			details.pug
+			edit.pug
+			index.pug
+		employees/
+			details.pug
+			index.pug
+		evaluations/
+			index.pug
+			forms/
+				client_evaluation_form.pug
+				peer_evaluation_form.pug
+				pm_evaluation_form.pug
+		includes/
+			cards.pug
+			footer.pug
+			main_image.pug
+			records.pug
+			topnav.pug
+		pm/
+			client_evaluation.pug
+			index.pug
+			pm_evaluation.pug
+			project_details.pug
+		projects/
+			details.pug
+			index.pug
+		skills/
+			index.pug
+		users/
+			changePwd.pug
+			edit.pug
+			index.pug
+			new.pug
+			nesSkills.pug
+			skills.pug
+	error.pug
+	index.pug
+	layout.pug
+	signin.pug
+app.js
+package-lock.json
+package.json
+README.md
+
+```
+
 ### 권민찬
 
 
@@ -63,7 +134,7 @@ https://github.com/mysqljs/mysql
 - **18-05-21**
   - 추가: views/pm/*, views/peer/* --> evaluate link page, set role page, add/delete member page, etc.
   - 수정: PM and peer evaluate link page(18-05-22)
-  
+
 < 공통 >
   1. 메인페이지 - ing
   2. signin - clear
@@ -93,7 +164,7 @@ https://github.com/mysqljs/mysql
   5. 직원 평가 리스트(정렬 가능한) - ing... 얘는 해야해
   6. 경영진 PM 설정 페이지
   7. 평가 점수 조회 페이지
-  
+
 - **18-05-22**
   - 수정: routers/users.js
   - signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 register
@@ -173,5 +244,3 @@ ALTER TABLE `client_evaluations` CHANGE `communication_score` `client_communicat
 ### 정지우
 
 
-
-(select peer_evaluations.be_evaluated_number, avg(peer_evaluations.performance_score) peer1,avg(peer_evaluations.communication_score) peer2, pm1, pm2 from peer_evaluations LEFT JOIN (SELECT p.be_evaluated_number, avg(performance_score) pm1, avg(communication_score) pm2 FROM pm_evaluations p group by p.be_evaluated_number) e ON peer_evaluations.be_evaluated_number=e.be_evaluated_number group by peer_evaluations.be_evaluated_number) UNION (select pm_evaluations.be_evaluated_number, peer1, peer2, avg(pm_evaluations.performance_score) pm1, avg(pm_evaluations.communication_score) pm2 from (SELECT r.be_evaluated_number, avg(r.performance_score) peer1, avg(r.communication_score) peer2 FROM peer_evaluations r group by r.be_evaluated_number) t2 RIGHT JOIN pm_evaluations ON t2.be_evaluated_number=pm_evaluations.be_evaluated_number group by pm_evaluations.be_evaluated_number);
