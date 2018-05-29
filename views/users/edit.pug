@@ -9,8 +9,8 @@ block content
       .col-md-12
       .row
         .col-md-6.mb-3.mt-3
-            label(for='Name') Name
-            input#Name.form-control(type='text', placeholder='', name='name', value=user.name, readonly='')
+          label(for='Name') Name
+          input#Name.form-control(type='text', placeholder='', name='name', value=user.name, readonly='')
         .col-md-6.mb-3.mt-3
           label(for='rrn') RRN
           input#rrn.form-control(type='text', placeholder='Need to reconfirm... fixing', name='rrn', value=user.RRN, readonly='')
@@ -25,16 +25,10 @@ block content
                   option(value=department.dept_id selected='')= department.dept_name
                 else
                   option(value=department.dept_id)= department.dept_name
-      .mb-3
-        label.form-check-label.pl-0(for='gender') Gender
-          p
-          if(user.gender=='M')
-            input#man(name='gender', value='M', type='radio' checked)
-            |  Man &emsp;&ensp;
-          if(user.gender=='W')         
-            input#woman(name='gender', value='W', type='radio' checked)
-            |  Woman
-          h6  
+      .row
+        .col-md-6.mb-3.mt-3
+          label.form-check-label.pl-0(for='gender') Gender
+            input#Name.form-control(type='text', placeholder='', name='gender', value=user.gender, readonly='')
       .mb-3
         label(for='rrn') Final Education
         input#final-education.form-control(type='text', name='final_education',placeholder=' Graduated from Myongji University, Data Technology Track', value=user.final_education, readonly='')
