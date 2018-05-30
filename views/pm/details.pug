@@ -3,46 +3,76 @@ extends ../layout
 block content
     .container
         .row.sidebar
-            nav.col-md-3.d-none.d-md-block.bg-light.sidebar
-                .sidebar-sticky
-                ul.nav.flex-column.mt-4
-                    if (currentUser.manager || currentUser.dept_id == 801001)
-                        li.nav-item.py-1
-                            a.nav-link.active(href='/projects')
-                                |                 Search: Project
-                    li.nav-item
-                        a.nav-link.active(href='/pm')
-                            |                 PM page
-                    if (currentUser.dept_id == 801001)
+            
+                nav.col-md-3.d-none.d-md-block.bg-light.sidebar
+                    .sidebar-sticky
+                    ul.nav.flex-column.mt-4
+                        if (currentUser.manager || currentUser.dept_id == 801001)
+                            li.nav-item.py-1
+                                a.nav-link.active(href='/projects')
+                                    |                 Search: Project
                         li.nav-item
-                            a.nav-link.active(href='/evaluations/client')
-                                |                 Client evalutions  
-            main.col-md-9.ml-sm-auto.px-4(role='main')
-                h2.mt-3 Project Members
-                table.table.mt-5
-                    thead
-                        tr
-                        th ID
-                        th Name
-                        th Department
-                        th Current Role
-                        th Evaluation
-                        th.text-center Deletion
-                    tbody
-                        each participant in participants
+                            a.nav-link.active(href='/pm')
+                                |                 PM page
+                        if (currentUser.dept_id == 801001)
+                            li.nav-item
+                                a.nav-link.active(href='/evaluations/client')
+                                    |                 Client evalutions  
+                main.col-md-9.ml-sm-auto.px-4(role='main')
+                    h2.mt-3 Project Members
+                    table.table.mt-5
+                        thead
                             tr
-                                td= participant.employee_number
-                                td= participant.name
-                                td= participant.dept_name
-                                td= participant.role
-                                td
-                                    if (participant.evaluation_id)
-                                        p 완료
-                                    else if (participant.employee_number != currentUser.employee_number)
-                                        a(href=`/evaluations/pm/${participant.project_id}/${participant.employee_number}`) 평가하기
-                                td.text-center.pt-2
-                                    if (participant.employee_number != currentUser.employee_number)
-                                        if (!participant.end_date)
-                                            a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=put` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
-                                        else
-                                            p 종료
+                            th ID
+                            th Name
+                            th Department
+                            th Current Role
+                            th Evaluation
+                            th.text-center Deletion
+                        tbody
+                            each participant in participants
+                                tr
+                                    td= participant.employee_number
+                                    td= participant.name
+                                    td= participant.dept_name
+                                    td= participant.role
+                                    td
+                                        if (participant.evaluation_id)
+                                            p 완료
+                                        else if (participant.employee_number != currentUser.employee_number)
+                                            a(href=`/evaluations/pm/${participant.project_id}/${participant.employee_number}`) 평가하기
+                                    td.text-center.pt-2
+                                        if (participant.employee_number != currentUser.employee_number)
+                                            if (!participant.end_date)
+                                                a.btn.btn-danger.btn-sm(href=`/pm/${participant.project_id}/${participant.employee_number}?_method=put` onclick='return confirm("Do you want to delete this employee in this project?");') Delete
+                                            else
+                                                p 종료
+                    br
+                    form.needs-validation(action='/', method='POST')
+                        h2.mt-5 Adding Members
+                        .col-sm-12
+                            form(action=`/pm/${participants[0].project_id}/${participants[0].employee_number}`, method='POST')
+                                .row
+                                    .col-sm-3.mt-3
+                                        label(for='employee_number') Employee Number
+                                        .input-group
+                                            input.form-control(type='text', name='employee_number')
+                                    .col-sm-3.mt-3
+                                        label(for='employee_name') Employee Name
+                                        .input-group
+                                            input.form-control(type='text', name='employee_name')        
+                                    .col-sm-4.mt-3
+                                        label(for='role')
+                                            | Role
+                                            .mt-2
+                                            select.custom-select(name='role')
+                                                option(data-hidden='true') Select Roles
+                                                option(value="Cheif Product Manager") Cheif Product Manager
+                                                option(value="Product Manager") Product Manager
+                                                option(value="Enterprise Architect") Enterprise Architect
+                                                option(value='801002') Architect
+                                                option(value='801003') Scrum Master
+                                                option(value='801001') Developer
+                                                option(value='801001') QA
+                                    .col-sm-2.mt-4
+                                        button.btn.btn-primary.btn-block(type='submit') Adding
