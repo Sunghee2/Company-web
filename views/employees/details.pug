@@ -60,8 +60,8 @@ block content
         .row
           .col-sm-12
             .col-sm-6.float-left
-                h5.mt-2.mb-2 SKILL
-            if (currentUser.manager)
+              h5.mt-2.mb-2 SKILL
+            if (currentUser.dept_id == 801001)
               .col-sm-6.float-right
                 a.btn.btn-outline-secondary.mt-3.md-5.float-right(role='button' href=`/employees/${employee.employee_number}/skill`) New Skill
         table.table.mt-2 
