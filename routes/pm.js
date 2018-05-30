@@ -6,7 +6,7 @@ conn.connect()
 
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    conn.query('SELECT * FROM assignments WHERE employee_number=? AND role="PM" AND (end_date+7 >= CURRENT_DATE OR end_date is NULL)', [req.user.employee_number], (err, rows) => {
+    conn.query('SELECT * FROM assignments WHERE employee_number=? AND role="PM" AND (DATE(DATE_ADD(end_date, INTERVAL 7 DAY)) >= CURRENT_DATE OR end_date is NULL)', [req.user.employee_number], (err, rows) => {
       if (!rows.length) {
         req.flash('danger', '접근 권한이 없습니다.');
         return res.redirect('back');
@@ -39,7 +39,7 @@ function validateForm(form) {
 router.get('/', needAuth, (req, res, next) => {
   const project_id = req.query.project_id;
 
-  conn.query('SELECT * from (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id FROM orders NATURAL JOIN clients) t2 WHERE end_date+7 >= CURRENT_DATE OR end_date is NULL', [req.user.employee_number],(err, rows) => {
+  conn.query('SELECT * from (SELECT * FROM projects WHERE pm_number=?) t1 NATURAL JOIN (SELECT client_name, order_id FROM orders NATURAL JOIN clients) t2 WHERE DATE(DATE_ADD(end_date, INTERVAL 7 DAY)) >= CURRENT_DATE OR end_date is NULL', [req.user.employee_number],(err, rows) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');  

@@ -25,14 +25,12 @@ function validateForm(form) {
   rrn = rrn.trim();
 
   var name = form.name || "";
-  var employee_number = form.employee_number || "";
   var gender = form.gender || "";
-  var department = form.department || "";
+  var department = form.dept_id || "";
   var final_education = form.final_education || "";
   var phone_number = form.phone_number || "";
   
   name = name.trim();
-  employee_number = employee_number.trim();
   gender = gender.trim();
   department = department.trim();
   final_education = final_education.trim();
@@ -40,9 +38,6 @@ function validateForm(form) {
   
   if (!name) {
     return 'Name is required.';
-  }
-  if (!employee_number) {
-    return 'Employee number is required.';
   }
   if (!department) {
     return 'Department is required.';
@@ -119,7 +114,6 @@ router.post('/new', needAuth, (req, res, next) => {
   }
 
   var name = req.body.name;
-  var employee_number = req.body.employee_number;
   var rrn = req.body.rrn;
   var department = req.body.dept_id;
   var gender = req.body.gender;
@@ -127,8 +121,8 @@ router.post('/new', needAuth, (req, res, next) => {
   var email = req.body.email || "";
   var phone_number = req.body.phone_number;
   
- conn.query('INSERT INTO employees(name,employee_number, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?,?)',
- [name,employee_number, rrn, department, gender, final_education, email, phone_number], function(err, rows) {
+ conn.query('INSERT INTO employees(name, rrn, dept_id, gender, final_education, email, phone_number) VALUES(?,?,?,?,?,?,?)',
+ [name, rrn, department, gender, final_education, email, phone_number], function(err, rows) {
     if (err)  throw(err);
 
     req.flash('success', 'Updated successfully.');
@@ -160,7 +154,7 @@ router.get('/:id', (req, res, next) => {
           if(!rows4){
             rows4 = ['null', null, null, null, null, null, null, null];
           }
-          conn.query('SELECT t1.project_id, project_name, t2.start_date, role FROM projects t1, assignments t2 WHERE t1.project_id=t2.project_id AND (t1.end_date+7 >= CURRENT_DATE OR t2.end_date is NULL) AND t2.end_date is NULL AND employee_number=?',[req.params.id], (err, rows5) => {
+          conn.query('SELECT t1.project_id, project_name, t2.start_date, role FROM projects t1, assignments t2 WHERE t1.project_id=t2.project_id AND (DATE(DATE_ADD(t1.end_date, INTERVAL 7 DAY)) >= CURRENT_DATE OR t2.end_date is NULL) AND t2.end_date is NULL AND employee_number=?',[req.params.id], (err, rows5) => {
             if (err) {
               req.flash('danger', err);
               return res.redirect('back');
