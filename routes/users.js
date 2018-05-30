@@ -228,7 +228,7 @@ router.get('/:id', needAuth, (req, res, next)=> {
           if(!rows4){
             rows4 = ['null', null, null, null, null, null, null, null];
           }
-          conn.query('SELECT t1.project_id, project_name, t2.start_date, role FROM projects t1, assignments t2 WHERE t1.project_id=t2.project_id AND (DATE(DATE_ADD(end_date, INTERVAL 7 DAY)) >= CURRENT_DATE OR t2.end_date is NULL) AND t2.end_date is NULL AND employee_number=?',[req.params.id], (err, rows5) => {
+          conn.query('SELECT t1.project_id, project_name, t2.start_date, role FROM projects t1, assignments t2 WHERE t1.project_id=t2.project_id AND (DATE(DATE_ADD(t1.end_date, INTERVAL 7 DAY)) >= CURRENT_DATE OR t2.end_date is NULL) AND t2.end_date is NULL AND employee_number=?',[req.params.id], (err, rows5) => {
             if (err) {
               req.flash('danger', err);
               return res.redirect('back');
