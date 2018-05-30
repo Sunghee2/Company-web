@@ -177,28 +177,19 @@ router.get('/:id/newEmpSkills', (req, res, next) => {
 });
 
 router.post('/:id/newEmpSkills', needAuth, (req, res, next) => {
-  var err = validateForm(req.body);
-  if (err) {
-    req.flash('danger', err);
-    return res.redirect('back');
-  }
-
-  console.log(req.body.skill);
-
-  var id = req.body.id;
+  var id = req.params.id;
   var skill = req.body.skill;
   var rank = req.body.rank;
   var skill_info = [
     skill, id, rank
   ];
-
-  conn.query('INSERT INTO emp_skills(skill_id, employee_number, rank) values (?,?,?)', skill_info, function(err, rows2) {
+  conn.query('INSERT INTO emp_skill(skill_id, employee_number, rank) values (?,?,?)', skill_info, (err, rows2) => {
     if (err) {
       req.flash('danger', err);
       return res.redirect('back');
     }
-    req.flash('success', 'success');
-    res.redirect('/:id/details');
+    req.flash('success', 'Updated successfully.');
+    res.redirect('/employees');
   })
 });
 

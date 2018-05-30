@@ -6,7 +6,7 @@ block content
         h2 New Skill
         hr.mt-5.featurette-divider
         .col-md-12
-        form.needs-validation(action='/employees/newEmpSkills', method='POST')
+        form.needs-validation(action=`/employees/${currentUser.employee_number}/newEmpSkills`, method='POST')
             p  
             .mb-3
             label(for='skill') Select Skill
@@ -28,8 +28,8 @@ block content
                     option(value='C') C
                     option(value='D') D
                     option(value='E') E
-        br
-        hr.mt-3
-        .row
-          .col-sm-12.text-right
-            button.btn.btn-primary(type='submit') Update
+            br
+            hr.mt-3
+            .row
+            .col-sm-12.text-right
+                button.btn.btn-primary(type='submit') Update
