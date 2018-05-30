@@ -275,7 +275,7 @@ router.put('/:id', needAuth, (req, res, next) => {
 
 router.route('/:id/changePwd')
   .get(needAuth, (req, res, next) => {
-    res.render('users/changePwd');
+    res.render('users/change_pwd');
   })
   .put(needAuth, (req, res, next) => {
     var err = validateFormForChangePwd(req.body);
