@@ -172,11 +172,11 @@ router.get('/:id', (req, res, next) => {
   })
 });
 
-router.get('/:id/newEmpSkills', (req, res, next) => {
-  res.render('employees/newEmpSkills');
+router.get('/:id/skill', (req, res, next) => {
+  res.render('employees/new_skill');
 });
 
-router.post('/:id/newEmpSkills', needAuth, (req, res, next) => {
+router.post('/:id/skill', needAuth, (req, res, next) => {
   var id = req.params.id;
   var skill = req.body.skill;
   var rank = req.body.rank;
@@ -189,7 +189,7 @@ router.post('/:id/newEmpSkills', needAuth, (req, res, next) => {
       return res.redirect('back');
     }
     req.flash('success', 'Updated successfully.');
-    res.redirect('/employees');
+    res.redirect(`/employees/${id}`);
   })
 });
 
