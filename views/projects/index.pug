@@ -33,10 +33,19 @@ block content
               .input-group
                 input#userdate(type='date', class="btn btn-outline-secondary", name='end_date', value=end_date)
             span.col-sm-2
-              label.mr-3.mb-3 View Result
+              label.mt-4.mr-3.mb-3 View Result
               .input-group
                 button.btn.btn-primary.btn-block(type='submit') Search
           .mb-3
+          form.form-inline.col-sm-12.mb-3(action='/projects', method='GET')
+            span.col-sm-5
+              label.mr-3.mb-3 Name
+              .input-group
+                input#userdate.form-control(type='text', name='name', value=name)
+            span.col-sm-2
+              label.mt-4.mr-3.mb-3 View Result
+              .input-group
+                button.btn.btn-primary.btn-block(type='submit') Search
         h3.mb-3.mt-5 Result
         if projects.length > 0
           p
