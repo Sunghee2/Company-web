@@ -62,7 +62,23 @@ block content
               td= project.order_id
             tr
               td Order details
-              td= project.order_details      
+              td= project.order_details  
+
+        h2.mt-5 Client evaluation
+        if(evaluation)
+          table.table.mt-3
+            thead
+              tr
+                th Performance Score
+                th Communication Score
+                th Total Score
+            tbody
+              tr
+                td= parseFloat(evaluation.performance_score).toFixed(2)
+                td= parseFloat(evaluation.communication_score).toFixed(2)
+                td= ((parseFloat(evaluation.performance_score) + parseFloat(evaluation.communication_score))/2).toFixed(2)
+        else
+          p 평가가 존재하지 않습니다.
 
         h2.mt-5 Project Members
         table.table.mt-3

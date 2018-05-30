@@ -42,7 +42,7 @@ block content
           p
           .small Current #{projects.length} project(s)
           p
-          table.table
+          table#pjtTable.table
             thead
               tr
                 th(scope='col') Project ID
@@ -61,5 +61,11 @@ block content
                     td= project.name
           
         else 
-          p 해당하는 프로젝트가 존재하지 않습니다.
+          p 프로젝트가 존재하지 않습니다.
+
+
+      script.
+        $(document).ready(function() {
+            $('#pjtTable').dataTable();
+        });
           

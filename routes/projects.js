@@ -73,10 +73,16 @@ router.get('/:id', (req, res, next) => {
               req.flash('danger', err);
               return res.redirect('back');
             }
-        
-            const project = rows[0];
-            const participants = rows2;
-            res.render('projects/details', {project: project, participants: participants});
+            conn.query('select performance_score, communication_score from client_evaluations where project_id=?', [req.params.id], (err,rows3) => {
+              if (err) {
+                req.flash('danger', err);
+                return res.redirect('back');
+              }              
+              const project = rows[0];
+              const participants = rows2;
+              const evaluation = rows3[0];
+              res.render('projects/details', {project: project, participants: participants, evaluation: evaluation});
+            })
           })
     });   
 })
