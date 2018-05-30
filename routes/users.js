@@ -320,22 +320,5 @@ router.route('/:id/changePwd')
       }
     })
   });
-
-router.get('/:id/skills', (req, res, next) => {
-  conn.query('select * from  employees NATURAL JOIN departments WHERE employee_number=? ' , [req.params.id] ,function(err, rows) {
-    if (err) {
-      req.flash('danger', err);
-      return res.redirect('back');  
-    }  
-    conn.query('select skill_name, rank from emp_skill NATURAL JOIN skill_sets where employee_number=?', [req.params.id], (err, rows2)=> {
-      if (err) {
-        req.flash('danger', err);
-        return res.redirect('back');  
-      } 
-      const skills = rows2;
-      res.render('users/skills', {skills: skills});
-    })
-  })
-});
      
 module.exports = router;

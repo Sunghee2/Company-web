@@ -48,31 +48,30 @@ block content
                                             else
                                                 p 종료
                     br
-                    form.needs-validation(action='/', method='POST')
+                    form.needs-validation(action=`/pm/${participants[0].project_id}`, method='POST')
                         h2.mt-5 Adding Members
                         .col-sm-12
-                            form(action=`/pm/${participants[0].project_id}/${participants[0].employee_number}`, method='POST')
-                                .row
-                                    .col-sm-3.mt-3
-                                        label(for='employee_number') Employee Number
-                                        .input-group
-                                            input.form-control(type='text', name='employee_number')
-                                    .col-sm-3.mt-3
-                                        label(for='employee_name') Employee Name
-                                        .input-group
-                                            input.form-control(type='text', name='employee_name')        
-                                    .col-sm-4.mt-3
-                                        label(for='role')
-                                            | Role
-                                            .mt-2
-                                            select.custom-select(name='role')
-                                                option(data-hidden='true') Select Roles
-                                                option(value="Cheif Product Manager") Cheif Product Manager
-                                                option(value="Product Manager") Product Manager
-                                                option(value="Enterprise Architect") Enterprise Architect
-                                                option(value='801002') Architect
-                                                option(value='801003') Scrum Master
-                                                option(value='801001') Developer
-                                                option(value='801001') QA
-                                    .col-sm-2.mt-4
-                                        button.btn.btn-primary.btn-block(type='submit') Adding
+                            .row
+                                .col-sm-3.mt-3
+                                    label(for='employee_number') Employee Number
+                                    .input-group
+                                        input.form-control(type='text', name='employee_number')
+                                .col-sm-3.mt-3
+                                    label(for='employee_name') Employee Name
+                                    .input-group
+                                        input.form-control(type='text', name='employee_name')        
+                                .col-sm-4.mt-3
+                                    label(for='role')
+                                        | Role
+                                        .mt-2
+                                        select.custom-select(name='role')
+                                            option(data-hidden='true') Select Roles
+                                            option(value="Cheif Product Manager") Cheif Product Manager
+                                            option(value="Product Manager") Product Manager
+                                            option(value="Enterprise Architect") Enterprise Architect
+                                            option(value='Architect') Architect
+                                            option(value='Scrum Master') Scrum Master
+                                            option(value='Developer') Developer
+                                            option(value='QA') QA
+                                .col-sm-2.mt-4
+                                    button.btn.btn-primary.btn-block(type='submit') Adding

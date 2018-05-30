@@ -73,7 +73,7 @@ router.get('/:id', needAuth, (req, res, next) => {
   })
 });
 
-router.route('/:project_id/:emp_id')
+router.route('/:project_id')
   .post(needAuth, (req, res, next) => {
     console.log("please");
     var err = validateForm(req.body);
@@ -93,7 +93,7 @@ router.route('/:project_id/:emp_id')
       }
 
       req.flash('success', '성공적으로 추가하였습니다.');
-      res.redirect(`../../pm/${project_id}`);
+      res.redirect(`/pm/${project_id}`);
     });
   })
   .put(needAuth, (req, res, next) => {
@@ -105,7 +105,7 @@ router.route('/:project_id/:emp_id')
         res.redirect('back');
       }
       req.flash('success', '성공적으로 삭제하였습니다.');
-      res.redirect(`../../pm/${project_id}`);
+      res.redirect(`/pm/${project_id}`);
     })
   })
 
