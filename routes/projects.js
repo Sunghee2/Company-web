@@ -4,7 +4,22 @@ const mysql = require('mysql');
 const conn = mysql.createConnection(require('../config/dbconfig.js'));
 conn.connect()
 
-router.get('/', (req, res, next) => {
+function needAuth(req, res, next) {
+    if (req.isAuthenticated()) {
+      const user = req.user;
+      if (user.manager || user.dept_id == 801001) {
+        next();
+      } else {
+        req.flash('danger', '접근 권한이 없습니다');
+        res.redirect('/');
+      }
+    } else {
+      req.flash('danger', 'Please signin first.');
+      res.redirect('/');
+    }
+  }
+
+router.get('/', needAuth, (req, res, next) => {
     const start_date = req.query.start_date;
     const end_date = req.query.end_date;
 

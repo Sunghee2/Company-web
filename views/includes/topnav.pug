@@ -18,6 +18,9 @@
                 a.nav-link(href="/employees/") Employee Management
               li.nav-item
                 a.nav-link(href="/projects/") Project Management
+            else 
+              li.nav-item
+                a.nav-link(href="/pm") PM page
             li.nav-item.dropdown
               a.nav-link.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= currentUser.ID
               .dropdown-menu(aria-labelledby='navbarDropdown')
