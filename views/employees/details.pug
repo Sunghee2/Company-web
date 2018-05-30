@@ -19,7 +19,6 @@ block content
               li.nav-item
                 a.nav-link.active(href='/employees/new')
                   |                 Add employee    
-            
       main.col-md-9.ml-sm-auto.px-4(role='main')
         .chartjs-size-monitor(style='position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: visible;visibility: visible; z-index: -1;')
           .chartjs-size-monitor-expand(style='position:absolute;left:0;top:0;right:0;bottom:0;overflow:visible;visibility:visible;')
@@ -58,8 +57,13 @@ block content
               td= employee.phone_number
 
         br
-        h5.mt-2.mb-2 SKILL
-        table.table 
+        .row
+          .col-sm-12
+            .col-sm-6.float-left
+                h5.mt-2.mb-2 SKILL
+            .col-sm-6.float-right
+                a.btn.btn-outline-secondary.mt-3.md-5.float-right(role='button' href=`/employees/${currentUser.employee_number}/newEmpSkills`) New Skill
+        table.table.mt-2 
           thead
             tr
               th(scope="col") NAME
@@ -68,7 +72,7 @@ block content
             each skill in skills
               tr
                 td= skill.skill_name
-                td= skill.skill_rank     
+                td= skill.rank     
             
         br
         h5.mt-2.mb-2 CAREER
