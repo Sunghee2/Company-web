@@ -64,10 +64,10 @@ block content
                   a(href=`/employees/${evaluation.employee_number}`)= evaluation.employee_number
                 td= (evaluation.peer1)? parseFloat(evaluation.peer1).toFixed(2) : ""
                 td= (evaluation.peer2)? parseFloat(evaluation.peer2).toFixed(2) : ""
-                td= (evaluation.peer1)? (parseFloat(evaluation.peer1) + parseFloat(evaluation.peer2)/2).toFixed(2) : ""
+                td= (evaluation.peer1)? ((parseFloat(evaluation.peer1) + parseFloat(evaluation.peer2))/2).toFixed(2) : ""
                 td= (evaluation.pm1)? parseFloat(evaluation.pm1).toFixed(2) : ""
                 td= (evaluation.pm2)? parseFloat(evaluation.pm2).toFixed(2) : ""
-                td= (evaluation.pm1)? ((parseFloat(evaluation.pm1) + parseFloat(evaluation.pm2)/2)).toFixed(2) : ""
+                td= (evaluation.pm1)? ((parseFloat(evaluation.pm1) + parseFloat(evaluation.pm2))/2).toFixed(2) : ""
                 td= (evaluation.client1)? parseFloat(evaluation.client1).toFixed(2) : ""
                 td= (evaluation.client2)? parseFloat(evaluation.client2).toFixed(2) : ""
                 td= (evaluation.client1)? ((parseFloat(evaluation.client1) + parseFloat(evaluation.client2))/2).toFixed(2) : ""
