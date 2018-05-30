@@ -79,30 +79,39 @@ router.route('/:project_id')
     var err = validateForm(req.body);
     if (err) {
       req.flash('danger', err);
-      res.redirect('back');
+      return res.redirect('back');
     }
     const project_id = req.params.project_id;
     const employee_number = req.body.employee_number;
     const name = req.body.employee_name;
     const role = req.body.role;
 
-    conn.query('INSERT INTO assignments(project_id, employee_number, start_date, role) VALUES (?,?, curdate(),?)', [project_id, employee_number, role], (err, rows) => {
+    conn.query('select * from employees where employee_number= ? and name= ?', [employee_number, name], function(err, rows){
       if (err) {
         req.flash('danger', err);
-        res.redirect('back');
+        return res.redirect('back');
       }
-
-      req.flash('success', '성공적으로 추가하였습니다.');
-      res.redirect(`/pm/${project_id}`);
-    });
-  })
+      if(!rows){
+        req.flash('danger', err);
+        return res.redirect('back');
+      }
+      conn.query('INSERT INTO assignments(project_id, employee_number, start_date, role) VALUES (?,?, curdate(),?)', [project_id, employee_number, role], (err, rows2) => {
+        if (err) {
+          req.flash('danger', err);
+          return res.redirect('back');
+        }
+        req.flash('success', '성공적으로 추가하였습니다.');
+        res.redirect(`/pm/${project_id}`);
+      })
+    }
+  )})
   .put(needAuth, (req, res, next) => {
     const project_id = req.params.project_id;
     const employee_number = req.params.emp_id;
     conn.query('update assignments set end_date = current_date() where project_id=? AND employee_number=?', [project_id, employee_number], (err, rows) => {
       if (err) {
         req.flash('danger', err);
-        res.redirect('back');
+        return res.redirect('back');
       }
       req.flash('success', '성공적으로 삭제하였습니다.');
       res.redirect(`/pm/${project_id}`);
