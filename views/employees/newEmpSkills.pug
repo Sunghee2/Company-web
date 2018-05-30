@@ -9,8 +9,7 @@ block content
         form.needs-validation(action='/employees/newEmpSkills', method='POST')
             p  
             .mb-3
-            label(for='skill')
-                | Select Skill
+            label(for='skill') Select Skill
                 .col-md-6.mb-3
                 select#skillSelect.custom-select(name='skill')
                     option(data-hidden='true') Select Skill
@@ -20,8 +19,7 @@ block content
                     option(value=4) C+
                     option(value=5) sql
             .mb-3
-            label(for='skill')
-                | Select Skill
+            label(for='rank') Select Rank
                 .col-md-6.mb-3
                 select#skillSelect.custom-select(name='rank')
                     option(data-hidden='true') Select Rank
