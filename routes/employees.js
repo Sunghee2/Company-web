@@ -173,7 +173,8 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.get('/:id/skill', (req, res, next) => {
-  res.render('employees/new_skill');
+  const employee_number = req.params.id;
+  res.render('employees/new_skill', {employee_number: employee_number});
 });
 
 router.post('/:id/skill', needAuth, (req, res, next) => {
