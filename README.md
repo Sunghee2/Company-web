@@ -1,44 +1,55 @@
-# 데이터베이스프로그래밍
+# company-web
 
-##### Requirement
+## Table of Contents
 
-- 개발 언어 및 환경은 반드시 다음에 명시된 툴이나 환경을 사용하여야 함 (사용하지 않을 경우 감점)
-- 데이터베이스 설계 도구: ERWin 사용 권장
-- DBMS: 반드시 관계형 DBMS 사용 (오라클,  MariaDB, MySQL, PostgreSQL 등 사용 권장)
-- 개발 프래임워크: 반드시 Git, Gibhub 사용, Java인 경우 Hibernate, JPA(Java Persistence API), Spring, MyBatis 등 사용 권장
-- 프로그래밍 언어 등: JSP, JavaScript, jQuery 사용, Bootstrap 사용 권장 (Responsive Web 구현), Ruby, Node.js, React, PHP, Python 등 기타 프로그래밍 언어나 환경을 사용해도 무방함.
-- UI는 주요 요구사항 중심으로 전체 프로젝트 중 일부분만을 구현하는 것을 권장함 (주의사항: 전체 시스템의 front-end를 다 상세하게 구현한다고 해서 점수를 더 받거나 하지 않는다는 점에 유의해서 시간과 리소스 분배를 잘할 것!)
-- 생략된 UI가 있을 경우, 별도의 방법으로 Data를 import하여 최종 발표 시 주요 요구사항의 데모가 가능하도록 해야 함. 
-
-​     
-
-##### Schedule
-
-| 순번 | 일자     | 내역                                          | 산출물                                                       |
-| ---- | -------- | --------------------------------------------- | ------------------------------------------------------------ |
-| 1    | 4/19(목) | 요구사항 분석 결과 및 프로젝트 진행 계획 발표 | 요구사항 정의서Entity-Relationship Diagram                   |
-| 2    | 5/3(목)  | 데이터베이스 설계 결과 발표                   | 데이터베이스 정의서                                          |
-| 3    | 5/17(목) | 프로젝트 중간점검 발표                        | CRUD Matrix표준용어/도메인/코드 정의서데이터베이스 생성 및 적재 스크립트 |
-| 4    | 5/31(목) | 최종보고서 제출 및 프로젝트 시연              | 개발 언어/환경에 따른 전체 시스템 아키텍쳐 및 주요 개발 내용주요 화면 캡쳐 및 설명을 포함하는 최종보고서 |
+1. [개발 환경](#개발-환경)
+2. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Running this project](#running-this-project)
+3. [Screenshots](#screenshots)
+4. [Todo](#todo)
 
 
 
-##### settings
+## 개발 환경
 
-mysql 설정은 config/dbconfig.js에 있음. 최대한 아래에 맞춰서 설정하기.
+- pug + css + bootstrap4 + jQuery
+
+- node.js + express.js + MySQL
+
+  
+
+## Getting Started
+
+#### Prerequisites
+
+config/dbconfig.js
 
 ```javascript
 module.exports = {
   host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'company'
+  user: '<your-username>',
+  password: '<your-mysql-password>',
+  database: '<your-datase-name>'
 }
 ```
 
-https://github.com/mysqljs/mysql
+#### Running this project
+
+```
+$ npm install
+$ npm start
+```
 
 
+
+## Screenshots
+
+![screenshot](./screenshots/sample.gif)
+
+
+
+## Todo
 
 ### 권민찬
 
@@ -56,62 +67,21 @@ https://github.com/mysqljs/mysql
   - 수정 완료: signin.pug, users/new.pug
   - 수정중: users/edit.pug, users/show.pug
   - 예정: employee_list, employee_detail page, admin_emp_insert_page, admin_project_insert_page
-  
+
 - **18-05-19**
   - 추가: searches/details/*
-  
+
 - **18-05-21**
   - 추가: views/pm/*, views/peer/* --> evaluate link page, set role page, add/delete member page, etc.
-  - 수정: PM and peer evaluate link page(18-05-22)
+    - 수정: PM and peer evaluate link page(18-05-22)
 
-< 공통 >
-  1. 메인페이지 - ing
-  2. signin - clear
-  3. signup - clear
-  4. 자기 정보 조회 - ing
-  5. 자기 정보 수정 - done by SH
-
-< 일반사용자 >
-
-< 개발자 >
-  1. 참여 프로젝트 정보 조회 - clear
-  2. 동료 평가 페이지 - clear
-  3. 동료 평가 양식 - clear
-
-< PM >
-  1. 참여 프로젝트 정보 조회 - clear
-  2. PM 평가 페이지 - clear
-  3. Client 평가 페이지 - ???? 어디있지...
-  4. 역할 분담 페이지 - clear
-  5. 프로젝트 인원 추가/삭제 - clear
-
-< 경영진 >
-  1. 사내 직원 정보 조회 - clear
-  2. 사내 프로젝트 내역 조회 - clear
-  3. 직원 정보 상세페이지 - clear
-  4. 프로젝트 정보 상세페이지 - clear
-  5. 직원 평가 리스트(정렬 가능한) - ing... 얘는 해야해
-  6. 경영진 PM 설정 페이지
-  7. 평가 점수 조회 페이지
+  
 
 - **18-05-22**
-  - 수정: routers/users.js
-  - signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 register
+    - 수정: routers/users.js
+    - signup form 수정해야할거 -> profile 입력칸 삭제, account input rrn 추가, num&rrn 비교후 register
 
-
-
-ALTER TABLE `peer_evaluations` CHANGE `performance_score` `peer_performance_score` FLOAT NOT NULL;
-ALTER TABLE `peer_evaluations` CHANGE `communication_score` `peer_communication_score` FLOAT NOT NULL;
-
-ALTER TABLE `pm_evaluations` CHANGE `performance_score` `pm_performance_score` FLOAT NULL;
-ALTER TABLE `pm_evaluations` CHANGE `communication_score` `pm_communication_score` FLOAT NULL;
-
-ALTER TABLE `client_evaluations` CHANGE `performance_score` `client_performance_score` FLOAT NOT NULL;
-ALTER TABLE `client_evaluations` CHANGE `communication_score` `client_communication_score` FLOAT NOT NULL;
-
-컬럼명 바꿔주세요 
-
-###### 백엔드 합류(연기) -> 배진영
+###### 
 
 
 ### 이성희
@@ -144,12 +114,6 @@ ALTER TABLE `client_evaluations` CHANGE `communication_score` `client_communicat
   - 추가 : routes/evaluations.js
   - 수정 : app.js(router 추가), users/new.pug(value수정, placeholder로 변경), evaluations/client_evaluation_form.pug(name 수정/ projects들어왔을 경우 추가), evaluations/peer_evaluation_form.pug(name 수정/ projects들어왔을 경우 추가), includes/topnav.pug(pm url 변경)
 
-> user/new 왜 다 value로 되어있는지 의문??? > 그래서 내가 걍 고쳤는데 혹시 따로 이유가 있으면 말해주셈
-> 평가도 다 그러네 왜그런거임?
->
-> 그리고 평가 get할 때 다 해당 user의 projects data 같이 보냄 dropdown에서 처리해주셈
-> 평가 전체 페이지 하나 만들어서 들어가는 건지 아니면 따로 따로 topnav에 넣을 건지 답 좀 --> 페이지 생각중
-
 - ##### 18-05-18
   - 수정 : signin.pug, users/new.pug(부서 data 맞게 넣음), users/edit.pug(해당하는 부서 data 넣고 선택 수정), includes/topnav.pug(계정id 보이도록 수정), lib/passport-config.js(session 수정), app.js(body-parser 추가), routes/evaluations.js(validate~수정), routes/users.js(정보수정할 때 부서정보 넘김)
 
@@ -163,12 +127,6 @@ ALTER TABLE `client_evaluations` CHANGE `communication_score` `client_communicat
 - ##### 18-05-23
   - 수정 : routes/pm.js(form, details get, 일단 add member ~ing, delete), pm/index.pug(프로젝트 form 복구), pm/project_details.pug(form, url), evaluations/forms/pm_evaluation_form.pug(input name, value, url 수정), routes/evaluations.js(pm get, post 추가)
   - 버튼 되면 redirect확인, curdate() 확인
-
-
-> 멤버 추가할 때 role not null이라 추가 form 있어야됨.
-> 나만 버튼들 하나도 안먹음?
-
-> evaluation
 
 ### 정지우
 
